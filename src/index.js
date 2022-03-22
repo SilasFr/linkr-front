@@ -1,6 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./style/index.css";
-import App from "./App";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/jsx-filename-extension */
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './style/reset.css';
+import './style/index.css';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));

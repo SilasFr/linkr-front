@@ -1,11 +1,14 @@
-import { useState } from "react";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/jsx-no-bind */
+
+import React, { useState } from 'react';
 import {
   Button,
   Container,
   Form,
   Input,
   StyledLink,
-} from "../../components/FormComponents";
+} from '../../components/FormComponents';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -34,7 +37,7 @@ export default function SignUp() {
             name="email"
             placeholder="email"
             type="email"
-            value={formData.email || ""}
+            value={formData.email || ''}
             onChange={handleInputChange}
             required
           />
@@ -43,7 +46,7 @@ export default function SignUp() {
             name="password"
             placeholder="password"
             type="password"
-            value={formData.password || ""}
+            value={formData.password || ''}
             onChange={handleInputChange}
             required
           />
@@ -52,7 +55,7 @@ export default function SignUp() {
             name="username"
             placeholder="username"
             type="text"
-            value={formData.username || ""}
+            value={formData.username || ''}
             onChange={handleInputChange}
             required
           />
@@ -61,7 +64,7 @@ export default function SignUp() {
             name="pictureUrl"
             placeholder="picture url"
             type="url"
-            value={formData.pictureUrl || ""}
+            value={formData.pictureUrl || ''}
             onChange={handleInputChange}
             required
           />

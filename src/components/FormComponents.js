@@ -6,7 +6,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   .right {
-    width: 100%;
+    width: 65%;
     display: flex;
 
     background-color: #151515;
@@ -36,11 +36,42 @@ const Container = styled.div`
   }
 
   .left {
-    width: 585px;
+    width: 35%;
     display: flex;
     justify-content: center;
 
     background-color: #333333;
+  }
+  @media (max-width: 420px) {
+    width: 100%;
+    flex-direction: column;
+
+    .right {
+      width: 100%;
+      height: 200px;
+      align-items: center;
+      justify-content: center;
+      .banner {
+        width: 237px;
+        height: 138px;
+        margin: 10px 0 40px 0;
+        h1 {
+          font-size: 76px;
+          line-height: 84px;
+          text-align: center;
+        }
+        h2 {
+          font-size: 23px;
+          line-height: 34px;
+          text-align: center;
+        }
+      }
+    }
+
+    .left {
+      width: 100%;
+      height: 100vh;
+    }
   }
 `;
 
@@ -58,6 +89,9 @@ const Form = styled.form`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+  @media (max-width: 420px) {
+    margin-top: 40px;
+  }
 `;
 
 const Input = styled.input`
@@ -72,8 +106,13 @@ const Input = styled.input`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+
   ::placeholder {
     color: #9f9f9f;
+  }
+
+  @media (max-width: 420px) {
+    height: 55px;
   }
 `;
 
@@ -91,6 +130,10 @@ const Button = styled.button`
   line-height: 40px;
 
   color: #ffffff;
+
+  @media (max-width: 420px) {
+    height: 55px;
+  }
 `;
 
 const StyledLink = styled(Link)`

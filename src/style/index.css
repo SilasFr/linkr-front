@@ -1,6 +1,11 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   text-decoration: none;
   color: inherit;
 }
+
+/* font-family: 'Lato', sans-serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'Passion One', cursive; */

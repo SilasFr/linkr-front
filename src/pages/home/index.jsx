@@ -2,10 +2,11 @@
 /* eslint-disable react/jsx-no-bind */
 
 import React /* ,{ useState } */ from 'react';
+import { IoChevronDownOutline as DownArrow } from 'react-icons/io5';
 import {
-  Container,
-} from '../../components/FormComponents';
-import { Header } from '../../components/HomeComponents';
+  MainContainer, Header, UserMenu, UserAvatar,
+  MainFeed, NewPost, PostsList, Post,
+} from '../../components/HomeComponents';
 
 export default function Home() {
   // const [formData, setFormData] = useState({});
@@ -21,11 +22,29 @@ export default function Home() {
   }
   */
   return (
-    <Container>
+    <MainContainer>
       <Header>
         <h1>linkr</h1>
+
+        <UserMenu>
+          <DownArrow />
+          <UserAvatar />
+        </UserMenu>
       </Header>
 
-    </Container>
+      <MainFeed>
+        <h2> feed_title </h2>
+        <NewPost>
+          new_post_form
+        </NewPost>
+        <PostsList>
+          <Post> single post </Post>
+          <Post> single post </Post>
+          <Post> single post </Post>
+          <Post> single post </Post>
+        </PostsList>
+      </MainFeed>
+
+    </MainContainer>
   );
 }

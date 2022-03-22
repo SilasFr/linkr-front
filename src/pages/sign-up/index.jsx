@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Container,
@@ -6,13 +7,20 @@ import {
   Input,
   StyledLink,
 } from "../../components/FormComponents";
+import { api } from "../../services/api";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+    try {
+      await api.createUser(formData);
+      navigate("/");
+    } catch (e) {
+      alert("Erro!", e);
+    }
     setFormData({});
   }
 

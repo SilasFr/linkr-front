@@ -89,6 +89,7 @@ const Form = styled.form`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+
   @media (max-width: 420px) {
     margin-top: 40px;
   }
@@ -106,6 +107,7 @@ const Input = styled.input`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+  border: 1px solid #000;
 
   ::placeholder {
     color: #9f9f9f;
@@ -128,8 +130,13 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+  border: 1px solid #000;
 
   color: #ffffff;
+
+  :disabled {
+    background-color: #9f9f9f;
+  }
 
   @media (max-width: 420px) {
     height: 55px;
@@ -137,7 +144,7 @@ const Button = styled.button`
 `;
 
 const StyledLink = styled(Link)`
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;

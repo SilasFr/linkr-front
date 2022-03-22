@@ -2,6 +2,8 @@
 /* eslint-disable react/jsx-no-bind */
 
 import React, { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -9,14 +11,25 @@ import {
   Input,
   StyledLink,
 } from '../../components/FormComponents';
+import { api } from '../../services/api';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
-    setFormData({});
+    setLoading(true);
+
+    try {
+      await api.createUser(formData);
+      setLoading(false);
+      setFormData({});
+      navigate('/');
+    } catch (e) {
+      alert("Erro!", e);
+    }
   }
 
   function handleInputChange(e) {
@@ -52,7 +65,7 @@ export default function SignUp() {
           />
 
           <Input
-            name="username"
+            name="userName"
             placeholder="username"
             type="text"
             value={formData.username || ''}
@@ -69,7 +82,9 @@ export default function SignUp() {
             required
           />
 
-          <Button>Sign Up</Button>
+          <Button disabled={loading}>
+            {loading ? <ClipLoader /> : 'Sign Up'}
+          </Button>
           <StyledLink to="/">
             <p>Switch back to log in</p>
           </StyledLink>

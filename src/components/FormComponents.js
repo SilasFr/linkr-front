@@ -14,7 +14,7 @@ const Container = styled.div`
     .banner {
       width: 442px;
 
-      margin-top: 260px;
+      margin-top: 300px;
       margin-left: 145px;
 
       h1 {
@@ -45,7 +45,9 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
+  width: 80%;
   margin-top: 260px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,6 +61,8 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
+  width: 100%;
+  height: 65px;
   background: #ffffff;
   border-radius: 6px;
   padding-left: 10px;

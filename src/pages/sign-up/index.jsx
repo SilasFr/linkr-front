@@ -8,15 +8,12 @@ import {
 } from "../../components/FormComponents";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    username: "",
-    pictureUrl: "",
-  });
+  const [formData, setFormData] = useState({});
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(formData);
+    setFormData({});
   }
 
   function handleInputChange(e) {
@@ -37,7 +34,7 @@ export default function SignUp() {
             name="email"
             placeholder="email"
             type="email"
-            value={formData.email}
+            value={formData.email || ""}
             onChange={handleInputChange}
             required
           />
@@ -46,7 +43,7 @@ export default function SignUp() {
             name="password"
             placeholder="password"
             type="password"
-            value={formData.password}
+            value={formData.password || ""}
             onChange={handleInputChange}
             required
           />
@@ -55,7 +52,7 @@ export default function SignUp() {
             name="username"
             placeholder="username"
             type="text"
-            value={formData.username}
+            value={formData.username || ""}
             onChange={handleInputChange}
             required
           />
@@ -64,7 +61,7 @@ export default function SignUp() {
             name="pictureUrl"
             placeholder="picture url"
             type="url"
-            value={formData.pictureUrl}
+            value={formData.pictureUrl || ""}
             onChange={handleInputChange}
             required
           />

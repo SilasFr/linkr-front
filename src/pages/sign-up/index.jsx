@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-alert */
+/* eslint-disable no-shadow */
 /* eslint-disable react/jsx-no-bind */
 
 import React, { useState } from 'react';
@@ -28,7 +30,7 @@ export default function SignUp() {
       setFormData({});
       navigate('/');
     } catch (e) {
-      alert("Erro!", e);
+      alert('Erro!', e);
     }
   }
 

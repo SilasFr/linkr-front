@@ -4,6 +4,7 @@ import {
   Form,
   ProfilePic,
 } from "../../components/TimelineComponents";
+import FeedPosts from "./FeedPosts";
 import Nav from "./navbar";
 
 export default function Timeline() {
@@ -38,6 +39,10 @@ export default function Timeline() {
                   <button>Publish</button>
                 </Form>
               </div>
+            </div>
+
+            <div className="posts">
+              <FeedPosts />
             </div>
           </main>
         </Feed>

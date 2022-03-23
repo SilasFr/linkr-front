@@ -6,10 +6,36 @@ import {
 import UserContext from "../../contexts/userContext";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 export default function Timeline() {
   const { userData, setUserData } = useContext(UserContext);
   const [ showMenu, setShowMenu ] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleLogout(e) {
+    e.preventDefault();
+
+    const token = {
+      token: userData.token
+    }
+
+    try {
+      await api.logout(token);
+
+      setUserData({
+        name: "",
+        token: "",
+        profilePic: "",
+      });
+
+      navigate("/");
+    } catch (e) {
+      alert("Sua sessão já foi expirada expirada.");
+      navigate("/")
+    }
+  }
 
   return (
     <Container>
@@ -24,11 +50,7 @@ export default function Timeline() {
           <MenuLogout>
             <Link 
               to={"/"} 
-              onClick={() => setUserData({
-                name: "",
-                token: "",
-                profilePic: "",
-              })}
+              onClick={handleLogout}
             >
               <p>Logout</p>
             </Link>

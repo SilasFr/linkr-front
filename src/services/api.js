@@ -12,4 +12,9 @@ async function login(user) {
   return response.data;
 }
 
-export const api = { createUser, login };
+async function logout(token) {
+  const response = await axios.post(`${BASE_URL}/logout`, token);
+  return response.data;
+}
+
+export const api = { createUser, login, logout };

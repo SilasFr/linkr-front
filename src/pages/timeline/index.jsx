@@ -1,13 +1,29 @@
+import { useContext, useEffect, useState } from "react";
 import {
   Container,
   Feed,
   Form,
   ProfilePic,
 } from "../../components/TimelineComponents";
+import UserContext from "../../contexts/userContext";
+import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
 import Nav from "./navbar";
 
 export default function Timeline() {
+  const [posts, setPosts] = useState();
+  const [loading, setLoading] = useState(false);
+  const { userData } = useContext(UserContext);
+  useEffect(() => {
+    setLoading(true);
+    try {
+      const response = api.loadPosts(userData.token);
+      setPosts(response);
+    } catch (e) {
+      alert("error");
+      console.log(e);
+    }
+  }, []);
   return (
     <>
       <Nav />

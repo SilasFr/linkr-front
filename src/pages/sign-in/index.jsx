@@ -20,7 +20,13 @@ export default function SignIn() {
 
   useEffect(() => {
     if (userData && userData.token) {
-      navigate("/timeline");
+      const promise = api.validateSession(userData.token);
+      promise.then(() => navigate("/timeline"));
+      promise.catch(() => {
+        alert("Sessão Inválida.");
+        login({});
+        navigate("/");
+      });
     }
   }, []);
 

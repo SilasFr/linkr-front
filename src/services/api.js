@@ -12,4 +12,14 @@ async function login(user) {
   return response.data;
 }
 
-export const api = { createUser, login };
+async function validateSession(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(`${BASE_URL}/`, config);
+  return response.data;
+}
+
+export const api = { createUser, login, validateSession };

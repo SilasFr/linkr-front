@@ -66,22 +66,20 @@ const MainFeed = styled.div`
 
 const NewPost = styled.div`
   display: flex;
-  justify-content: center;
-  width: 99%;
+  width: 100%;
   height: 210px;
   margin: 0 0 30px 0;
-  padding: 16px;
   background-color: #FFFFFF;
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-const NewPostUserInfo = styled.div`
+const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 50px;
   height: 150px;
-  margin: 0 auto auto auto;
+  margin: 16px auto auto 16px;
   & img {
     border-radius: 50%;
   }
@@ -90,10 +88,8 @@ const NewPostUserInfo = styled.div`
 const NewPostForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  max-height: 100%;
-  margin: 0 12px 0 12px;
+  width: 503px;
+  margin: 21px 28px 16px 0;
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
@@ -136,21 +132,73 @@ const NewPostUrl = styled.input`
 `;
 
 const NewPostDescription = styled.input`
-  height: 90px;
+  height: 66px;
 `;
 
 const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px dashed blue;
 `;
 
 const PostCard = styled.li`
   display: flex;
   width: 100%;
-  height: 70px;
-  border: 1px dashed yellow;
+  height: 276px;
+  margin: 0 0 30px 0;
+  background-color: #171717;
+  border-radius: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const PostContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 503px;
+  height: 237px;
+  margin: 21px 28px 16px 0;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  & h3 {
+    font-size: 19px;
+    line-height: 23px;
+    color: #FFFFFF;
+  }
+  & h4 {
+    font-size: 17px;
+    line-height: 21px;
+    color: #B7B7B7;
+  }
+`;
+
+const LinkPreview = styled.div`
+  width: 100%;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & img {
+    width: 153px;
+  }
+`;
+
+const LinkData = styled.div`
+  & h5 {
+    font-size: 16px;
+    line-height: 19px;
+    color: #CECECE;
+  }
+  & p {
+    font-size: 11px;
+    line-height: 13px;
+    color: #9B9595;
+  }
+  & h6 {
+    font-size: 11px;
+    line-height: 13px;
+    color: #CECECE;
+  }
 `;
 
 export {
@@ -158,11 +206,14 @@ export {
   Header, UserMenu, UserAvatar,
   MainFeed,
   NewPost,
-  NewPostUserInfo,
+  PostUserInfo,
   NewPostForm,
   NewPostUrl,
   NewPostDescription,
   ButtonPublish,
   PostsList,
   PostCard,
+  PostContent,
+  LinkPreview,
+  LinkData,
 };

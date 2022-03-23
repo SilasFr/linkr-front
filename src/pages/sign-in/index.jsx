@@ -79,7 +79,7 @@ export default function SignIn() {
           />
 
           <Button disabled={loading}>
-            {loading ? <ClipLoader /> : "Sign Up"}
+            {loading ? <ClipLoader /> : "Log In"}
           </Button>
           <StyledLink to="/sign-up">
             <p>First time? Create an account!</p>

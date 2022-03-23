@@ -131,6 +131,8 @@ const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  margin-top: 30px;
 `;
 
 const PostCard = styled.li`
@@ -182,7 +184,10 @@ const LinkPreview = styled.div`
   align-items: center;
   justify-content: space-between;
   & img {
-    width: 153px;
+    min-width: 153px;
+    max-width: 200px;
+    max-height: 180px;
+    border-radius: 15px;
   }
 `;
 

@@ -26,8 +26,12 @@ export default function Timeline() {
       alert("error");
       console.log(e);
     }
+    setLoading(false);
   }, [userData.token]);
   console.log("posts: ", posts);
+  if (posts.length === 0) {
+    return <p>There are no posts yet</p>;
+  }
   return (
     <>
       <Nav />
@@ -62,7 +66,7 @@ export default function Timeline() {
             </div>
 
             <div className="posts">
-              <FeedPosts posts={posts} />
+              {loading ? <p>Carregando posts</p> : <FeedPosts posts={posts} />}
             </div>
           </main>
         </Feed>

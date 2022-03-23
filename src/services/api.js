@@ -7,4 +7,9 @@ async function createUser(user) {
   await axios.post(`${BASE_URL}/sign-up`, user);
 }
 
-export const api = { createUser };
+async function login(user) {
+  const response = await axios.post(`${BASE_URL}/`, user);
+  return response.data;
+}
+
+export const api = { createUser, login };

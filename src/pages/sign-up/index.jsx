@@ -25,7 +25,15 @@ export default function SignUp() {
       setFormData({});
       navigate("/");
     } catch (e) {
-      alert("Erro!", e);
+      console.log("error: ", e.response.status);
+      if (e.response.status === 409) {
+        alert(
+          "Este email já foi cadastrado! Cadastre outro email e tente novamente."
+        );
+      } else {
+        alert(e.response.data);
+      }
+      setLoading(false);
     }
   }
 

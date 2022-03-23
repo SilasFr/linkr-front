@@ -34,14 +34,16 @@ export default function SignIn() {
         profilePic: response.profilePic,
       });
 
-      setLoading(false);
+      // setLoading(false);
       setFormData({});
       navigate("/timeline");
     } catch (e) {
+      console.log(e.response);
       if (e.response.status === 401) {
         alert("Email ou senha incorretos.");
       }
     }
+    setLoading(false);
   }
 
   function handleInputChange(e) {

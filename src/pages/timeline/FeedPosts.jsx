@@ -7,37 +7,34 @@ import {
   PostUserInfo,
 } from "../../components/TimelineComponents";
 
-export default function FeedPosts() {
+export default function FeedPosts({ posts }) {
   return (
     <PostsList>
-      <PostCard>
-        <PostUserInfo>
-          <img
-            src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg"
-            alt="user avatar"
-          />
-        </PostUserInfo>
-        <PostContent>
-          <h3>Juvenal Juvêncio</h3>
-          <h4>
-            Muito maneiro esse tutorial MaterialUI + React! #hashtags #react
-            #javascript
-          </h4>
-          <LinkPreview>
-            <LinkData>
-              <h5>Link preview title</h5>
-              <p>
-                link preview not so short description maybe even multiple lines
-              </p>
-              <h6>https://medium.com/@pshrmn/a-simple-react-router</h6>
-            </LinkData>
+      {posts.map((post) => (
+        <PostCard>
+          <PostUserInfo>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
-              alt=""
+              src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg"
+              alt="user avatar"
             />
-          </LinkPreview>
-        </PostContent>
-      </PostCard>
+          </PostUserInfo>
+          <PostContent>
+            <h3>{post.title}</h3>
+            <h4>
+              Muito maneiro esse tutorial MaterialUI + React! #hashtags #react
+              #javascript
+            </h4>
+            <LinkPreview>
+              <LinkData>
+                <h5>{post.title}</h5>
+                <p>{post.description}</p>
+                <h6>{post.url}</h6>
+              </LinkData>
+              <img src={post.image} alt="" />
+            </LinkPreview>
+          </PostContent>
+        </PostCard>
+      ))}
     </PostsList>
   );
 }

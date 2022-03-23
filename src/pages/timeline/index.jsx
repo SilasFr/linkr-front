@@ -62,7 +62,7 @@ export default function Timeline() {
             </div>
 
             <div className="posts">
-              <FeedPosts />
+              <FeedPosts posts={posts} />
             </div>
           </main>
         </Feed>

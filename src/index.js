@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-filename-extension */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/reset.css';

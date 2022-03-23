@@ -1,8 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-alert */
-/* eslint-disable no-shadow */
-/* eslint-disable react/jsx-no-bind */
-
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';

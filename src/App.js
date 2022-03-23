@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable react/jsx-filename-extension */
-
 import React, { useState } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import SignIn from './pages/sign-in';

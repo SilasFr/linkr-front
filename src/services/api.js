@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/prefer-default-export */
-
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';

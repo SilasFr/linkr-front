@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/jsx-no-bind */
-
 import React, { useContext, useState, useEffect } from 'react';
 import { IoChevronDownOutline as DownArrow } from 'react-icons/io5';
 import {

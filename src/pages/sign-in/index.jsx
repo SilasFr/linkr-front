@@ -10,12 +10,25 @@ import {
 import { api } from "../../services/api";
 import { ClipLoader } from "react-spinners";
 import UserContext from "../../contexts/userContext";
+import { useEffect } from "react";
 
 export default function SignIn() {
-  const { setUserData } = useContext(UserContext);
+  const { userData, login } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData && userData.token) {
+      const promise = api.validateSession(userData.token);
+      promise.then(() => navigate("/timeline"));
+      promise.catch(() => {
+        alert("Sessão Inválida.");
+        login({});
+        navigate("/");
+      });
+    }
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,7 +41,7 @@ export default function SignIn() {
     try {
       const response = await api.login(formData);
 
-      setUserData({
+      login({
         name: response.name,
         token: response.token,
         profilePic: response.profilePic,

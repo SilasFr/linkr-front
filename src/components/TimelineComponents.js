@@ -71,6 +71,8 @@ const MenuLogout = styled.div`
     width: 130px;
     height: 45px;
 
+    border-bottom-left-radius: 25px;
+
     align-items: center;
     justify-content: center;
 

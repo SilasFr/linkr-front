@@ -15,9 +15,29 @@ async function login(user) {
   return response.data;
 }
 
-async function newPost(postData) {
-  const newPostResponse = await axios.post(`${BASE_URL}/posts/new`, postData);
+async function newPost(postData, token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const newPostResponse = await axios.post(`${BASE_URL}/posts/new`, postData, config);
   return newPostResponse;
 }
 
-export const api = { createUser, login, newPost };
+async function getPosts(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const allPosts = await axios.get(`${BASE_URL}/posts`, config);
+  return allPosts;
+}
+
+export const api = {
+  createUser,
+  login,
+  newPost,
+  getPosts,
+};

@@ -1,9 +1,8 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/jsx-no-bind */
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { IoChevronDownOutline as DownArrow } from 'react-icons/io5';
-// import { ClipLoader } from 'react-spinners';
 import {
   MainContainer, Header, UserMenu, UserAvatar,
   MainFeed, NewPost, PostsList, PostCard, NewPostForm, PostUserInfo,
@@ -16,27 +15,39 @@ import UserContext from '../../contexts/userContext';
 
 export default function Home() {
   const { userData } = useContext(UserContext);
+  const [postsArray, setPostsArray] = useState([]);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+
+  function updatePosts() {
+    const postsPromise = api.getPosts(userData.token);
+    postsPromise.then((res) => {
+      setPostsArray(res.data);
+    });
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await api.newPost(formData);
-      console.log('response: ', response);
+      await api.newPost(formData, userData.token);
       setLoading(false);
       setFormData({});
+      updatePosts();
     } catch (error) {
       console.log(error);
-      alert(error);
+      alert('Houve um erro ao publicar seu link');
+      setLoading(false);
+      setFormData({});
     }
   }
 
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
+
+  useEffect(updatePosts, []);
 
   return (
     <MainContainer>
@@ -74,31 +85,31 @@ export default function Home() {
               value={formData.description || ''}
               onChange={handleInputChange}
             />
-            <ButtonPublish>
-              { loading ? 'Loading...' : 'Publish' }
+            <ButtonPublish disabled={loading}>
+              {loading ? 'Publishing...' : 'Publish'}
             </ButtonPublish>
           </NewPostForm>
         </NewPost>
         <PostsList>
-
-          <PostCard>
-            <PostUserInfo>
-              <img src={userData.profilePic} alt="user avatar" />
-            </PostUserInfo>
-            <PostContent>
-              <h3>{userData.name}</h3>
-              <h4>Muito maneiro esse tutorial MaterialUI + React! #hashtags #react #javascript</h4>
-              <LinkPreview>
-                <LinkData>
-                  <h5>Link preview title</h5>
-                  <p>link preview not so short description maybe even multiple lines</p>
-                  <h6>https://medium.com/@pshrmn/a-simple-react-router</h6>
-                </LinkData>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="" />
-              </LinkPreview>
-            </PostContent>
-          </PostCard>
-
+          {postsArray.map((post) => (
+            <PostCard key={post.id}>
+              <PostUserInfo>
+                <img src={userData.profilePic} alt="user avatar" />
+              </PostUserInfo>
+              <PostContent>
+                <h3>{userData.name}</h3>
+                <h4>{post.description}</h4>
+                <LinkPreview>
+                  <LinkData>
+                    <h5>Link preview title</h5>
+                    <p>link preview not so short description maybe even multiple lines</p>
+                    <h6>{post.link}</h6>
+                  </LinkData>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="" />
+                </LinkPreview>
+              </PostContent>
+            </PostCard>
+          ))}
         </PostsList>
       </MainFeed>
 

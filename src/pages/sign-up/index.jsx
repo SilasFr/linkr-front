@@ -70,7 +70,7 @@ export default function SignUp() {
             name="userName"
             placeholder="username"
             type="text"
-            value={formData.username || ''}
+            value={formData.userName || ''}
             onChange={handleInputChange}
             required
           />

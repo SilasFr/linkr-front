@@ -126,6 +126,7 @@ const ButtonPublish = styled.button`
   color: #ffffff;
   :disabled {
     background-color: #9F9F9F;
+    pointer-events: none;
   }
 `;
 

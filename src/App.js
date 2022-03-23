@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/timeline" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

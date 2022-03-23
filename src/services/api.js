@@ -3,6 +3,13 @@ import axios from "axios";
 const BASE_URL = "http://localhost:5000";
 // const BASE_URL = "https://linkr-back.herokuapp.com";
 
+function createConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
 async function createUser(user) {
   await axios.post(`${BASE_URL}/sign-up`, user);
 }
@@ -13,11 +20,7 @@ async function login(user) {
 }
 
 async function validateSession(token) {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  const config = createConfig(token);
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }

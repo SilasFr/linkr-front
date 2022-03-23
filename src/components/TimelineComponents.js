@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -126,4 +127,92 @@ const Form = styled.form`
   }
 `;
 
-export { Container, Feed, Form, ProfilePic };
+const PostsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const PostCard = styled.li`
+  display: flex;
+  width: 100%;
+  height: 276px;
+  margin: 0 0 30px 0;
+  background-color: #171717;
+  border-radius: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const PostContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 503px;
+  height: 237px;
+  margin: 21px 28px 16px 0;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  & h3 {
+    font-size: 19px;
+    line-height: 23px;
+    color: #ffffff;
+  }
+  & h4 {
+    font-size: 17px;
+    line-height: 21px;
+    color: #b7b7b7;
+  }
+`;
+
+const PostUserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 150px;
+  margin: 16px auto auto 16px;
+  & img {
+    border-radius: 50%;
+  }
+`;
+
+const LinkPreview = styled.div`
+  width: 100%;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & img {
+    width: 153px;
+  }
+`;
+
+const LinkData = styled.div`
+  & h5 {
+    font-size: 16px;
+    line-height: 19px;
+    color: #cecece;
+  }
+  & p {
+    font-size: 11px;
+    line-height: 13px;
+    color: #9b9595;
+  }
+  & h6 {
+    font-size: 11px;
+    line-height: 13px;
+    color: #cecece;
+  }
+`;
+
+export {
+  Container,
+  Feed,
+  Form,
+  ProfilePic,
+  PostsList,
+  PostCard,
+  PostContent,
+  PostUserInfo,
+  LinkPreview,
+  LinkData,
+};

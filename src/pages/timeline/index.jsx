@@ -11,19 +11,23 @@ import FeedPosts from "./FeedPosts";
 import Nav from "./navbar";
 
 export default function Timeline() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useContext(UserContext);
+
   useEffect(() => {
     setLoading(true);
     try {
-      const response = api.loadPosts(userData.token);
-      setPosts(response);
+      const request = api.loadPosts(userData.token);
+      request.then((response) => {
+        setPosts(response.data);
+      });
     } catch (e) {
       alert("error");
       console.log(e);
     }
-  }, []);
+  }, [userData.token]);
+  console.log("posts: ", posts);
   return (
     <>
       <Nav />

@@ -12,4 +12,9 @@ async function login(user) {
   return response.data;
 }
 
-export const api = { createUser, login };
+async function loadPosts(token) {
+  const result = await axios.get(`${BASE_URL}/timeline`);
+  return result;
+}
+
+export const api = { createUser, login, loadPosts };

@@ -1,8 +1,9 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/jsx-no-bind */
 
-import React /* ,{ useState } */ from 'react';
+import React, { useContext, useState } from 'react';
 import { IoChevronDownOutline as DownArrow } from 'react-icons/io5';
+// import { ClipLoader } from 'react-spinners';
 import {
   MainContainer, Header, UserMenu, UserAvatar,
   MainFeed, NewPost, PostsList, PostCard, NewPostForm, PostUserInfo,
@@ -10,8 +11,33 @@ import {
   ButtonPublish, PostContent, LinkPreview,
   LinkData,
 } from '../../components/HomeComponents';
+import { api } from '../../services/api';
+import UserContext from '../../contexts/userContext';
 
 export default function Home() {
+  const { userData } = useContext(UserContext);
+  const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await api.newPost(formData);
+      console.log('response: ', response);
+      setLoading(false);
+      setFormData({});
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }
+
+  function handleInputChange(event) {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  }
+
   return (
     <MainContainer>
       <Header>
@@ -19,7 +45,7 @@ export default function Home() {
 
         <UserMenu>
           <DownArrow />
-          <UserAvatar src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" />
+          <UserAvatar src={userData.profilePic} />
         </UserMenu>
       </Header>
 
@@ -27,40 +53,40 @@ export default function Home() {
         <h1>timeline</h1>
         <NewPost>
           <PostUserInfo>
-            <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="user avatar" />
+            <img src={userData.profilePic} alt="user avatar" />
           </PostUserInfo>
-          <NewPostForm>
+          <NewPostForm
+            onSubmit={handleSubmit}
+          >
             <h2>What are you going to share today?</h2>
             <NewPostUrl
               name="link"
               placeholder="http://..."
               type="url"
-              // value={formData.email || ''}
-              // onChange={handleInputChange}
+              value={formData.link || ''}
+              onChange={handleInputChange}
               required
             />
             <NewPostDescription
-              name="desscription"
+              name="description"
               placeholder="Comment about the link you're sharing! (optional)"
               type="text"
-              // value={formData.email || ''}
-              // onChange={handleInputChange}
-              required
+              value={formData.description || ''}
+              onChange={handleInputChange}
             />
-            <ButtonPublish
-              type="submit"
-            >
-              Publish
+            <ButtonPublish>
+              { loading ? 'Loading...' : 'Publish' }
             </ButtonPublish>
           </NewPostForm>
         </NewPost>
         <PostsList>
+
           <PostCard>
             <PostUserInfo>
-              <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="user avatar" />
+              <img src={userData.profilePic} alt="user avatar" />
             </PostUserInfo>
             <PostContent>
-              <h3>Juvenal Juvêncio</h3>
+              <h3>{userData.name}</h3>
               <h4>Muito maneiro esse tutorial MaterialUI + React! #hashtags #react #javascript</h4>
               <LinkPreview>
                 <LinkData>
@@ -73,23 +99,6 @@ export default function Home() {
             </PostContent>
           </PostCard>
 
-          <PostCard>
-            <PostUserInfo>
-              <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="user avatar" />
-            </PostUserInfo>
-            <PostContent>
-              <h3>Juvenal Juvêncio</h3>
-              <h4>Muito maneiro esse tutorial MaterialUI + React! #hashtags #react #javascript</h4>
-              <LinkPreview>
-                <LinkData>
-                  <h5>Link preview title</h5>
-                  <p>link preview not so short description maybe even multiple lines</p>
-                  <h6>https://medium.com/@pshrmn/a-simple-react-router</h6>
-                </LinkData>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="" />
-              </LinkPreview>
-            </PostContent>
-          </PostCard>
         </PostsList>
       </MainFeed>
 

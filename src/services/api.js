@@ -15,4 +15,9 @@ async function login(user) {
   return response.data;
 }
 
-export const api = { createUser, login };
+async function newPost(postData) {
+  const newPostResponse = await axios.post(`${BASE_URL}/posts/new`, postData);
+  return newPostResponse;
+}
+
+export const api = { createUser, login, newPost };

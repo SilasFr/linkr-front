@@ -124,6 +124,9 @@ const ButtonPublish = styled.button`
   font-size: 14px;
   line-height: 17px;
   color: #ffffff;
+  :disabled {
+    background-color: #9F9F9F;
+  }
 `;
 
 const NewPostUrl = styled.input`

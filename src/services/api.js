@@ -22,19 +22,8 @@ async function newPost(postData, token) {
   return newPostResponse;
 }
 
-async function getPosts(token) {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const allPosts = await axios.get(`${BASE_URL}/posts`, config);
-  return allPosts;
-}
-
 export const api = {
   createUser,
   login,
   newPost,
-  getPosts,
 };

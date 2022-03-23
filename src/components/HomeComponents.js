@@ -121,6 +121,7 @@ const ButtonPublish = styled.button`
   font-size: 14px;
   line-height: 17px;
   color: #ffffff;
+  
   :disabled {
     background-color: #9F9F9F;
     pointer-events: none;
@@ -142,66 +143,6 @@ const PostsList = styled.ul`
   width: 100%;
 `;
 
-const PostCard = styled.li`
-  display: flex;
-  width: 100%;
-  height: 276px;
-  margin: 0 0 30px 0;
-  background-color: #171717;
-  border-radius: 16px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-const PostContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 503px;
-  height: 237px;
-  margin: 21px 28px 16px 0;
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  & h3 {
-    font-size: 19px;
-    line-height: 23px;
-    color: #FFFFFF;
-  }
-  & h4 {
-    font-size: 17px;
-    line-height: 21px;
-    color: #B7B7B7;
-  }
-`;
-
-const LinkPreview = styled.div`
-  width: 100%;
-  height: 155px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  & img {
-    width: 153px;
-  }
-`;
-
-const LinkData = styled.div`
-  & h5 {
-    font-size: 16px;
-    line-height: 19px;
-    color: #CECECE;
-  }
-  & p {
-    font-size: 11px;
-    line-height: 13px;
-    color: #9B9595;
-  }
-  & h6 {
-    font-size: 11px;
-    line-height: 13px;
-    color: #CECECE;
-  }
-`;
-
 export {
   MainContainer,
   Header, UserMenu, UserAvatar,
@@ -212,9 +153,5 @@ export {
   NewPostUrl,
   NewPostDescription,
   ButtonPublish,
-  PostsList,
-  PostCard,
-  PostContent,
-  LinkPreview,
-  LinkData,
+  PostsList
 };

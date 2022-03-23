@@ -5,10 +5,11 @@ import {
 } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Timeline() {
-  const { userData } = useContext(UserContext);
-  const [ showMenu, setShowMenu ] = useState(false)
+  const { userData, setUserData } = useContext(UserContext);
+  const [ showMenu, setShowMenu ] = useState(false);
 
   return (
     <Container>
@@ -21,7 +22,16 @@ export default function Timeline() {
       </Header>
         { showMenu ? 
           <MenuLogout>
-            <p>Logout</p>
+            <Link 
+              to={"/"} 
+              onClick={() => setUserData({
+                name: "",
+                token: "",
+                profilePic: "",
+              })}
+            >
+              <p>Logout</p>
+            </Link>
           </MenuLogout> 
         : null }
 

@@ -1,8 +1,15 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000";
-// const BASE_URL = "https://linkr-back.herokuapp.com";
+// const BASE_URL = 'https://linkr-back.herokuapp.com';
 
+function createConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
 async function createUser(user) {
   await axios.post(`${BASE_URL}/sign-up`, user);
 }
@@ -13,8 +20,37 @@ async function login(user) {
 }
 
 async function loadPosts(token) {
-  const result = await axios.get(`${BASE_URL}/timeline`);
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/timeline`, config);
   return result;
 }
 
-export const api = { createUser, login, loadPosts };
+async function logout(token) {
+  const response = await axios.post(`${BASE_URL}/logout`, token);
+  return response.data;
+}
+
+async function newPost(postData, token) {
+  const config = createConfig(token);
+  const newPostResponse = await axios.post(
+    `${BASE_URL}/posts/new`,
+    postData,
+    config
+  );
+  return newPostResponse;
+}
+
+async function validateSession(token) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/`, config);
+  return response.data;
+}
+
+export const api = {
+  createUser,
+  login,
+  logout,
+  loadPosts,
+  validateSession,
+  newPost,
+};

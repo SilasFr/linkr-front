@@ -1,16 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import {
-  Container,
-  Feed,
-  TimelineMessage,
-} from "../../components/TimelineComponents";
+import { TimelineMessage } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
-import Nav from "./navbar";
 
-export default function Timeline() {
+export default function Timeline({ reload, setReload }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [timeline, setTimeline] = useState();
@@ -19,20 +14,21 @@ export default function Timeline() {
   useEffect(() => {
     try {
       setLoading(true);
-      const request = api.loadPosts(userData.token);
-      request.then((response) => {
+      const promise = api.loadPosts(userData.token);
+      promise.then((response) => {
         setPosts(response.data);
-        renderResponse();
         setLoading(false);
       });
     } catch (e) {
       alert(
         "An error occured while trying to fetch the posts, please refresh the page"
       );
-      setLoading(false);
-      console.log(e);
     }
-  }, []);
+  }, [reload, userData.token]);
+
+  useEffect(() => {
+    renderResponse();
+  }, [posts]);
 
   function renderResponse() {
     if (posts.length > 0) {
@@ -40,33 +36,21 @@ export default function Timeline() {
     }
     return setTimeline(
       <TimelineMessage>
-        <p>There are no posts yett</p>
+        <p>There are no posts yet</p>
       </TimelineMessage>
     );
   }
+
   return (
-    <>
-      <Nav />
-
-      <Container>
-        <Feed>
-          <header>
-            <p>timeline</p>
-          </header>
-
-          <main>
-            {loading ? (
-              <TimelineMessage>
-                <p>Loading... </p>
-                <ClipLoader color="white" />
-              </TimelineMessage>
-            ) : (
-              timeline
-            )}
-            <div className="posts"></div>
-          </main>
-        </Feed>
-      </Container>
-    </>
+    <main>
+      {loading ? (
+        <TimelineMessage>
+          <p>Loading... </p>
+          <ClipLoader color="white" />
+        </TimelineMessage>
+      ) : (
+        timeline
+      )}
+    </main>
   );
 }

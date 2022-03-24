@@ -1,28 +1,22 @@
+import React, { useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
-
-import UserContext from "./contexts/userContext";
-import { useState } from "react";
 import Timeline from "./pages/timeline";
+import Home from "./pages/home";
+import { UserProvider } from "./contexts/userContext";
 
 function App() {
-  const [userData, setUserData] = useState({
-    name: "",
-    token: "",
-    profilePic: "",
-  });
-
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/timeline" element={<Home />} />
         </Routes>
       </BrowserRouter>
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
 

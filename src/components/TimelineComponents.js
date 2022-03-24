@@ -8,6 +8,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #333333;
+
+  @media (max-width: 450px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 
 const Feed = styled.div`
@@ -72,22 +77,34 @@ const PostsList = styled.ul`
   width: 100%;
 
   margin-top: 30px;
+
+  @media (max-width: 450px) {
+    width: 100vw;
+  }
 `;
 
 const PostCard = styled.li`
   display: flex;
+  justify-content: space-between;
+  gap: 15px;
   width: 100%;
   height: 276px;
   margin: 0 0 30px 0;
   background-color: #171717;
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 450px) {
+    width: 100%;
+    border-radius: 0;
+    height: 232px;
+  }
 `;
 
 const PostContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 503px;
+  width: 80%;
   height: 237px;
   margin: 21px 28px 16px 0;
   font-family: "Lato";
@@ -130,13 +147,16 @@ const LinkPreview = styled.div`
   border: 1px solid #4d4d4d;
   border-radius: 11px;
   & img {
-    min-width: 153px;
-    max-width: 100%;
-    max-height: 100%;
+    min-width: 35%;
+    height: 100%;
     border-radius: 0px 11px 11px 0px;
   }
   :hover {
     cursor: pointer;
+  }
+
+  @media (max-width: 450px) {
+    height: 115px;
   }
 `;
 
@@ -150,11 +170,19 @@ const LinkData = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #cecece;
+    @media (max-width: 450px) {
+      font-size: 11px;
+      line-height: 13px;
+    }
   }
   & p {
     font-size: 11px;
     line-height: 13px;
     color: #9b9595;
+    @media (max-width: 450px) {
+      font-size: 9px;
+      line-height: 11px;
+    }
   }
   & h6 {
     margin-top: 5px;
@@ -162,6 +190,10 @@ const LinkData = styled.div`
     font-weight: 400;
     line-height: 13px;
     color: #cecece;
+    @media (max-width: 450px) {
+      font-size: 9px;
+      line-height: 11px;
+    }
   }
 `;
 
@@ -173,7 +205,6 @@ const TimelineMessage = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* background-color: #fff; */
   p {
     font-family: "Oswald";
     font-style: normal;
@@ -181,6 +212,91 @@ const TimelineMessage = styled.div`
     font-size: 32px;
     line-height: 64px;
     color: #fff;
+  }
+  @media (max-width: 450px) {
+    width: 100vw;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 72px;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 15px;
+
+  background-color: #151515;
+  .profile-pic-menu {
+    display: flex;
+    align-items: center;
+
+    ion-icon {
+      font-size: 24px;
+
+      color: #ffffff;
+
+      cursor: pointer;
+    }
+
+    .profile-pic {
+      width: 53px;
+      height: 53px;
+
+      border-radius: 50%;
+
+      margin-left: 15px;
+
+      cursor: pointer;
+    }
+  }
+
+  h1 {
+    font-family: "Passion One";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 49px;
+    line-height: 54px;
+    letter-spacing: 0.05em;
+
+    color: #ffffff;
+  }
+
+  @media (max-width: 450px) {
+    width: 100%;
+    flex-direction: row;
+  }
+`;
+
+const MenuLogout = styled.div`
+  display: flex;
+  width: 130px;
+  height: 45px;
+
+  border-bottom-left-radius: 25px;
+
+  align-items: center;
+  justify-content: center;
+
+  align-self: flex-end;
+
+  background-color: #171717;
+
+  p {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+
+    color: #ffffff;
+  }
+
+  @media (max-width: 450px) {
+    height: 43px;
   }
 `;
 
@@ -194,4 +310,6 @@ export {
   LinkPreview,
   LinkData,
   TimelineMessage,
+  Header,
+  MenuLogout,
 };

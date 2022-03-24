@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -8,7 +9,6 @@ import {
   StyledLink,
 } from "../../components/FormComponents";
 import { api } from "../../services/api";
-import { ClipLoader } from "react-spinners";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -25,7 +25,6 @@ export default function SignUp() {
       setFormData({});
       navigate("/");
     } catch (e) {
-      console.log("error: ", e.response.status);
       if (e.response.status === 409) {
         alert(
           "Este email já foi cadastrado! Cadastre outro email e tente novamente."

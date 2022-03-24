@@ -11,15 +11,12 @@ export default function FeedPosts({ posts }) {
   return (
     <PostsList>
       {posts.map((post) => (
-        <PostCard>
+        <PostCard key={post.id} onClick={() => window.open(post.link.url)}>
           <PostUserInfo>
-            <img
-              src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg"
-              alt="user avatar"
-            />
+            <img src={post.profilePic} alt="user avatar" />
           </PostUserInfo>
           <PostContent>
-            <h3>{post.author}</h3>
+            <h3>{post.userName}</h3>
             <h4>{post.description}</h4>
             <LinkPreview>
               <LinkData>

@@ -19,18 +19,15 @@ export default function FeedPosts({ posts }) {
             />
           </PostUserInfo>
           <PostContent>
-            <h3>{post.title}</h3>
-            <h4>
-              Muito maneiro esse tutorial MaterialUI + React! #hashtags #react
-              #javascript
-            </h4>
+            <h3>{post.author}</h3>
+            <h4>{post.description}</h4>
             <LinkPreview>
               <LinkData>
-                <h5>{post.title}</h5>
-                <p>{post.description}</p>
-                <h6>{post.url}</h6>
+                <h5>{post.link.title}</h5>
+                <p>{post.link.description}</p>
+                <h6>{post.link.url}</h6>
               </LinkData>
-              <img src={post.image} alt="" />
+              <img src={post.link.image} alt={post.link.title} />
             </LinkPreview>
           </PostContent>
         </PostCard>

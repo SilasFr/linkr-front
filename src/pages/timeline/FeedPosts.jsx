@@ -11,7 +11,7 @@ export default function FeedPosts({ posts }) {
   return (
     <PostsList>
       {posts.map((post) => (
-        <PostCard key={post.id} onClick={() => window.open(post.link.url)}>
+        <PostCard key={post.id} onClick={() => window.open(post.link)}>
           <PostUserInfo>
             <img src={post.profilePic} alt="user avatar" />
           </PostUserInfo>
@@ -20,11 +20,11 @@ export default function FeedPosts({ posts }) {
             <h4>{post.description}</h4>
             <LinkPreview>
               <LinkData>
-                <h5>{post.link.title}</h5>
-                <p>{post.link.description}</p>
-                <h6>{post.link.url}</h6>
+                <h5>{post.title}</h5>
+                <p>{post.description}</p>
+                <h6>{post.link}</h6>
               </LinkData>
-              <img src={post.link.image} alt={post.link.title} />
+              <img src={post.image} alt={post.title} />
             </LinkPreview>
           </PostContent>
         </PostCard>

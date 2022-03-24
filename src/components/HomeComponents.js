@@ -36,7 +36,34 @@ const UserMenu = styled.div`
   font-size: 25px;
   font-weight: 700;
   color: #FFFFFF;
+  position: relative;
 `;
+
+const MenuLogout = styled.div`
+  display: flex;
+  width: 130px;
+  height: 45px;
+  border-bottom-left-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  background-color: #171717;
+  position: absolute;
+  z-index: 1;
+  margin-top: 72px;
+  p {
+      font-family: 'Lato';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+  }
+  @media (max-width: 420px) {
+  height: 43px;
+  }
+`
 
 const UserAvatar = styled.img`
   display: flex;
@@ -145,7 +172,7 @@ const PostsList = styled.ul`
 
 export {
   MainContainer,
-  Header, UserMenu, UserAvatar,
+  Header, UserMenu, MenuLogout, UserAvatar,
   MainFeed,
   NewPost,
   PostUserInfo,

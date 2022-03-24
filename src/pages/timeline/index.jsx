@@ -3,8 +3,6 @@ import { ClipLoader } from "react-spinners";
 import {
   Container,
   Feed,
-  Form,
-  ProfilePic,
   TimelineMessage,
 } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
@@ -28,10 +26,10 @@ export default function Timeline() {
         setLoading(false);
       });
     } catch (e) {
-      setLoading(false);
       alert(
         "An error occured while trying to fetch the posts, please refresh the page"
       );
+      setLoading(false);
       console.log(e);
     }
   }, []);
@@ -40,7 +38,7 @@ export default function Timeline() {
     if (posts.length > 0) {
       return setTimeline(<FeedPosts posts={posts} />);
     }
-    setTimeline(
+    return setTimeline(
       <TimelineMessage>
         <p>There are no posts yett</p>
       </TimelineMessage>
@@ -57,28 +55,6 @@ export default function Timeline() {
           </header>
 
           <main>
-            <div className="new-post">
-              <div className="profile-pic">
-                <ProfilePic className="img">
-                  <img src="#" alt="profile" />
-                </ProfilePic>
-              </div>
-              <div className="post-info">
-                <p className="post-info-title">
-                  What are you going to share today?
-                </p>
-                <Form action="">
-                  <input type="url" placeholder="http://..." />
-                  <input
-                    className="description"
-                    type="text"
-                    placeholder="Awesome article about #javascript"
-                  />
-                  <button>Publishss</button>
-                </Form>
-              </div>
-            </div>
-
             {loading ? (
               <TimelineMessage>
                 <p>Loading... </p>

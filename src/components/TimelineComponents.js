@@ -53,11 +53,6 @@ const Feed = styled.div`
         font-family: "Lato";
         font-size: 20px;
         color: #707070;
-
-        &-title {
-          /* font-size: 20px;
-          line-height: 24px; */
-        }
       }
     }
 
@@ -68,69 +63,6 @@ const Feed = styled.div`
       align-items: center;
       justify-content: center;
     }
-  }
-`;
-
-const ProfilePic = styled.div`
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid red;
-  border-radius: 50%;
-
-  background-color: #fff;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-  margin-top: 10px;
-
-  input {
-    width: 503px;
-    height: 30px;
-    padding: 6px;
-
-    font-family: "Lato";
-    font-size: 15px;
-    font-style: normal;
-    border: none;
-    background: #efefef;
-    border-radius: 5px;
-
-    color: #333333;
-
-    ::placeholder {
-      color: #949494;
-      font-weight: 300;
-    }
-  }
-
-  input.description {
-    height: 66px;
-  }
-
-  button {
-    width: 112px;
-    height: 31px;
-    align-self: end;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    background: #1877f2;
-    border-radius: 5px;
-    border: none;
-    color: #fff;
   }
 `;
 
@@ -255,8 +187,6 @@ const TimelineMessage = styled.div`
 export {
   Container,
   Feed,
-  Form,
-  ProfilePic,
   PostsList,
   PostCard,
   PostContent,

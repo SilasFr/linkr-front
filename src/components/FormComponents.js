@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -152,4 +152,6 @@ const StyledLink = styled(Link)`
   color: #ffffff;
 `;
 
-export { Container, Form, Input, Button, StyledLink };
+export {
+  Container, Form, Input, Button, StyledLink,
+};

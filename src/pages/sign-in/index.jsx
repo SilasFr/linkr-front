@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -10,25 +10,38 @@ import {
 import { api } from "../../services/api";
 import { ClipLoader } from "react-spinners";
 import UserContext from "../../contexts/userContext";
+import { useEffect } from "react";
 
 export default function SignIn() {
-  const { setUserData } = useContext(UserContext);
+  const { userData, login } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData && userData.token) {
+      const promise = api.validateSession(userData.token);
+      promise.then(() => navigate("/timeline"));
+      promise.catch(() => {
+        alert("Sessão Inválida.");
+        login({});
+        navigate("/");
+      });
+    }
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
-    if (formData.email === "" || formData.password === "") {
-      alert("Campos vazios, preencha-os");
+    if (formData.email === '' || formData.password === '') {
+      alert('Campos vazios, preencha-os');
     }
 
     try {
       const response = await api.login(formData);
 
-      setUserData({
+      login({
         name: response.name,
         token: response.token,
         profilePic: response.profilePic,
@@ -36,10 +49,10 @@ export default function SignIn() {
 
       setLoading(false);
       setFormData({});
-      navigate("/timeline");
+      navigate('/timeline');
     } catch (e) {
       if (e.response.status === 401) {
-        alert("Email ou senha incorretos.");
+        alert('Email ou senha incorretos.');
       }
     }
   }
@@ -62,7 +75,7 @@ export default function SignIn() {
             name="email"
             placeholder="email"
             type="email"
-            value={formData.email || ""}
+            value={formData.email || ''}
             onChange={handleInputChange}
             required
           />
@@ -71,13 +84,13 @@ export default function SignIn() {
             name="password"
             placeholder="password"
             type="password"
-            value={formData.password || ""}
+            value={formData.password || ''}
             onChange={handleInputChange}
             required
           />
 
           <Button disabled={loading}>
-            {loading ? <ClipLoader /> : "Sign Up"}
+            {loading ? <ClipLoader /> : 'Sign Up'}
           </Button>
           <StyledLink to="/sign-up">
             <p>First time? Create an account!</p>

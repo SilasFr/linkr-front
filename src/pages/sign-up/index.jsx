@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Container,
   Form,
   Input,
   StyledLink,
-} from "../../components/FormComponents";
-import { api } from "../../services/api";
-import { ClipLoader } from "react-spinners";
+} from '../../components/FormComponents';
+import { api } from '../../services/api';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -23,9 +23,9 @@ export default function SignUp() {
       await api.createUser(formData);
       setLoading(false);
       setFormData({});
-      navigate("/");
+      navigate('/');
     } catch (e) {
-      alert("Erro!", e);
+      alert('Erro!', e);
     }
   }
 
@@ -47,7 +47,7 @@ export default function SignUp() {
             name="email"
             placeholder="email"
             type="email"
-            value={formData.email || ""}
+            value={formData.email || ''}
             onChange={handleInputChange}
             required
           />
@@ -56,7 +56,7 @@ export default function SignUp() {
             name="password"
             placeholder="password"
             type="password"
-            value={formData.password || ""}
+            value={formData.password || ''}
             onChange={handleInputChange}
             required
           />
@@ -65,7 +65,7 @@ export default function SignUp() {
             name="userName"
             placeholder="username"
             type="text"
-            value={formData.userName || ""}
+            value={formData.userName || ''}
             onChange={handleInputChange}
             required
           />
@@ -74,13 +74,13 @@ export default function SignUp() {
             name="pictureUrl"
             placeholder="picture url"
             type="url"
-            value={formData.pictureUrl || ""}
+            value={formData.pictureUrl || ''}
             onChange={handleInputChange}
             required
           />
 
           <Button disabled={loading}>
-            {loading ? <ClipLoader /> : "Sign Up"}
+            {loading ? <ClipLoader /> : 'Sign Up'}
           </Button>
           <StyledLink to="/">
             <p>Switch back to log in</p>

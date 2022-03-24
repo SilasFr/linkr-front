@@ -19,6 +19,11 @@ async function login(user) {
   return response.data;
 }
 
+async function logout(token) {
+  const response = await axios.post(`${BASE_URL}/logout`, token);
+  return response.data;
+}
+
 async function newPost(postData, token) {
   const config = createConfig(token);
   const newPostResponse = await axios.post(`${BASE_URL}/posts/new`, postData, config);
@@ -34,6 +39,7 @@ async function validateSession(token) {
 export const api = {
   createUser,
   login,
+  logout,
   validateSession,
   newPost,
 };

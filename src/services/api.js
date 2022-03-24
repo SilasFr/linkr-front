@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "http://localhost:5000";
-// const BASE_URL = "https://linkr-back.herokuapp.com";
+const BASE_URL = 'http://localhost:5000';
+// const BASE_URL = 'https://linkr-back.herokuapp.com';
 
 function createConfig(token) {
   return {
@@ -19,10 +19,21 @@ async function login(user) {
   return response.data;
 }
 
+async function newPost(postData, token) {
+  const config = createConfig(token);
+  const newPostResponse = await axios.post(`${BASE_URL}/posts/new`, postData, config);
+  return newPostResponse;
+}
+
 async function validateSession(token) {
   const config = createConfig(token);
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }
 
-export const api = { createUser, login, validateSession };
+export const api = {
+  createUser,
+  login,
+  validateSession,
+  newPost,
+};

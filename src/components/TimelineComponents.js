@@ -9,7 +9,6 @@ const Container = styled.div`
   background-color: #333333;
 
   @media (max-width: 420px) {
-    width: 100%;
     flex-direction: column;
   }
 `;

@@ -17,12 +17,14 @@ import {
 } from "../../components/HomeComponents";
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
+import Timeline from "../timeline";
 
 export default function Home() {
   const { userData, setUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [reload, setReload] = useState(true);
   const navigate = useNavigate();
 
   async function handleLogout(e) {
@@ -55,8 +57,9 @@ export default function Home() {
       await api.newPost(formData, userData.token);
       setLoading(false);
       setFormData({});
-      updatePosts();
+      setReload(!reload);
     } catch (error) {
+      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});
@@ -117,6 +120,7 @@ export default function Home() {
             </ButtonPublish>
           </NewPostForm>
         </NewPost>
+        <Timeline reload={reload} setReload={setReload} />
       </MainFeed>
     </MainContainer>
   );

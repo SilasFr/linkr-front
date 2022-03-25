@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #333333;
 `;
 
@@ -23,7 +23,7 @@ const Header = styled.div`
     font-family: "Passion One";
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 
@@ -35,7 +35,7 @@ const UserMenu = styled.div`
   width: 88px;
   font-size: 25px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
 `;
 
@@ -52,18 +52,18 @@ const MenuLogout = styled.div`
   z-index: 1;
   margin-top: 72px;
   p {
-      font-family: 'Lato';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 17px;
-      line-height: 20px;
-      letter-spacing: 0.05em;
-      color: #FFFFFF;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #ffffff;
   }
   @media (max-width: 420px) {
-  height: 43px;
+    height: 43px;
   }
-`
+`;
 
 const UserAvatar = styled.img`
   display: flex;
@@ -83,9 +83,9 @@ const MainFeed = styled.div`
     margin: 0 auto 45px 0;
     font-size: 43px;
     line-height: 64px;
-    font-family: 'Oswald';
+    font-family: "Oswald";
     font-weight: 700;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 
@@ -94,7 +94,7 @@ const NewPost = styled.div`
   width: 100%;
   height: 210px;
   margin: 0 0 30px 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -127,7 +127,7 @@ const NewPostForm = styled.form`
   flex-direction: column;
   width: 95%;
   margin: 21px 28px 16px 0;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-weight: 300;
   & h2 {
@@ -138,7 +138,7 @@ const NewPostForm = styled.form`
   & input {
     width: 95%;
     padding-left: 13px;
-    background-color: #EFEFEF;
+    background-color: #efefef;
     border-radius: 5px;
     font-size: 15px;
     line-height: 18px;
@@ -163,7 +163,7 @@ const ButtonPublish = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1877F2;
+  background-color: #1877f2;
   border-radius: 5px;
   font-family: "Oswald";
   font-style: normal;
@@ -171,9 +171,9 @@ const ButtonPublish = styled.button`
   font-size: 14px;
   line-height: 17px;
   color: #ffffff;
-  
+
   :disabled {
-    background-color: #9F9F9F;
+    background-color: #9f9f9f;
     pointer-events: none;
   }
 `;
@@ -195,7 +195,10 @@ const PostsList = styled.ul`
 
 export {
   MainContainer,
-  Header, UserMenu, MenuLogout, UserAvatar,
+  Header,
+  UserMenu,
+  MenuLogout,
+  UserAvatar,
   MainFeed,
   NewPost,
   PostUserInfo,
@@ -203,5 +206,5 @@ export {
   NewPostUrl,
   NewPostDescription,
   ButtonPublish,
-  PostsList
+  PostsList,
 };

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { IoChevronDownOutline as DownArrow } from "react-icons/io5";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   MainContainer,
   Header,
@@ -18,14 +17,17 @@ import {
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 import Timeline from "../timeline";
+import Topics from "../topics";
 
-export default function Home() {
+export default function Home({ target }) {
   const { userData, setUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [reload, setReload] = useState(true);
   const navigate = useNavigate();
+
+  const { hashtag } = useParams();
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -93,34 +95,41 @@ export default function Home() {
         ) : null}
       </>
       <MainFeed>
-        <h1>timeline</h1>
-        <NewPost>
-          <PostUserInfo>
-            <img src={userData.profilePic} alt="user avatar" />
-          </PostUserInfo>
-          <NewPostForm onSubmit={handleSubmit}>
-            <h2>What are you going to share today?</h2>
-            <NewPostUrl
-              name="link"
-              placeholder="http://..."
-              type="url"
-              value={formData.link || ""}
-              onChange={handleInputChange}
-              required
-            />
-            <NewPostDescription
-              name="description"
-              placeholder="Comment about the link you're sharing! (optional)"
-              type="text"
-              value={formData.description || ""}
-              onChange={handleInputChange}
-            />
-            <ButtonPublish disabled={loading}>
-              {loading ? "Publishing..." : "Publish"}
-            </ButtonPublish>
-          </NewPostForm>
-        </NewPost>
-        <Timeline reload={reload} setReload={setReload} />
+        <h1>{target !== "timeline" ? `#${hashtag}` : target}</h1>
+        {target === "timeline" && (
+          <NewPost>
+            <PostUserInfo>
+              <img src={userData.profilePic} alt="user avatar" />
+            </PostUserInfo>
+            <NewPostForm onSubmit={handleSubmit}>
+              <h2>What are you going to share today?</h2>
+              <NewPostUrl
+                name="link"
+                placeholder="http://..."
+                type="url"
+                value={formData.link || ""}
+                onChange={handleInputChange}
+                required
+              />
+              <NewPostDescription
+                name="description"
+                placeholder="Comment about the link you're sharing! (optional)"
+                type="text"
+                value={formData.description || ""}
+                onChange={handleInputChange}
+              />
+              <ButtonPublish disabled={loading}>
+                {loading ? "Publishing..." : "Publish"}
+              </ButtonPublish>
+            </NewPostForm>
+          </NewPost>
+        )}
+        {target === "timeline" && (
+          <Timeline reload={reload} setReload={setReload} />
+        )}
+        {target !== "timeline" && (
+          <Topics reload={reload} setReload={setReload} />
+        )}
       </MainFeed>
     </MainContainer>
   );

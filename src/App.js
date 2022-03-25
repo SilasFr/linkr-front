@@ -6,6 +6,7 @@ import Timeline from "./pages/timeline";
 import Home from "./pages/home";
 import { UserProvider } from "./contexts/userContext";
 import TimelineContext from "./contexts/timelineContext";
+import Topics from "./pages/topics";
 
 function App() {
   return (
@@ -14,7 +15,11 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/timeline" element={<Home />} />
+          <Route path="/timeline" element={<Home target={"timeline"} />} />
+          <Route
+            path="/hashtag/:hashtag"
+            element={<Home target={"hashtag"} />}
+          />
         </Routes>
       </BrowserRouter>
     </UserProvider>

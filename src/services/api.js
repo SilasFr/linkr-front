@@ -25,6 +25,12 @@ async function loadPosts(token) {
   return result;
 }
 
+async function loadPostsByHashtag(hashtag, token) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/hashtag/${hashtag}`, config);
+  return result;
+}
+
 async function logout(token) {
   const response = await axios.post(`${BASE_URL}/logout`, token);
   return response.data;
@@ -51,6 +57,7 @@ export const api = {
   login,
   logout,
   loadPosts,
+  loadPostsByHashtag,
   validateSession,
   newPost,
 };

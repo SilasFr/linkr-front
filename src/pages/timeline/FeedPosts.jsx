@@ -59,20 +59,3 @@ export default function FeedPosts({ posts }) {
     </PostsList>
   );
 }
-
-/*   const posts = [
-    {
-      id: 1,
-      link: "https://www.npmjs.com/package/react-hashtag",
-      profilePic:
-        "https://www.maisgoias.com.br/cdn-cgi/image/fit=cover,width=1200,height=800,quality=90,format=auto/https://uploads.emaisgoias.com.br/2021/03/patrick-1500.jpg",
-      userName: "Ze do caroço",
-      description: "Arroz #batata #canela #cancer",
-      title: "Ze do caroço",
-      image:
-        "https://www.maisgoias.com.br/cdn-cgi/image/fit=cover,width=1200,height=800,quality=90,format=auto/https://uploads.emaisgoias.com.br/2021/03/patrick-1500.jpg",
-      userName: "Moraizin",
-    },
-  ];
-
-  console.log(posts); */

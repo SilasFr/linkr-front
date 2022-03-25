@@ -74,10 +74,11 @@ const UserAvatar = styled.img`
 `;
 
 const MainFeed = styled.div`
-  width: 612px;
+  width: 100%;
   margin: 78px auto auto auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   & h1 {
     margin: 0 auto 45px 0;
     font-size: 43px;
@@ -96,6 +97,14 @@ const NewPost = styled.div`
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    height: 164px;
+    padding: 10px 15px 12px 16px;
+    border-radius: 0;
+
+  }
 `;
 
 const PostUserInfo = styled.div`
@@ -107,12 +116,16 @@ const PostUserInfo = styled.div`
   & img {
     border-radius: 50%;
   }
+
+  @media (max-width: 420px) {
+    display: none;
+  }
 `;
 
 const NewPostForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 503px;
+  width: 95%;
   margin: 21px 28px 16px 0;
   font-family: "Lato";
   font-style: normal;
@@ -123,7 +136,7 @@ const NewPostForm = styled.form`
     color: #707070;
   }
   & input {
-    width: 100%;
+    width: 95%;
     padding-left: 13px;
     background-color: #efefef;
     border-radius: 5px;
@@ -131,6 +144,16 @@ const NewPostForm = styled.form`
     line-height: 18px;
     color: #949494;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    margin: 0;
+    & h2 {
+      font-size: 17px;
+      line-height: 20px;
+      text-align: center;
+    }
+  }  
 `;
 
 const ButtonPublish = styled.button`

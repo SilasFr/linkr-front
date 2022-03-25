@@ -9,8 +9,12 @@ const Container = styled.div`
   align-items: center;
   background-color: #333333;
 
+<<<<<<< HEAD
   @media (max-width: 450px) {
     width: 100%;
+=======
+  @media (max-width: 420px) {
+>>>>>>> main
     flex-direction: column;
   }
 `;

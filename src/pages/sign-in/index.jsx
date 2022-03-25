@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Container,
@@ -23,8 +23,8 @@ export default function SignIn() {
       const promise = api.validateSession(userData.token);
       promise.then(() => navigate("/timeline"));
       promise.catch(() => {
-        alert("Sessão Inválida.");
         login({});
+        alert("Sessão Inválida.");
         navigate("/");
       });
     }
@@ -34,8 +34,8 @@ export default function SignIn() {
     e.preventDefault();
     setLoading(true);
 
-    if (formData.email === '' || formData.password === '') {
-      alert('Campos vazios, preencha-os');
+    if (formData.email === "" || formData.password === "") {
+      alert("Campos vazios, preencha-os");
     }
 
     try {
@@ -49,12 +49,14 @@ export default function SignIn() {
 
       setLoading(false);
       setFormData({});
-      navigate('/timeline');
+      navigate("/timeline");
     } catch (e) {
+      console.log(e.response);
       if (e.response.status === 401) {
-        alert('Email ou senha incorretos.');
+        alert("Email ou senha incorretos.");
       }
     }
+    setLoading(false);
   }
 
   function handleInputChange(e) {
@@ -75,7 +77,7 @@ export default function SignIn() {
             name="email"
             placeholder="email"
             type="email"
-            value={formData.email || ''}
+            value={formData.email || ""}
             onChange={handleInputChange}
             required
           />
@@ -84,13 +86,13 @@ export default function SignIn() {
             name="password"
             placeholder="password"
             type="password"
-            value={formData.password || ''}
+            value={formData.password || ""}
             onChange={handleInputChange}
             required
           />
 
           <Button disabled={loading}>
-            {loading ? <ClipLoader /> : 'Sign Up'}
+            {loading ? <ClipLoader /> : "Log In"}
           </Button>
           <StyledLink to="/sign-up">
             <p>First time? Create an account!</p>

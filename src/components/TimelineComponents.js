@@ -123,6 +123,12 @@ const PostContent = styled.div`
   }
 `;
 
+const HeartIcon = styled.div`
+  margin: 18px auto 4px auto;
+  color: #FFFFFF;
+  font-size: 21px;
+`;
+
 const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -312,4 +318,5 @@ export {
   TimelineMessage,
   Header,
   MenuLogout,
+  HeartIcon,
 };

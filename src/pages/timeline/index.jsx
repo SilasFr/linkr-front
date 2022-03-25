@@ -28,7 +28,6 @@ export default function Timeline({ reload, setReload }) {
     updatePosts();
     setReload(!reload);
   }, [reload]);
-  console.log(posts);
 
   return (
     <main>

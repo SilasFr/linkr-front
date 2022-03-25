@@ -5,9 +5,17 @@ import {
   PostContent,
   PostsList,
   PostUserInfo,
+  TimelineMessage,
 } from "../../components/TimelineComponents";
 
 export default function FeedPosts({ posts }) {
+  if (typeof posts === "string") {
+    return (
+      <TimelineMessage>
+        <p>{posts}</p>
+      </TimelineMessage>
+    );
+  }
   return (
     <PostsList>
       {posts.map((post) => (

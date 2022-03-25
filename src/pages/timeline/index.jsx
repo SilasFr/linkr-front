@@ -27,17 +27,7 @@ export default function Timeline({ reload, setReload }) {
   useEffect(() => {
     updatePosts();
   }, [posts]);
-
-  function renderResponse() {
-    if (posts.length > 0) {
-      return setTimeline(<FeedPosts posts={posts} />);
-    }
-    return setTimeline(
-      <TimelineMessage>
-        <p>There are no posts yet</p>
-      </TimelineMessage>
-    );
-  }
+  console.log(posts);
 
   return (
     <main>
@@ -47,7 +37,7 @@ export default function Timeline({ reload, setReload }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        timeline
+        <FeedPosts posts={posts} />
       )}
     </main>
   );

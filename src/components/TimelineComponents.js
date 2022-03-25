@@ -110,6 +110,8 @@ const PostContent = styled.div`
   font-family: "Lato";
   font-style: normal;
   font-weight: 400;
+
+  position: relative;
   & h3 {
     font-size: 19px;
     line-height: 23px;
@@ -304,9 +306,17 @@ const TrashCan = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
 
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid red;
+  ion-icon {
+    color: #fff;
+    font-size: 25px;
+  }
 `;
 
 export {

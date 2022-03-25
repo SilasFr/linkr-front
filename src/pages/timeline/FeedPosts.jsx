@@ -6,6 +6,7 @@ import {
   PostsList,
   PostUserInfo,
   TimelineMessage,
+  TrashCan,
 } from "../../components/TimelineComponents";
 
 export default function FeedPosts({ posts }) {
@@ -34,6 +35,8 @@ export default function FeedPosts({ posts }) {
               </LinkData>
               <img src={post.image} alt={post.title} />
             </LinkPreview>
+
+            <TrashCan />
           </PostContent>
         </PostCard>
       ))}

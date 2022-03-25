@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
-import Home from './pages/home';
+import Timeline from "./pages/timeline";
+import Home from "./pages/home";
 import { UserProvider } from "./contexts/userContext";
 
 function App() {
-
   return (
     <UserProvider>
       <BrowserRouter>

@@ -74,7 +74,7 @@ const UserAvatar = styled.img`
 `;
 
 const MainFeed = styled.div`
-  width: 100%;
+  width: 620px;
   margin: 78px auto auto auto;
   display: flex;
   flex-direction: column;
@@ -86,6 +86,15 @@ const MainFeed = styled.div`
     font-family: "Oswald";
     font-weight: 700;
     color: #ffffff;
+  }
+
+  @media (max-width: 450px) {
+    width: 100vw;
+    margin-top: 0;
+    h1 {
+      margin-left: 17px;
+      margin-bottom: 20px;
+    }
   }
 `;
 
@@ -103,17 +112,19 @@ const NewPost = styled.div`
     height: 164px;
     padding: 10px 15px 12px 16px;
     border-radius: 0;
-
   }
 `;
 
 const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50px;
+  align-items: center;
+  width: 10%;
   height: 150px;
   margin: 16px auto auto 16px;
   & img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
 
@@ -125,8 +136,10 @@ const PostUserInfo = styled.div`
 const NewPostForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 95%;
-  margin: 21px 28px 16px 0;
+  align-items: flex-start;
+  gap: 5px;
+  width: 90%;
+  margin: 21px 28px 16px 15px;
   font-family: "Lato";
   font-style: normal;
   font-weight: 300;
@@ -136,7 +149,7 @@ const NewPostForm = styled.form`
     color: #707070;
   }
   & input {
-    width: 95%;
+    box-sizing: border-box;
     padding-left: 13px;
     background-color: #efefef;
     border-radius: 5px;
@@ -153,13 +166,14 @@ const NewPostForm = styled.form`
       line-height: 20px;
       text-align: center;
     }
-  }  
+  }
 `;
 
 const ButtonPublish = styled.button`
+  align-self: end;
+
   width: 112px;
   height: 32px;
-  margin: 5px 0 auto auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,11 +193,13 @@ const ButtonPublish = styled.button`
 `;
 
 const NewPostUrl = styled.input`
+  width: 100%;
   height: 30px;
-  margin: 10px 0 8px 0;
+  /* margin: 10px 0 8px 0; */
 `;
 
 const NewPostDescription = styled.input`
+  width: 100%;
   height: 66px;
 `;
 

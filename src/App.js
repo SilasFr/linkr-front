@@ -10,15 +10,13 @@ import TimelineContext from "./contexts/timelineContext";
 function App() {
   return (
     <UserProvider>
-      <TimelineContext>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/timeline" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-      </TimelineContext>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/timeline" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </UserProvider>
   );
 }

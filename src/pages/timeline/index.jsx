@@ -8,7 +8,6 @@ import FeedPosts from "./FeedPosts";
 export default function Timeline({ reload, setReload }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [timeline, setTimeline] = useState();
   const { userData } = useContext(UserContext);
 
   async function updatePosts() {
@@ -25,8 +24,10 @@ export default function Timeline({ reload, setReload }) {
   }
 
   useEffect(() => {
+    if (!reload) return;
     updatePosts();
-  }, [posts]);
+    setReload(!reload);
+  }, [reload]);
   console.log(posts);
 
   return (

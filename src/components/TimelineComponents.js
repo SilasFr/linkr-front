@@ -300,6 +300,15 @@ const MenuLogout = styled.div`
   }
 `;
 
+const TrashCan = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+`;
+
 export {
   Container,
   Feed,
@@ -312,4 +321,5 @@ export {
   TimelineMessage,
   Header,
   MenuLogout,
+  TrashCan,
 };

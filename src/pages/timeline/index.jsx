@@ -49,7 +49,7 @@ export default function Timeline({ reload, setReload }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        timeline
+        <FeedPosts posts={posts} />
       )}
     </main>
   );

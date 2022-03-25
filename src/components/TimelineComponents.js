@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -299,6 +300,10 @@ const MenuLogout = styled.div`
   }
 `;
 
+const StyledHashtag = styled(Link)`
+  font-weight: 700;
+`;
+
 export {
   Container,
   Feed,
@@ -311,4 +316,5 @@ export {
   TimelineMessage,
   Header,
   MenuLogout,
+  StyledHashtag,
 };

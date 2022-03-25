@@ -134,9 +134,10 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 27px;
   line-height: 40px;
+  color: #ffffff;
   border: 1px solid #000;
 
-  color: #ffffff;
+  cursor: pointer;
 
   :disabled {
     background-color: #9f9f9f;
@@ -154,6 +155,7 @@ const StyledLink = styled(Link)`
   font-size: 20px;
   text-decoration: underline;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 export { Container, Form, Input, Button, StyledLink };

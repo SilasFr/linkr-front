@@ -11,23 +11,21 @@ export default function Timeline({ reload, setReload }) {
   const [timeline, setTimeline] = useState();
   const { userData } = useContext(UserContext);
 
-  useEffect(() => {
+  async function updatePosts() {
     try {
       setLoading(true);
-      const promise = api.loadPosts(userData.token);
-      promise.then((response) => {
-        setPosts(response.data);
-        setLoading(false);
-      });
+      const response = await api.loadPosts(userData.token);
+      setPosts(response.data);
     } catch (e) {
       alert(
-        "An error occured while trying to fetch the posts, please refresh the page"
+        '"An error occured while trying to fetch the posts, please refresh the page"'
       );
     }
-  }, [reload, userData.token]);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    renderResponse();
+    updatePosts();
   }, [posts]);
 
   function renderResponse() {

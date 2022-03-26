@@ -312,10 +312,10 @@ const TrashCan = styled.div`
 
   width: 40px;
   height: 40px;
-  border: 1px solid red;
+  z-index: 1;
   ion-icon {
     color: #fff;
-    font-size: 25px;
+    font-size: 1.5rem;
   }
 `;
 

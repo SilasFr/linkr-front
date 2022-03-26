@@ -1,15 +1,17 @@
 import { TrashCan } from "../../components/TimelineComponents";
+import { useState } from "react";
 
-export default function TrashIcon() {
-  function handleDelete() {
+export default function TrashIcon({ postId, dialog }) {
+  async function handleDelete() {
     try {
-      console.log("click to delete");
+      console.log("delete", postId);
+      dialog(!dialog);
     } catch (e) {
-      alert(e.response.data);
+      alert("Não foi possível excluir o post");
     }
   }
   return (
-    <TrashCan>
+    <TrashCan onClick={handleDelete}>
       <ion-icon name="trash"></ion-icon>
     </TrashCan>
   );

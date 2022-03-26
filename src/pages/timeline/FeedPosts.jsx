@@ -6,10 +6,10 @@ import {
   PostsList,
   PostUserInfo,
   TimelineMessage,
-  TrashCan,
 } from "../../components/TimelineComponents";
+import TrashIcon from "./TrashIcon";
 
-export default function FeedPosts({ posts }) {
+export default function FeedPosts({ posts, dialog }) {
   if (typeof posts === "string") {
     return (
       <TimelineMessage>
@@ -20,14 +20,14 @@ export default function FeedPosts({ posts }) {
   return (
     <PostsList>
       {posts.map((post) => (
-        <PostCard key={post.id} onClick={() => window.open(post.link)}>
+        <PostCard key={post.id}>
           <PostUserInfo>
             <img src={post.profilePic} alt="user avatar" />
           </PostUserInfo>
           <PostContent>
             <h3>{post.userName}</h3>
             <h4>{post.description}</h4>
-            <LinkPreview>
+            <LinkPreview onClick={() => window.open(post.link)}>
               <LinkData>
                 <h5>{post.title}</h5>
                 <p>{post.description}</p>
@@ -36,7 +36,7 @@ export default function FeedPosts({ posts }) {
               <img src={post.image} alt={post.title} />
             </LinkPreview>
 
-            <TrashCan />
+            <TrashIcon postId={post.id} dialog={dialog} />
           </PostContent>
         </PostCard>
       ))}

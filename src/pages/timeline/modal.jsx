@@ -10,6 +10,13 @@ import {
 } from "../../components/ModalComponents";
 
 export default function ModalComponent({ modalControl }) {
+  async function handleDelete() {
+    try {
+      console.log("delete", postId);
+    } catch (e) {
+      alert("Não foi possível excluir o post");
+    }
+  }
   return (
     <Modal
       center
@@ -24,8 +31,10 @@ export default function ModalComponent({ modalControl }) {
       <ModalContainer>
         <Dialog>Are you sure you want to delete this post?</Dialog>
         <Interface>
-          <CloseButton>No, go back</CloseButton>
-          <DeleteButton>Yes, delete it</DeleteButton>
+          <CloseButton onClick={modalControl.onCloseModal}>
+            No, go back
+          </CloseButton>
+          <DeleteButton onClick={handleDelete}>Yes, delete it</DeleteButton>
         </Interface>
       </ModalContainer>
     </Modal>

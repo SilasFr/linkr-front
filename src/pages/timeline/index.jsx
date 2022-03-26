@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
+import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
-
 import ModalComponent from "./modal";
 
 export default function Timeline({ reload, setReload }) {
+  const { userData } = useContext(UserContext);
+  const { timeline, setTimeline } = useContext(TimelineContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -19,7 +21,6 @@ export default function Timeline({ reload, setReload }) {
     onOpenModal,
     onCloseModal,
   };
-  const { userData } = useContext(UserContext);
 
   async function updatePosts() {
     try {
@@ -48,7 +49,7 @@ export default function Timeline({ reload, setReload }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        <FeedPosts posts={posts} dialog={onOpenModal} />
+        <FeedPosts posts={posts} dialog={modalControl} />
       )}
       <ModalComponent modalControl={modalControl} />
     </main>

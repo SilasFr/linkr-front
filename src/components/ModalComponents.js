@@ -46,6 +46,7 @@ const DeleteButton = styled.button`
 
   background: #1877f2;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const CloseButton = styled.button`
@@ -60,6 +61,7 @@ const CloseButton = styled.button`
 
   background: #ffffff;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 export { ModalContainer, Dialog, Interface, DeleteButton, CloseButton };

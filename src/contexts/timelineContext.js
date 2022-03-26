@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 const TimelineContext = createContext();
 
-export function UserProvider({ children }) {
+export function TimelineProvider({ children }) {
   const [timeline, setTimeline] = useState(false);
 
   return (

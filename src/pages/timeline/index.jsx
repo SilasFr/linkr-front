@@ -9,7 +9,6 @@ import ModalComponent from "./modal";
 
 export default function Timeline({ reload, setReload }) {
   const { userData } = useContext(UserContext);
-  const { timeline, setTimeline } = useContext(TimelineContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,6 +36,7 @@ export default function Timeline({ reload, setReload }) {
 
   useEffect(() => {
     if (!reload) return;
+    console.log("reloaded");
     updatePosts();
     setReload(!reload);
   }, [reload]);
@@ -51,7 +51,7 @@ export default function Timeline({ reload, setReload }) {
       ) : (
         <FeedPosts posts={posts} dialog={modalControl} />
       )}
-      <ModalComponent modalControl={modalControl} />
+      <ModalComponent modalControl={modalControl} reload={setReload} />
     </main>
   );
 }

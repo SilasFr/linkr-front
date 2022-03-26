@@ -46,6 +46,12 @@ async function validateSession(token) {
   return response.data;
 }
 
+async function deletePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.delete(`${BASE_URL}/posts/${id}`, config);
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -53,4 +59,5 @@ export const api = {
   loadPosts,
   validateSession,
   newPost,
+  deletePost,
 };

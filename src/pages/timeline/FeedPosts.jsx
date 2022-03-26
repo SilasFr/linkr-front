@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   LinkData,
   LinkPreview,
@@ -7,9 +8,11 @@ import {
   PostUserInfo,
   TimelineMessage,
 } from "../../components/TimelineComponents";
+import TimelineContext from "../../contexts/timelineContext";
 import TrashIcon from "./TrashIcon";
 
 export default function FeedPosts({ posts, dialog }) {
+  const { timeline, setTimeline } = useContext(TimelineContext);
   if (typeof posts === "string") {
     return (
       <TimelineMessage>

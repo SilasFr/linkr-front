@@ -8,11 +8,20 @@ import {
   Interface,
   ModalContainer,
 } from "../../components/ModalComponents";
+import { useContext } from "react";
+import TimelineContext from "../../contexts/timelineContext";
+import { api } from "../../services/api";
+import UserContext from "../../contexts/userContext";
 
-export default function ModalComponent({ modalControl }) {
+export default function ModalComponent({ modalControl, reload }) {
+  const { userData } = useContext(UserContext);
+  const { deletePost } = useContext(TimelineContext);
   async function handleDelete() {
     try {
-      console.log("delete", postId);
+      console.log("deleted");
+      await api.deletePost(deletePost, userData.token);
+      modalControl.onCloseModal();
+      reload(true);
     } catch (e) {
       alert("Não foi possível excluir o post");
     }

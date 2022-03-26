@@ -59,7 +59,6 @@ export default function Home() {
       setFormData({});
       setReload(!reload);
     } catch (error) {
-      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});

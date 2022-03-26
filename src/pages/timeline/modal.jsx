@@ -18,7 +18,6 @@ export default function ModalComponent({ modalControl, reload }) {
   const { deletePost } = useContext(TimelineContext);
   async function handleDelete() {
     try {
-      console.log("deleted");
       await api.deletePost(deletePost, userData.token);
       modalControl.onCloseModal();
       reload(true);

@@ -76,7 +76,7 @@ const PostsList = styled.ul`
   flex-direction: column;
   width: 100%;
 
-  margin-top: 30px;
+  margin: 30px 0;
 
   @media (max-width: 450px) {
     width: 100vw;
@@ -90,9 +90,11 @@ const PostCard = styled.li`
   width: 100%;
   height: 276px;
   margin: 0 0 30px 0;
+  padding-top: 10px;
   background-color: #171717;
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
 
   @media (max-width: 450px) {
     width: 100%;
@@ -111,16 +113,16 @@ const PostContent = styled.div`
   font-style: normal;
   font-weight: 400;
 
-  position: relative;
   & h3 {
     font-size: 19px;
     line-height: 23px;
     color: #ffffff;
   }
   & h4 {
+    height: 40px;
     font-weight: 400;
     font-size: 17px;
-    line-height: 21px;
+    line-height: 20px;
     color: #b7b7b7;
   }
 `;
@@ -141,7 +143,7 @@ const PostUserInfo = styled.div`
 const LinkPreview = styled.div`
   width: 100%;
   height: 155px;
-  margin-top: 20px;
+  margin: 5px 0 20px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -308,14 +310,17 @@ const TrashCan = styled.div`
   justify-content: center;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 5px;
 
   width: 40px;
   height: 40px;
   z-index: 1;
   ion-icon {
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    @media (max-width: 450px) {
+      font-size: 1rem;
+    }
   }
 `;
 

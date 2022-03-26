@@ -2,7 +2,7 @@
   background: rgba(241, 241, 241, 0.843);
 }
 .customModal {
-  width: 597px;
+  max-width: 597px;
   height: 262px;
   border-radius: 50px;
   background: #333333;

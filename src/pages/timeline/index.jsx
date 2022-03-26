@@ -20,7 +20,6 @@ export default function Timeline({ reload, setReload }) {
     onOpenModal,
     onCloseModal,
   };
-
   async function updatePosts() {
     try {
       setLoading(true);

@@ -9,7 +9,7 @@ import {
   TimelineMessage,
   StyledHashtag,
 } from "../../components/TimelineComponents";
-import ReactHashtag from "react-hashtag";
+import ReactHashtag from "@mdnm/react-hashtag";
 import UserContext from "../../contexts/userContext";
 import TrashIcon from "./TrashIcon";
 

@@ -43,10 +43,10 @@ async function newPost(postData, token) {
 async function postHashtags(hashtagsArray, token) {
   const hashtags = {
     hashtags: hashtagsArray,
-    token: token
-  }
+    token: token,
+  };
   const response = await axios.post(`${BASE_URL}/hashtag`, hashtags);
-  return response
+  return response;
 }
 
 async function getHashtags() {
@@ -60,6 +60,12 @@ async function validateSession(token) {
   return response.data;
 }
 
+async function deletePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.delete(`${BASE_URL}/posts/${id}`, config);
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -67,6 +73,7 @@ export const api = {
   loadPosts,
   validateSession,
   newPost,
+  deletePost,
   postHashtags,
   getHashtags,
 };

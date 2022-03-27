@@ -70,7 +70,6 @@ const UserAvatar = styled.img`
   width: 53px;
   height: 53px;
   border-radius: 26.5px;
-  background-color: blue;
 `;
 
 const MainFeed = styled.div`

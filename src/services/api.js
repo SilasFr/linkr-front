@@ -25,6 +25,12 @@ async function loadPosts(token) {
   return result;
 }
 
+async function loadPostsByUserId(token, userId) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/timeline/${userId}`, config);
+  return result;
+}
+
 async function logout(token) {
   const response = await axios.post(`${BASE_URL}/logout`, token);
   return response.data;
@@ -51,6 +57,7 @@ export const api = {
   login,
   logout,
   loadPosts,
+  loadPostsByUserId,
   validateSession,
   newPost,
 };

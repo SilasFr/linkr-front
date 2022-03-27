@@ -15,6 +15,7 @@ import {
   MainFeed,
 } from "../../components/HomeComponents";
 import { ClipLoader } from "react-spinners";
+import ModalComponent from "../timeline/modal";
 
 export default function UserPage() {
   const userId = useParams().id;
@@ -22,12 +23,20 @@ export default function UserPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [open, setOpen] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+  const modalControl = {
+    open,
+    setOpen,
+    onOpenModal,
+    onCloseModal,
+  };
 
   useEffect(async () => {
     try {
       setLoading(true);
       const response = await api.loadPostsByUserId(userData.token, userId);
-      console.log("userData: ", userData.profilePic);
       setPosts(response.data);
       setLoading(false);
     } catch {
@@ -51,13 +60,13 @@ export default function UserPage() {
         </UserMenu>
       </Header>
       <>
-        {/*         {showMenu ? (
+        {showMenu ? (
           <MenuLogout>
             <Link to={"/"} onClick={handleLogout}>
               <p>Logout</p>
             </Link>
           </MenuLogout>
-        ) : null} */}
+        ) : null}
       </>
       <MainFeed>
         <h1>{userData.name}</h1>
@@ -69,8 +78,9 @@ export default function UserPage() {
               <ClipLoader color="white" />
             </TimelineMessage>
           ) : (
-            <FeedPosts posts={posts} />
+            <FeedPosts posts={posts} dialog={modalControl} />
           )}
+          <ModalComponent modalControl={modalControl} />
         </main>
       </MainFeed>
     </MainContainer>

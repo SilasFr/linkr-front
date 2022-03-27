@@ -17,10 +17,7 @@ import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 import Timeline from "../timeline";
 import * as extract from "mention-hashtag";
-<<<<<<< HEAD
 import HeaderComponent from "../../components/Header";
-=======
->>>>>>> feat/hashtag-onclick
 
 export default function Home() {
   const { userData, setUserData } = useContext(UserContext);
@@ -114,11 +111,7 @@ export default function Home() {
             {typeof hashtagsArray === "string"
               ? ""
               : hashtagsArray.map((hashtag) => (
-<<<<<<< HEAD
-                  <Link to={`/hashtag/:${hashtag.topic}`}>
-=======
                   <Link to={`/hashtag/${hashtag.topic}`}>
->>>>>>> feat/hashtag-onclick
                     <li key={hashtag.id}># {hashtag.topic}</li>
                   </Link>
                 ))}

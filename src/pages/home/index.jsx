@@ -2,10 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   MainContainer,
-  Header,
-  UserMenu,
-  MenuLogout,
-  UserAvatar,
   MainFeed,
   NewPost,
   NewPostForm,
@@ -15,22 +11,21 @@ import {
   ButtonPublish,
   ContentContainer,
   HashtagBox,
-  HorizontalLine
+  HorizontalLine,
 } from "../../components/HomeComponents";
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 import Timeline from "../timeline";
-import * as extract from "mention-hashtag"
-
+import * as extract from "mention-hashtag";
+import HeaderComponent from "../../components/Header";
 
 export default function Home() {
   const { userData, setUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const [reload, setReload] = useState(true);
   const navigate = useNavigate();
-  const [hashtagsArray, setHashtagsArray] = useState([])
+  const [hashtagsArray, setHashtagsArray] = useState([]);
 
   async function updateHashtags() {
     try {
@@ -44,40 +39,22 @@ export default function Home() {
   }
 
   useEffect(() => {
-    updateHashtags()
-  }, [])
-
-  async function handleLogout(e) {
-    e.preventDefault();
-
-    const token = {
-      token: userData.token,
-    };
-
-    try {
-      await api.logout(token);
-
-      setUserData({
-        name: "",
-        token: "",
-        profilePic: "",
-      });
-      navigate("/");
-    } catch (e) {
-      alert("Sua sessão já foi expirada expirada.");
-      navigate("/");
-    }
-  }
+    updateHashtags();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
 
-    const hashtags = extract(formData.description, { symbol: false, type: '#' });
+    const hashtags = extract(formData.description, {
+      symbol: false,
+      type: "#",
+    });
 
     try {
       await api.newPost(formData, userData.token);
       await api.postHashtags(hashtags, userData.token);
+      await updateHashtags();
       setLoading(false);
       setFormData({});
       setReload(!reload);
@@ -94,26 +71,7 @@ export default function Home() {
 
   return (
     <MainContainer>
-      <Header>
-        <h1>linkr</h1>
-
-        <UserMenu>
-          <ion-icon
-            name={showMenu ? "chevron-up" : "chevron-down"}
-            onClick={() => setShowMenu((currentShowMenu) => !currentShowMenu)}
-          ></ion-icon>
-          <UserAvatar src={userData.profilePic} />
-        </UserMenu>
-      </Header>
-      <>
-        {showMenu ? (
-          <MenuLogout>
-            <Link to={"/"} onClick={handleLogout}>
-              <p>Logout</p>
-            </Link>
-          </MenuLogout>
-        ) : null}
-      </>
+      <HeaderComponent />
       <ContentContainer>
         <MainFeed>
           <h1>timeline</h1>
@@ -130,14 +88,14 @@ export default function Home() {
                 value={formData.link || ""}
                 onChange={handleInputChange}
                 required
-                />
+              />
               <NewPostDescription
                 name="description"
                 placeholder="Comment about the link you're sharing! (optional)"
                 type="text"
                 value={formData.description || ""}
                 onChange={handleInputChange}
-                />
+              />
               <ButtonPublish disabled={loading}>
                 {loading ? "Publishing..." : "Publish"}
               </ButtonPublish>
@@ -149,11 +107,13 @@ export default function Home() {
           <h3>trending</h3>
           <HorizontalLine></HorizontalLine>
           <ul>
-            {hashtagsArray.map(hashtag => (
-              <Link to={`/hashtag/:${hashtag.topic}`}>
-                <li key={hashtag.id}># {hashtag.topic}</li>
-              </Link>
-            ))}
+            {typeof hashtagsArray === "string"
+              ? ""
+              : hashtagsArray.map((hashtag) => (
+                  <Link to={`/hashtag/:${hashtag.topic}`}>
+                    <li key={hashtag.id}># {hashtag.topic}</li>
+                  </Link>
+                ))}
           </ul>
         </HashtagBox>
       </ContentContainer>

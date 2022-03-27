@@ -6,23 +6,16 @@ import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
 import Nav from "../timeline/navbar";
 import { TimelineMessage } from "../../components/TimelineComponents";
-import {
-  MainContainer,
-  Header,
-  UserMenu,
-  MenuLogout,
-  UserAvatar,
-  MainFeed,
-} from "../../components/HomeComponents";
+import { MainContainer, MainFeed } from "../../components/HomeComponents";
 import { ClipLoader } from "react-spinners";
 import ModalComponent from "../timeline/modal";
+import HeaderComponent from "../../components/Header";
 
 export default function UserPage() {
   const userId = useParams().id;
   const { userData } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -48,26 +41,7 @@ export default function UserPage() {
 
   return (
     <MainContainer>
-      <Header>
-        <h1>linkr</h1>
-
-        <UserMenu>
-          <ion-icon
-            name={showMenu ? "chevron-up" : "chevron-down"}
-            onClick={() => setShowMenu((currentShowMenu) => !currentShowMenu)}
-          ></ion-icon>
-          <UserAvatar src={userData.profilePic} />
-        </UserMenu>
-      </Header>
-      <>
-        {showMenu ? (
-          <MenuLogout>
-            <Link to={"/"} onClick={handleLogout}>
-              <p>Logout</p>
-            </Link>
-          </MenuLogout>
-        ) : null}
-      </>
+      <HeaderComponent />
       <MainFeed>
         <h1>{userData.name}</h1>
         <Nav />

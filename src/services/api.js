@@ -43,10 +43,10 @@ async function newPost(postData, token) {
 async function postHashtags(hashtagsArray, token) {
   const hashtags = {
     hashtags: hashtagsArray,
-    token: token
-  }
+    token: token,
+  };
   const response = await axios.post(`${BASE_URL}/hashtag`, hashtags);
-  return response
+  return response;
 }
 
 async function getHashtags() {
@@ -73,10 +73,7 @@ export const api = {
   loadPosts,
   validateSession,
   newPost,
-<<<<<<< HEAD
   deletePost,
-=======
   postHashtags,
   getHashtags,
->>>>>>> main
 };

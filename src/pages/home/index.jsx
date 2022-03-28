@@ -18,6 +18,11 @@ import {
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 import Timeline from "../timeline";
+import {
+  SearchBar,
+  SearchContainer,
+  SearchUsers,
+} from "../../components/NavigationComponents";
 
 export default function Home() {
   const { userData, setUserData } = useContext(UserContext);
@@ -74,7 +79,28 @@ export default function Home() {
     <MainContainer>
       <Header>
         <h1>linkr</h1>
-
+        <SearchContainer>
+          <SearchBar
+            placeholder="Search for people"
+            minLength={2}
+            debounceTimeout={300}
+            onChange={(event) => console.log(event.target.value)}
+          ></SearchBar>
+          <SearchUsers>
+            <li>
+              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
+              <span>oie</span>
+            </li>
+            <li>
+              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
+              <span>oie</span>
+            </li>
+            <li>
+              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
+              <span>oie</span>
+            </li>
+          </SearchUsers>
+        </SearchContainer>
         <UserMenu>
           <ion-icon
             name={showMenu ? "chevron-up" : "chevron-down"}

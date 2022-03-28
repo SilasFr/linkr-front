@@ -7,7 +7,9 @@ import {
   PostsList,
   PostUserInfo,
   TimelineMessage,
+  StyledHashtag,
 } from "../../components/TimelineComponents";
+import ReactHashtag from "@mdnm/react-hashtag";
 import UserContext from "../../contexts/userContext";
 import TrashIcon from "./TrashIcon";
 
@@ -20,6 +22,24 @@ export default function FeedPosts({ posts, dialog }) {
       </TimelineMessage>
     );
   }
+
+  function Hashtags(post) {
+    return (
+      <ReactHashtag
+        renderHashtag={(hashtagValue) => (
+          <StyledHashtag
+            key={post.id}
+            to={`/hashtag/${hashtagValue.replace("#", "")}`}
+          >
+            {hashtagValue}
+          </StyledHashtag>
+        )}
+      >
+        {post.description}
+      </ReactHashtag>
+    );
+  }
+
   return (
     <PostsList>
       {posts.map((post) => {
@@ -34,7 +54,7 @@ export default function FeedPosts({ posts, dialog }) {
             </PostUserInfo>
             <PostContent>
               <h3>{post.userName}</h3>
-              <h4>{post.description}</h4>
+              <h4>{Hashtags(post)}</h4>
               <LinkPreview onClick={() => window.open(post.link)}>
                 <LinkData>
                   <h5>{post.title}</h5>

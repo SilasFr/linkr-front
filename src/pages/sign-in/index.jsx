@@ -24,7 +24,6 @@ export default function SignIn() {
       promise.then(() => navigate("/timeline"));
       promise.catch(() => {
         login({});
-        alert("Sessão Inválida.");
         navigate("/");
       });
     }

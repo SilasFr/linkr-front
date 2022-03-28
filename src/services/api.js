@@ -25,6 +25,11 @@ async function loadPosts(token) {
   return result;
 }
 
+async function loadPostsByHashtag(hashtag, token) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/hashtag/${hashtag}`, config);
+  return result;
+}
 async function loadPostsByUserId(token, userId) {
   const config = createConfig(token);
   const result = await axios.get(`${BASE_URL}/timeline/${userId}`, config);
@@ -77,6 +82,7 @@ export const api = {
   login,
   logout,
   loadPosts,
+  loadPostsByHashtag,
   loadPostsByUserId,
   validateSession,
   newPost,

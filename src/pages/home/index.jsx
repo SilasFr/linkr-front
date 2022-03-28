@@ -21,21 +21,13 @@ import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
 
 export default function Home({ target }) {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(true);
-  const navigate = useNavigate();
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
   const { hashtag } = useParams();
-
-  async function handleLogout(e) {
-    e.preventDefault();
-  }
-  const token = {
-    token: userData.token,
-  };
 
   async function updateHashtags() {
     try {

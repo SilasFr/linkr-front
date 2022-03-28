@@ -5,7 +5,6 @@ import SignUp from "./pages/sign-up";
 import Home from "./pages/home";
 import UserPage from "./pages/userPage";
 import { UserProvider } from "./contexts/userContext";
-import Topics from "./pages/topics";
 import { TimelineProvider } from "./contexts/timelineContext";
 
 function App() {

@@ -15,7 +15,11 @@ function App() {
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/timeline" element={<Home />} />
+            <Route path="/timeline" element={<Home target={"timeline"} />} />
+            <Route
+              path="/hashtag/:hashtag"
+              element={<Home target={"hashtag"} />}
+            />
             <Route path="/user/:id" element={<UserPage />} />
           </Routes>
         </BrowserRouter>

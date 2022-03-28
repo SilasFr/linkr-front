@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { IoIosHeart } from "react-icons/io";
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -329,13 +329,18 @@ const TrashCan = styled.div`
   }
 `;
 const Like = styled.div`
-  ion-icon .liked {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 20px;
+
+  ion-icon.liked {
+    font-size: 50px;
     color: red;
   }
-  ion-icon {
-    color: #fff;
-    font-size: 20px;
-  }
+`;
+
+const StyledLike = styled(IoIosHeart)`
+  color: red;
 `;
 
 export {
@@ -353,4 +358,5 @@ export {
   StyledHashtag,
   TrashCan,
   Like,
+  StyledLike,
 };

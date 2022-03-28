@@ -72,6 +72,22 @@ async function deletePost(id, token) {
   return response;
 }
 
+async function likePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+  return response;
+}
+
+async function dislikePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${id}/dislike`,
+    {},
+    config
+  );
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -83,4 +99,6 @@ export const api = {
   deletePost,
   postHashtags,
   getHashtags,
+  likePost,
+  dislikePost,
 };

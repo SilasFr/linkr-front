@@ -1,13 +1,51 @@
 import { useContext, useEffect, useState } from "react";
 import { Like, StyledLike } from "../../components/TimelineComponents";
-import UserContext from "../../contexts/userContext";
+import ReactTooltip from "react-tooltip";
 import { api } from "../../services/api";
+import UserContext from "../../contexts/userContext.js";
 
-export default function LikeIcon({ id }) {
+export default function LikeIcon({ id, postInfo }) {
+  let { likesList, likedByUser } = postInfo;
+  console.log(likesList);
   const { userData } = useContext(UserContext);
-  const [liked, setLiked] = useState(false);
+  const [tooltipMessage, SetTooltipMessage] = useState("");
+  const token = userData.token;
 
-  useEffect(() => {
+  const [liked, setLiked] = useState(likedByUser);
+  if (likesList[0] === null) likesList = [];
+
+  useEffect(async () => {
+    let nameList = await api.getLikesByPostId(id, token);
+
+    if (likesList.length > 2) {
+      likedByUser
+        ? SetTooltipMessage(
+            `Você, ${nameList[1].name} e outras ${
+              likesList.length - 2
+            } pessoas curtiram esse post!`
+          )
+        : SetTooltipMessage(
+            `${nameList[0].name}, ${nameList[1].name} e outras ${
+              likesList.length - 2
+            } pessoas curtiram esse post!`
+          );
+    } else if (likesList.length === 2) {
+      likedByUser
+        ? SetTooltipMessage(`Você e ${nameList[1].name} curtiram esse post`)
+        : SetTooltipMessage(
+            `${nameList[0].name} e ${nameList[1].name} curtiram esse post`
+          );
+    } else if (likesList.length === 1) {
+      likedByUser
+        ? SetTooltipMessage(`Você curtiu esse post`)
+        : SetTooltipMessage(`${nameList[0].name} curtiu esse post`);
+    } else if (likesList.length === 0) {
+      SetTooltipMessage(`Ninguem curtiu esse post ainda`);
+    }
+    ReactTooltip.rebuild();
+  }, [liked]);
+
+  function toggleLike() {
     try {
       if (liked) {
         const promise = api.likePost(id, userData.token);
@@ -21,21 +59,45 @@ export default function LikeIcon({ id }) {
     } catch (e) {
       alert("Erro! Não foi possível dar like no post.");
     }
-  }, [liked]);
-  function toggleLike() {
     setLiked(!liked);
   }
+
   function renderLike() {
     if (liked) {
-      return <StyledLike onClick={toggleLike} />;
-    } else
       return (
-        <ion-icon
-          onClick={toggleLike}
-          name="heart-outline"
-          className=""
-        ></ion-icon>
+        <>
+          <StyledLike onClick={toggleLike} data-tip data-for={`tooltip${id}`} />
+          <ReactTooltip
+            id={`tooltip${id}`}
+            place="bottom"
+            type="light"
+            delayHide={500}
+          >
+            {tooltipMessage}
+          </ReactTooltip>
+        </>
       );
+    } else {
+      return (
+        <>
+          <ion-icon
+            data-tip
+            data-for={`tooltip${id}`}
+            onClick={toggleLike}
+            name="heart-outline"
+            className=""
+          ></ion-icon>
+          <ReactTooltip
+            id={`tooltip${id}`}
+            place="bottom"
+            type="light"
+            delayHide={500}
+          >
+            {tooltipMessage}
+          </ReactTooltip>
+        </>
+      );
+    }
   }
   return <Like>{renderLike()}</Like>;
 }

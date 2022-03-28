@@ -12,9 +12,11 @@ import {
 import ReactHashtag from "@mdnm/react-hashtag";
 import UserContext from "../../contexts/userContext";
 import TrashIcon from "./TrashIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function FeedPosts({ posts, dialog }) {
   const { userData } = useContext(UserContext);
+  const navigate = useNavigate();
   if (typeof posts === "string") {
     return (
       <TimelineMessage>
@@ -53,7 +55,7 @@ export default function FeedPosts({ posts, dialog }) {
               <img src={post.profilePic} alt="user avatar" />
             </PostUserInfo>
             <PostContent>
-              <h3>{post.userName}</h3>
+              <h3 onClick={() => navigate(`/user/${post.author}`)}>{post.userName}</h3>
               <h4>{Hashtags(post)}</h4>
               <LinkPreview onClick={() => window.open(post.link)}>
                 <LinkData>

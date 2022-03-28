@@ -70,6 +70,14 @@ async function validateSession(token) {
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }
+async function searchUser(token, query) {
+  const config = createConfig(token);
+  const response = await axios.get(
+    `${BASE_URL}/timeline/users?user=${query}`,
+    config
+  );
+  return response;
+}
 
 async function deletePost(id, token) {
   const config = createConfig(token);
@@ -87,6 +95,22 @@ async function loadPostById(id, token) {
   return response;
 }
 
+async function likePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+  return response;
+}
+
+async function dislikePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${id}/dislike`,
+    {},
+    config
+  );
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -96,9 +120,12 @@ export const api = {
   loadPostsByUserId,
   validateSession,
   newPost,
+  searchUser,
   deletePost,
   postHashtags,
   getHashtags,
   editPost,
   loadPostById,
+  likePost,
+  dislikePost,
 };

@@ -14,6 +14,8 @@ import ReactHashtag from "@mdnm/react-hashtag";
 import { api } from "../services/api";
 import UserContext from "../contexts/userContext";
 
+import LikeIcon from "../pages/timeline/likeIcon";
+
 export default function IndividualPost({
   post,
   dialog,
@@ -98,6 +100,7 @@ export default function IndividualPost({
     <PostCard key={post.id}>
       <PostUserInfo>
         <img src={post.profilePic} alt="user avatar" />
+        <LikeIcon key={post.id * Date.now()} id={post.id} />
       </PostUserInfo>
       <PostContent>
         <h3>{post.userName}</h3>

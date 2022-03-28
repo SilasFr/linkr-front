@@ -72,6 +72,12 @@ async function deletePost(id, token) {
   return response;
 }
 
+async function getLikesByPostId(id, token) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/likes/${id}`, config);
+  return response.data;
+}
+
 export const api = {
   createUser,
   login,
@@ -83,4 +89,5 @@ export const api = {
   deletePost,
   postHashtags,
   getHashtags,
+  getLikesByPostId,
 };

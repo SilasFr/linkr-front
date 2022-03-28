@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #333333;
-
   @media (max-width: 420px) {
     flex-direction: column;
   }
@@ -17,11 +15,9 @@ const Container = styled.div`
 
 const Feed = styled.div`
   margin-top: 125px;
-
   display: flex;
   flex-direction: column;
   color: #fff;
-
   header {
     p {
       font-family: "Oswald";
@@ -31,18 +27,15 @@ const Feed = styled.div`
       line-height: 64px;
     }
   }
-
   main {
     width: 611px;
     height: 100%;
-
     margin-top: 43px;
     .new-post {
       width: 100%;
       height: 200px;
       display: flex;
       padding: 15px;
-
       color: #000;
       background-color: #fff;
       border-radius: 16px;
@@ -51,16 +44,13 @@ const Feed = styled.div`
       }
       .post-info {
         margin: 5px 0 0 18px;
-
         display: flex;
         flex-direction: column;
-
         font-family: "Lato";
         font-size: 20px;
         color: #707070;
       }
     }
-
     .posts {
       width: 100%;
       min-height: 100px;
@@ -75,9 +65,7 @@ const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-
   margin: 30px 0;
-
   @media (max-width: 450px) {
     width: 100vw;
   }
@@ -95,7 +83,6 @@ const PostCard = styled.li`
   border-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
-
   @media (max-width: 450px) {
     width: 100%;
     border-radius: 0;
@@ -112,7 +99,6 @@ const PostContent = styled.div`
   font-family: "Lato";
   font-style: normal;
   font-weight: 400;
-
   & h3 {
     font-size: 19px;
     line-height: 23px;
@@ -130,6 +116,7 @@ const PostContent = styled.div`
 const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50px;
   height: 150px;
   margin: 16px auto auto 16px;
@@ -147,7 +134,6 @@ const LinkPreview = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   border: 1px solid #4d4d4d;
   border-radius: 11px;
   & img {
@@ -158,7 +144,6 @@ const LinkPreview = styled.div`
   :hover {
     cursor: pointer;
   }
-
   @media (max-width: 450px) {
     height: 115px;
   }
@@ -166,7 +151,6 @@ const LinkPreview = styled.div`
 
 const LinkData = styled.div`
   padding: 20px 15px;
-
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -208,7 +192,6 @@ const TimelineMessage = styled.div`
   gap: 30px;
   align-items: center;
   justify-content: center;
-
   p {
     font-family: "Oswald";
     font-style: normal;
@@ -226,37 +209,26 @@ const Header = styled.div`
   display: flex;
   width: 100vw;
   height: 72px;
-
   justify-content: space-between;
   align-items: center;
-
   padding: 0 15px;
-
   background-color: #151515;
   .profile-pic-menu {
     display: flex;
     align-items: center;
-
     ion-icon {
       font-size: 24px;
-
       color: #ffffff;
-
       cursor: pointer;
     }
-
     .profile-pic {
       width: 53px;
       height: 53px;
-
       border-radius: 50%;
-
       margin-left: 15px;
-
       cursor: pointer;
     }
   }
-
   h1 {
     font-family: "Passion One";
     font-style: normal;
@@ -264,10 +236,8 @@ const Header = styled.div`
     font-size: 49px;
     line-height: 54px;
     letter-spacing: 0.05em;
-
     color: #ffffff;
   }
-
   @media (max-width: 450px) {
     width: 100%;
     flex-direction: row;
@@ -278,16 +248,11 @@ const MenuLogout = styled.div`
   display: flex;
   width: 130px;
   height: 45px;
-
   border-bottom-left-radius: 25px;
-
   align-items: center;
   justify-content: center;
-
   align-self: flex-end;
-
   background-color: #171717;
-
   p {
     font-family: "Lato";
     font-style: normal;
@@ -295,10 +260,8 @@ const MenuLogout = styled.div`
     font-size: 17px;
     line-height: 20px;
     letter-spacing: 0.05em;
-
     color: #ffffff;
   }
-
   @media (max-width: 450px) {
     height: 43px;
   }
@@ -315,7 +278,6 @@ const TrashCan = styled.div`
   position: absolute;
   top: 0;
   right: 5px;
-
   width: 40px;
   height: 40px;
   z-index: 1;
@@ -325,6 +287,15 @@ const TrashCan = styled.div`
     @media (max-width: 450px) {
       font-size: 1rem;
     }
+  }
+`;
+const Like = styled.div`
+  ion-icon .liked {
+    color: red;
+  }
+  ion-icon {
+    color: #fff;
+    font-size: 20px;
   }
 `;
 
@@ -342,4 +313,5 @@ export {
   MenuLogout,
   StyledHashtag,
   TrashCan,
+  Like,
 };

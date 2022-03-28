@@ -33,9 +33,7 @@ export default function Topics({ reload, setReload }) {
   }
 
   useEffect(() => {
-    // if (!reload) return;
     updatePosts();
-    // setReload(!reload);
   }, [reload]);
   return (
     <main>

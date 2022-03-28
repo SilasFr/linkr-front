@@ -99,7 +99,7 @@ export default function Home() {
         <SearchContainer>
           <SearchBar
             placeholder="Search for people"
-            minLength={2}
+            minLength={3}
             debounceTimeout={300}
             onChange={(event) => searchTo(event)}
           ></SearchBar>
@@ -111,7 +111,7 @@ export default function Home() {
                   key={searchedUsers.indexOf(item)}
                 >
                   <li>
-                    <img src={item.image} />
+                    <img src={item.profilePic} />
                     <span>{item.name}</span>
                   </li>
                 </Link>

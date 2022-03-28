@@ -130,6 +130,7 @@ const PostContent = styled.div`
 const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50px;
   height: 150px;
   margin: 16px auto auto 16px;
@@ -327,6 +328,15 @@ const TrashCan = styled.div`
     }
   }
 `;
+const Like = styled.div`
+  ion-icon .liked {
+    color: red;
+  }
+  ion-icon {
+    color: #fff;
+    font-size: 20px;
+  }
+`;
 
 export {
   Container,
@@ -342,4 +352,5 @@ export {
   MenuLogout,
   StyledHashtag,
   TrashCan,
+  Like,
 };

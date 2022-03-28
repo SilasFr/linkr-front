@@ -76,6 +76,16 @@ async function deletePost(id, token) {
   const response = await axios.delete(`${BASE_URL}/posts/${id}`, config);
   return response;
 }
+async function editPost(postData, id, token) {
+  const config = createConfig(token);
+  const response = await axios.put(`${BASE_URL}/posts/${id}`, postData, config);
+  return response;
+}
+async function loadPostById(id, token) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/posts/${id}`, config);
+  return response;
+}
 
 export const api = {
   createUser,
@@ -89,4 +99,6 @@ export const api = {
   deletePost,
   postHashtags,
   getHashtags,
+  editPost,
+  loadPostById,
 };

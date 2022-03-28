@@ -125,6 +125,22 @@ const PostContent = styled.div`
     line-height: 20px;
     color: #b7b7b7;
   }
+  input {
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border-radius: 7px;
+
+    padding: 5px;
+
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #4c4c4c;
+  }
 `;
 
 const PostUserInfo = styled.div`
@@ -327,7 +343,26 @@ const TrashCan = styled.div`
     }
   }
 `;
+const Pen = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 45px;
 
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  svg {
+    width: 32px;
+    height: 32px;
+    @media (max-width: 450px) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
 export {
   Container,
   Feed,
@@ -342,4 +377,5 @@ export {
   MenuLogout,
   StyledHashtag,
   TrashCan,
+  Pen,
 };

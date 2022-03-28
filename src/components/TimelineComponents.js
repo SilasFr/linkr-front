@@ -117,6 +117,7 @@ const PostContent = styled.div`
     font-size: 19px;
     line-height: 23px;
     color: #ffffff;
+    cursor: pointer;
   }
   & h4 {
     height: 40px;

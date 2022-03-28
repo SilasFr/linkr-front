@@ -25,6 +25,11 @@ async function loadPosts(token) {
   return result;
 }
 
+async function loadPostsByHashtag(hashtag, token) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/hashtag/${hashtag}`, config);
+  return result;
+}
 async function loadPostsByUserId(token, userId) {
   const config = createConfig(token);
   const result = await axios.get(`${BASE_URL}/timeline/${userId}`, config);
@@ -65,6 +70,14 @@ async function validateSession(token) {
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }
+async function searchUser(token, query) {
+  const config = createConfig(token);
+  const response = await axios.get(
+    `${BASE_URL}/timeline/users?user=${query}`,
+    config
+  );
+  return response;
+}
 
 async function deletePost(id, token) {
   const config = createConfig(token);
@@ -77,9 +90,11 @@ export const api = {
   login,
   logout,
   loadPosts,
+  loadPostsByHashtag,
   loadPostsByUserId,
   validateSession,
   newPost,
+  searchUser,
   deletePost,
   postHashtags,
   getHashtags,

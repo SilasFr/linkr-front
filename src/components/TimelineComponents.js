@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { IoIosHeart } from "react-icons/io";
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -131,6 +131,7 @@ const PostContent = styled.div`
 const PostUserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50px;
   height: 150px;
   margin: 16px auto auto 16px;
@@ -328,6 +329,20 @@ const TrashCan = styled.div`
     }
   }
 `;
+const Like = styled.div`
+  margin-top: 20px;
+  color: #fff;
+  font-size: 20px;
+
+  ion-icon.liked {
+    font-size: 50px;
+    color: red;
+  }
+`;
+
+const StyledLike = styled(IoIosHeart)`
+  color: red;
+`;
 
 export {
   Container,
@@ -343,4 +358,6 @@ export {
   MenuLogout,
   StyledHashtag,
   TrashCan,
+  Like,
+  StyledLike,
 };

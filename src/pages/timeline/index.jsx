@@ -34,9 +34,7 @@ export default function Timeline({ reload, setReload }) {
   }
 
   useEffect(() => {
-    if (!reload) return;
     updatePosts();
-    setReload(!reload);
   }, [reload]);
 
   return (

@@ -13,6 +13,7 @@ import ReactHashtag from "@mdnm/react-hashtag";
 import UserContext from "../../contexts/userContext";
 import TrashIcon from "./TrashIcon";
 import { useNavigate } from "react-router-dom";
+import LikeIcon from "./likeIcon";
 
 export default function FeedPosts({ posts, dialog }) {
   const { userData } = useContext(UserContext);
@@ -50,9 +51,10 @@ export default function FeedPosts({ posts, dialog }) {
           renderTrashIcon = true;
         }
         return (
-          <PostCard key={post.id}>
+          <PostCard key={Date.now() / post.id}>
             <PostUserInfo>
               <img src={post.profilePic} alt="user avatar" />
+              <LikeIcon key={post.id * Date.now()} id={post.id} />
             </PostUserInfo>
             <PostContent>
               <h3 onClick={() => navigate(`/user/${post.author}`)}>{post.userName}</h3>
@@ -67,7 +69,7 @@ export default function FeedPosts({ posts, dialog }) {
               </LinkPreview>
 
               {renderTrashIcon && (
-                <TrashIcon postId={post.id} dialog={dialog} />
+                <TrashIcon postId={post.id * Date.now()} dialog={dialog} />
               )}
             </PostContent>
           </PostCard>

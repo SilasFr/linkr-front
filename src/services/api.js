@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
-// const BASE_URL = 'https://linkr-back.herokuapp.com';
+const BASE_URL = "https://linkr-back.herokuapp.com";
 
 function createConfig(token) {
   return {
@@ -85,6 +84,22 @@ async function deletePost(id, token) {
   return response;
 }
 
+async function likePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(`${BASE_URL}/posts/${id}/like`, {}, config);
+  return response;
+}
+
+async function dislikePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${id}/dislike`,
+    {},
+    config
+  );
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -98,4 +113,6 @@ export const api = {
   deletePost,
   postHashtags,
   getHashtags,
+  likePost,
+  dislikePost,
 };

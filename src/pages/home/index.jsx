@@ -119,7 +119,7 @@ export default function Home({ target }) {
               ? ""
               : hashtagsArray.map((hashtag) => (
                   <Link to={`/hashtag/${hashtag.topic}`}>
-                    <li key={hashtag.id}># {hashtag.topic}</li>
+                    <li key={hashtag.id * Math.random()}># {hashtag.topic}</li>
                   </Link>
                 ))}
           </ul>

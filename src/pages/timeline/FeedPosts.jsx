@@ -31,7 +31,7 @@ export default function FeedPosts({ posts, dialog }) {
       <ReactHashtag
         renderHashtag={(hashtagValue) => (
           <StyledHashtag
-            key={post.id}
+            key={post.id * Date.now() * Math.random()}
             to={`/hashtag/${hashtagValue.replace("#", "")}`}
           >
             {hashtagValue}
@@ -54,7 +54,11 @@ export default function FeedPosts({ posts, dialog }) {
           <PostCard key={Date.now() / post.id}>
             <PostUserInfo>
               <img src={post.profilePic} alt="user avatar" />
-              <LikeIcon key={post.id * Date.now()} id={post.id} />
+              <LikeIcon
+                key={post.id * Date.now()}
+                id={post.id}
+                postInfo={post}
+              />
             </PostUserInfo>
             <PostContent>
               <h3 onClick={() => navigate(`/user/${post.author}`)}>{post.userName}</h3>

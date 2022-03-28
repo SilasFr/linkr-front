@@ -45,6 +45,14 @@ async function validateSession(token) {
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }
+async function searchUser(token, query) {
+  const config = createConfig(token);
+  const response = await axios.get(
+    `${BASE_URL}/timeline/users?user=${query}`,
+    config
+  );
+  return response;
+}
 
 export const api = {
   createUser,
@@ -53,4 +61,5 @@ export const api = {
   loadPosts,
   validateSession,
   newPost,
+  searchUser,
 };

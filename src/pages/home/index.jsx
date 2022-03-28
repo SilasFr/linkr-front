@@ -30,6 +30,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [reload, setReload] = useState(true);
+  const [searchedUsers, setSearchedUsers] = useState([]);
   const navigate = useNavigate();
 
   async function handleLogout(e) {
@@ -75,6 +76,22 @@ export default function Home() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
+  async function searchTo(event) {
+    try {
+      if (event.target.value === "") {
+        setSearchedUsers([]);
+        return;
+      }
+
+      const result = await api.searchUser(userData.token, event.target.value);
+      setSearchedUsers(result.data);
+    } catch (e) {
+      console.log(e);
+      alert("Houve um erro ao pesquisar, tente novamente");
+      setSearchedUsers([]);
+    }
+  }
+
   return (
     <MainContainer>
       <Header>
@@ -84,21 +101,22 @@ export default function Home() {
             placeholder="Search for people"
             minLength={2}
             debounceTimeout={300}
-            onChange={(event) => console.log(event.target.value)}
+            onChange={(event) => searchTo(event)}
           ></SearchBar>
           <SearchUsers>
-            <li>
-              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
-              <span>oie</span>
-            </li>
-            <li>
-              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
-              <span>oie</span>
-            </li>
-            <li>
-              <img src="https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg"></img>
-              <span>oie</span>
-            </li>
+            {searchedUsers.map((item) => {
+              return (
+                <Link
+                  to={`/usuario/${item.id}`}
+                  key={searchedUsers.indexOf(item)}
+                >
+                  <li>
+                    <img src={item.image} />
+                    <span>{item.name}</span>
+                  </li>
+                </Link>
+              );
+            })}
           </SearchUsers>
         </SearchContainer>
         <UserMenu>

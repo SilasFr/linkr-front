@@ -128,6 +128,9 @@ const SearchUsers = styled.ul`
   &:first-of-type {
     padding-top: 8px;
   }
+  &:hover {
+    display: flex;
+  }
 `;
 
 export {

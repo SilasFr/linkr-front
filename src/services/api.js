@@ -25,6 +25,17 @@ async function loadPosts(token) {
   return result;
 }
 
+async function loadPostsByHashtag(hashtag, token) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/hashtag/${hashtag}`, config);
+  return result;
+}
+async function loadPostsByUserId(token, userId) {
+  const config = createConfig(token);
+  const result = await axios.get(`${BASE_URL}/timeline/${userId}`, config);
+  return result;
+}
+
 async function logout(token) {
   const response = await axios.post(`${BASE_URL}/logout`, token);
   return response.data;
@@ -38,6 +49,20 @@ async function newPost(postData, token) {
     config
   );
   return newPostResponse;
+}
+
+async function postHashtags(hashtagsArray, token) {
+  const hashtags = {
+    hashtags: hashtagsArray,
+    token: token,
+  };
+  const response = await axios.post(`${BASE_URL}/hashtag`, hashtags);
+  return response;
+}
+
+async function getHashtags() {
+  const result = await axios.get(`${BASE_URL}/hashtag`);
+  return result.data;
 }
 
 async function validateSession(token) {
@@ -54,12 +79,23 @@ async function searchUser(token, query) {
   return response;
 }
 
+async function deletePost(id, token) {
+  const config = createConfig(token);
+  const response = await axios.delete(`${BASE_URL}/posts/${id}`, config);
+  return response;
+}
+
 export const api = {
   createUser,
   login,
   logout,
   loadPosts,
+  loadPostsByHashtag,
+  loadPostsByUserId,
   validateSession,
   newPost,
   searchUser,
+  deletePost,
+  postHashtags,
+  getHashtags,
 };

@@ -24,7 +24,6 @@ export default function SignIn() {
       promise.then(() => navigate("/timeline"));
       promise.catch(() => {
         login({});
-        alert("Sessão Inválida.");
         navigate("/");
       });
     }
@@ -49,14 +48,14 @@ export default function SignIn() {
 
       setLoading(false);
       setFormData({});
+      setLoading(false);
       navigate("/timeline");
     } catch (e) {
-      console.log(e.response);
+      setLoading(false);
       if (e.response.status === 401) {
         alert("Email ou senha incorretos.");
       }
     }
-    setLoading(false);
   }
 
   function handleInputChange(e) {

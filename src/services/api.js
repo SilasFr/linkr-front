@@ -70,6 +70,14 @@ async function validateSession(token) {
   const response = await axios.get(`${BASE_URL}/`, config);
   return response.data;
 }
+async function searchUser(token, query) {
+  const config = createConfig(token);
+  const response = await axios.get(
+    `${BASE_URL}/timeline/users?user=${query}`,
+    config
+  );
+  return response;
+}
 
 async function deletePost(id, token) {
   const config = createConfig(token);
@@ -86,6 +94,7 @@ export const api = {
   loadPostsByUserId,
   validateSession,
   newPost,
+  searchUser,
   deletePost,
   postHashtags,
   getHashtags,

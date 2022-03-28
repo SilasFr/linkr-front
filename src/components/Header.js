@@ -68,7 +68,7 @@ export default function HeaderComponent() {
             {searchedUsers.map((item) => {
               return (
                 <Link
-                  to={`/usuario/${item.id}`}
+                  to={`/user/${item.id}`}
                   key={searchedUsers.indexOf(item)}
                 >
                   <li>

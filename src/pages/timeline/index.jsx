@@ -36,7 +36,7 @@ export default function Timeline({ reload, setReload }) {
   useEffect(() => {
     updatePosts();
   }, [reload]);
-
+  console.log(posts);
   return (
     <main>
       {loading ? (

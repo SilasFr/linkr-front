@@ -100,7 +100,7 @@ export default function IndividualPost({
     <PostCard key={post.id}>
       <PostUserInfo>
         <img src={post.profilePic} alt="user avatar" />
-        <LikeIcon key={post.id * Date.now()} id={post.id} />
+        <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
       </PostUserInfo>
       <PostContent>
         <h3>{post.userName}</h3>

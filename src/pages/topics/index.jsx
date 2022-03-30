@@ -13,6 +13,7 @@ export default function Topics({ reload, setReload }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useContext(UserContext);
+  const [backButton, setBackButton] = useState(false);
 
   async function updatePosts() {
     try {
@@ -26,7 +27,7 @@ export default function Topics({ reload, setReload }) {
         return;
       }
       alert(
-        '"An error occured while trying to fetch the posts, please refresh the page"'
+        "An error occured while trying to fetch the posts, please refresh the page"
       );
     }
     setLoading(false);
@@ -34,7 +35,11 @@ export default function Topics({ reload, setReload }) {
 
   useEffect(() => {
     updatePosts();
-  }, [reload]);
+  }, [reload, backButton]);
+
+  window.onpopstate = () => {
+    setBackButton(!backButton);
+  };
   return (
     <main>
       {loading ? (

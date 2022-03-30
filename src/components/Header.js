@@ -55,7 +55,7 @@ export default function HeaderComponent() {
   return (
     <>
       <Header>
-        <h1>linkr</h1>
+        <Link to="/timeline">linkr</Link>
 
         <SearchContainer>
           <SearchBar
@@ -67,10 +67,7 @@ export default function HeaderComponent() {
           <SearchUsers>
             {searchedUsers.map((item) => {
               return (
-                <Link
-                  to={`/user/${item.id}`}
-                  key={searchedUsers.indexOf(item)}
-                >
+                <Link to={`/user/${item.id}`} key={searchedUsers.indexOf(item)}>
                   <li>
                     <img src={item.profilePic} />
                     <span>{item.name}</span>

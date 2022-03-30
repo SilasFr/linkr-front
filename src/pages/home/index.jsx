@@ -60,6 +60,7 @@ export default function Home({ target }) {
       setLoading(false);
       setReload(!reload);
       updateHashtags();
+      setFormData({});
     } catch (error) {
       alert("Houve um erro ao publicar seu link");
       setLoading(false);

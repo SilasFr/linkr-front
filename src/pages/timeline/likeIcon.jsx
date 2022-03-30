@@ -6,7 +6,6 @@ import UserContext from "../../contexts/userContext.js";
 
 export default function LikeIcon({ id, postInfo }) {
   let { likesList, likedByUser } = postInfo;
-  console.log(likesList);
   const { userData } = useContext(UserContext);
   const [tooltipMessage, SetTooltipMessage] = useState("");
   const token = userData.token;

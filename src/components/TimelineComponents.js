@@ -343,17 +343,24 @@ const StyledLike = styled(IoIosHeart)`
 
 const UpdateContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 61px;
   padding: 0 20px;
-  background-color: blue;
-  border-radius: 15px;
+  background-color: #1877f2;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
 
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 15px;
 
   p {
     color: #fff;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
   }
   @media (max-width: 450px) {
     width: 100vw;

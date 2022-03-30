@@ -9,6 +9,7 @@ import ModalComponent from "./modal";
 
 export default function Timeline({ reload, setReload }) {
   const { userData } = useContext(UserContext);
+  const { timeline, setTimeline } = useContext(TimelineContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function Timeline({ reload, setReload }) {
     try {
       setLoading(true);
       const response = await api.loadPosts(userData.token);
-      setPosts(response.data);
+      setTimeline(response.data);
     } catch (e) {
       alert(
         '"An error occured while trying to fetch the posts, please refresh the page"'
@@ -36,7 +37,7 @@ export default function Timeline({ reload, setReload }) {
   useEffect(() => {
     updatePosts();
   }, [reload]);
-  console.log(posts);
+  console.log(timeline);
   return (
     <main>
       {loading ? (
@@ -45,7 +46,7 @@ export default function Timeline({ reload, setReload }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        <FeedPosts posts={posts} dialog={modalControl} />
+        <FeedPosts dialog={modalControl} />
       )}
       <ModalComponent modalControl={modalControl} reload={setReload} />
     </main>

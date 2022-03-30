@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   MainContainer,
@@ -19,6 +19,7 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+import UserPage from "../userPage";
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
@@ -27,7 +28,11 @@ export default function Home({ target }) {
   const [reload, setReload] = useState(true);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
-  const { hashtag } = useParams();
+  // ALTERAR ASSIM QUE POSSIVEL
+  const [userName, setUserName] = useState("loading");
+  // ALTERAR ASSIM QUE POSSIVEL
+
+  const { hashtag, id } = useParams();
 
   async function updateHashtags() {
     try {
@@ -70,12 +75,17 @@ export default function Home({ target }) {
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
+
   return (
     <MainContainer>
       <HeaderComponent />
       <ContentContainer>
         <MainFeed>
-          <h1>{target !== "timeline" ? `#${hashtag}` : target}</h1>
+          <h1>
+            {target === "hashtag" && `#${hashtag}`}
+            {target === "timeline" && "timeline"}
+            {target === "user" && userName}
+          </h1>
           {target === "timeline" && (
             <NewPost>
               <PostUserInfo>
@@ -107,8 +117,11 @@ export default function Home({ target }) {
           {target === "timeline" && (
             <Timeline reload={reload} setReload={setReload} />
           )}
-          {target !== "timeline" && (
+          {target === "hashtag" && (
             <Topics reload={reload} setReload={setReload} />
+          )}
+          {target === "user" && (
+            <UserPage userId={id} setUserName={setUserName} />
           )}
         </MainFeed>
         <HashtagBox>

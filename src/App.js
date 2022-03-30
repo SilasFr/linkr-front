@@ -20,7 +20,7 @@ function App() {
               path="/hashtag/:hashtag"
               element={<Home target={"hashtag"} />}
             />
-            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/user/:id" element={<Home target={"user"} />} />
           </Routes>
         </BrowserRouter>
       </TimelineProvider>

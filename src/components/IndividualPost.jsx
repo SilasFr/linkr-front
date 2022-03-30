@@ -15,6 +15,7 @@ import { api } from "../services/api";
 import UserContext from "../contexts/userContext";
 
 import LikeIcon from "../pages/timeline/likeIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function IndividualPost({
   post,
@@ -28,6 +29,8 @@ export default function IndividualPost({
 
   const { userData } = useContext(UserContext);
 
+  const navigate = useNavigate()
+
   async function updatePost() {
     try {
       const response = await api.loadPostById(post.id, userData.token);
@@ -38,7 +41,6 @@ export default function IndividualPost({
       );
     }
   }
-  console.log(newDescription);
   useEffect(() => updatePost(), [editing]);
 
   function handleInputChange(e) {
@@ -103,7 +105,7 @@ export default function IndividualPost({
         <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
       </PostUserInfo>
       <PostContent>
-        <h3>{post.userName}</h3>
+        <h3 onClick={() => navigate(`/user/${post.author}`)}>{post.userName}</h3>
         {editing ? (
           <input
             value={newDescription}

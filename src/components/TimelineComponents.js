@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IoIosHeart } from "react-icons/io";
+import { IoIosHeart, IoIosSync } from "react-icons/io";
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -341,6 +341,30 @@ const StyledLike = styled(IoIosHeart)`
   color: red;
 `;
 
+const UpdateContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  background-color: blue;
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  p {
+    color: #fff;
+  }
+  @media (max-width: 450px) {
+    width: 100vw;
+  }
+`;
+
+const UpdateIcon = styled(IoIosSync)`
+  font-size: 20px;
+  color: #fff;
+`;
+
 export {
   Container,
   Feed,
@@ -358,4 +382,6 @@ export {
   Pen,
   Like,
   StyledLike,
+  UpdateContainer,
+  UpdateIcon,
 };

@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import useInterval from "react-useinterval";
+import {
+  UpdateContainer,
+  UpdateIcon,
+} from "../../components/TimelineComponents";
 import TimelineContext from "../../contexts/timelineContext";
 import UserContext from "../../contexts/userContext";
 import { api } from "../../services/api";
@@ -7,25 +11,39 @@ import { api } from "../../services/api";
 export default function Update() {
   const { timeline, setTimeline } = useContext(TimelineContext);
   const { userData } = useContext(UserContext);
-  let [count, setCount] = useState(false);
-
-  useEffect(
-    async function () {
-      try {
-        const promise = await api.loadPosts(userData.token);
-        console.log(promise.data);
-      } catch (e) {
-        console.log(e);
-        alert("error!");
-      }
-    },
-    [count]
+  const [count, setCount] = useState(1);
+  const [paragraph, setParagraph] = useState(
+    <p>{count} new post, load more!</p>
+  );
+  const [update, setUpdate] = useState(
+    <UpdateContainer>
+      {paragraph}
+      <UpdateIcon />
+    </UpdateContainer>
   );
 
-  const increaseCount = () => {
-    setCount(!count);
-  };
+  const updateTimelineElement = (
+    <UpdateContainer>
+      <UpdateIcon />
+    </UpdateContainer>
+  );
 
-  useInterval(increaseCount, 15000);
-  return <h1>{count}</h1>;
+  //   useEffect(async function () {}, [count]);
+
+  async function checkTimeline() {
+    try {
+      const response = await api.loadPosts(userData.token);
+      console.log(response.data);
+      if (response.data !== timeline) {
+        setUpdate(updateTimelineElement);
+      }
+    } catch (e) {
+      console.log(e);
+      alert("error!");
+    }
+    return;
+  }
+
+  useInterval(checkTimeline, 15000);
+  return <div>{update}</div>;
 }

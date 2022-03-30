@@ -61,7 +61,6 @@ export default function Home({ target }) {
       setReload(!reload);
       updateHashtags();
     } catch (error) {
-      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});
@@ -70,9 +69,6 @@ export default function Home({ target }) {
 
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
-  }
-  function handleTopicChange() {
-    setReload(!reload);
   }
   return (
     <MainContainer>
@@ -122,11 +118,7 @@ export default function Home({ target }) {
             {typeof hashtagsArray === "string"
               ? ""
               : hashtagsArray.map((hashtag) => (
-                  <Link
-                    to={`/hashtag/${hashtag.topic}`}
-                    key={hashtag.id}
-                    onClick={handleTopicChange}
-                  >
+                  <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
                     <li># {hashtag.topic}</li>
                   </Link>
                 ))}

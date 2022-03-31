@@ -19,12 +19,13 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+import TimelineContext from "../../contexts/timelineContext";
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(true);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
   const { hashtag } = useParams();
@@ -104,12 +105,8 @@ export default function Home({ target }) {
               </NewPostForm>
             </NewPost>
           )}
-          {target === "timeline" && (
-            <Timeline reload={reload} setReload={setReload} />
-          )}
-          {target !== "timeline" && (
-            <Topics reload={reload} setReload={setReload} />
-          )}
+          {target === "timeline" && <Timeline />}
+          {target !== "timeline" && <Topics />}
         </MainFeed>
         <HashtagBox>
           <h3>trending</h3>

@@ -6,10 +6,12 @@ import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
 import ModalComponent from "./modal";
+import Update from "./Example";
 
-export default function Timeline({ reload, setReload }) {
+export default function Timeline() {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
+  const { reload, setReload } = useContext(TimelineContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,9 +39,10 @@ export default function Timeline({ reload, setReload }) {
   useEffect(() => {
     updatePosts();
   }, [reload]);
-  console.log(timeline);
+
   return (
     <main>
+      <Update />
       {loading ? (
         <TimelineMessage>
           <p>Loading... </p>

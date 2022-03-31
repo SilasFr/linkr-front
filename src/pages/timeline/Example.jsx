@@ -10,8 +10,9 @@ import { api } from "../../services/api";
 
 export default function Update() {
   const { timeline, setTimeline } = useContext(TimelineContext);
+  const { reload, setReload } = useContext(TimelineContext);
   const { userData } = useContext(UserContext);
-  const [count, setCount] = useState(0);
+
   const [update, setUpdate] = useState(<div></div>);
 
   useEffect(() => {
@@ -24,36 +25,37 @@ export default function Update() {
     });
   }, []);
 
-  useEffect(() => {
-    if (!count) return;
-    setUpdate(
-      <UpdateContainer>
-        {count > 1 ? (
-          <p>{count} new posts, load more!</p>
-        ) : (
-          <p>{count} new post, load more!</p>
-        )}
-        <UpdateIcon />
-      </UpdateContainer>
-    );
-  }, [count]);
-
   async function checkTimeline() {
     try {
       const response = await api.loadPosts(userData.token);
-      console.log("response: ", response.data);
-      console.log("timeline: ", timeline);
       if (JSON.stringify(response.data) !== JSON.stringify(timeline)) {
         let sum = 0;
-        console.log("diferente");
         response.data.forEach((post) => {
-          console.log("id: ", post.id);
-          if (!timeline.includes(post.id)) sum++;
+          let isNew = true;
+          timeline.forEach((element) => {
+            if (element.id === post.id) isNew = false;
+          });
+          if (isNew) sum++;
         });
-        console.log(sum);
-        setCount(sum);
+
+        setUpdate(
+          <UpdateContainer
+            onClick={() => {
+              setUpdate(<div></div>);
+              setReload(!reload);
+            }}
+          >
+            {sum > 1 ? (
+              <p>{sum} new posts, load more!</p>
+            ) : (
+              <p>{sum} new post, load more!</p>
+            )}
+            <UpdateIcon />
+          </UpdateContainer>
+        );
       } else {
         console.log("sem update");
+        setUpdate(<div></div>);
       }
     } catch (e) {
       console.log(e);

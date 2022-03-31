@@ -54,7 +54,7 @@ export default function HeaderComponent() {
   return (
     <>
       <Header>
-        <h1>linkr</h1>
+        <Link to="/timeline">linkr</Link>
 
         <SearchContainer>
           <SearchBar

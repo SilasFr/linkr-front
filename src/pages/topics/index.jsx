@@ -6,14 +6,15 @@ import { api } from "../../services/api";
 import { ClipLoader } from "react-spinners";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import FeedPosts from "../timeline/FeedPosts";
+import TimelineContext from "../../contexts/timelineContext";
 
-export default function Topics({ reload, setReload }) {
+export default function Topics() {
   const { hashtag } = useParams();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useContext(UserContext);
-  const [backButton, setBackButton] = useState(false);
+  const { reload, setReload } = useContext(TimelineContext);
 
   async function updatePosts() {
     try {
@@ -27,7 +28,7 @@ export default function Topics({ reload, setReload }) {
         return;
       }
       alert(
-        "An error occured while trying to fetch the posts, please refresh the page"
+        '"An error occured while trying to fetch the posts, please refresh the page"'
       );
     }
     setLoading(false);
@@ -35,11 +36,7 @@ export default function Topics({ reload, setReload }) {
 
   useEffect(() => {
     updatePosts();
-  }, [reload, backButton]);
-
-  window.onpopstate = () => {
-    setBackButton(!backButton);
-  };
+  }, [reload]);
   return (
     <main>
       {loading ? (

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   MainContainer,
@@ -19,15 +19,21 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+import TimelineContext from "../../contexts/timelineContext";
+import UserPage from "../userPage";
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(true);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
-  const { hashtag } = useParams();
+  // ALTERAR ASSIM QUE POSSIVEL
+  const [userName, setUserName] = useState("loading");
+  // ALTERAR ASSIM QUE POSSIVEL
+
+  const { hashtag, id } = useParams();
 
   async function updateHashtags() {
     try {
@@ -60,6 +66,7 @@ export default function Home({ target }) {
       setLoading(false);
       setReload(!reload);
       updateHashtags();
+      setFormData({});
     } catch (error) {
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
@@ -70,15 +77,17 @@ export default function Home({ target }) {
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
-  function handleTopicChange() {
-    setReload(!reload);
-  }
+
   return (
     <MainContainer>
       <HeaderComponent />
       <ContentContainer>
         <MainFeed>
-          <h1>{target !== "timeline" ? `#${hashtag}` : target}</h1>
+          <h1>
+            {target === "hashtag" && `#${hashtag}`}
+            {target === "timeline" && "timeline"}
+            {target === "user" && userName}
+          </h1>
           {target === "timeline" && (
             <NewPost>
               <PostUserInfo>
@@ -110,8 +119,11 @@ export default function Home({ target }) {
           {target === "timeline" && (
             <Timeline reload={reload} setReload={setReload} />
           )}
-          {target !== "timeline" && (
+          {target === "hashtag" && (
             <Topics reload={reload} setReload={setReload} />
+          )}
+          {target === "user" && (
+            <UserPage userId={id} setUserName={setUserName} />
           )}
         </MainFeed>
         <HashtagBox>
@@ -121,11 +133,7 @@ export default function Home({ target }) {
             {typeof hashtagsArray === "string"
               ? ""
               : hashtagsArray.map((hashtag) => (
-                  <Link
-                    to={`/hashtag/${hashtag.topic}`}
-                    key={hashtag.id}
-                    onClick={handleTopicChange}
-                  >
+                  <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
                     <li># {hashtag.topic}</li>
                   </Link>
                 ))}

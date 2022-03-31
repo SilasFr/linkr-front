@@ -22,6 +22,7 @@ export default function ComentForm({ postId }) {
     } catch {
       alert("Erro ao comentar");
     }
+    setLoading(false);
   }
 
   function handleInputChange(e) {

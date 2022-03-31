@@ -1,11 +1,6 @@
 import axios from "axios";
 
-<<<<<<< HEAD
-/* const BASE_URL = "https://linkr-back.herokuapp.com"; */
-const BASE_URL = "http://localhost:3000";
-=======
 const BASE_URL = process.env.REACT_APP_BASE_URL;
->>>>>>> main
 
 function createConfig(token) {
   return {

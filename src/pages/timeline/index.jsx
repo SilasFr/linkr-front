@@ -7,6 +7,7 @@ import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
 import ModalComponent from "./modal";
 import Update from "./updateRoutine";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function Timeline() {
   const { userData } = useContext(UserContext);
@@ -23,10 +24,11 @@ export default function Timeline() {
     onOpenModal,
     onCloseModal,
   };
-  async function updatePosts() {
+  async function updatePosts(offset) {
+    console.log("firou o updateposts");
     try {
       setLoading(true);
-      const response = await api.loadPosts(userData.token);
+      const response = await api.loadPosts(userData.token, offset);
       setTimeline(response.data);
     } catch (e) {
       alert(
@@ -44,12 +46,9 @@ export default function Timeline() {
     <main>
       <Update />
       {loading ? (
-        <TimelineMessage>
-          <p>Loading... </p>
-          <ClipLoader color="white" />
-        </TimelineMessage>
+        <LoadingComponent />
       ) : (
-        <FeedPosts dialog={modalControl} />
+        <FeedPosts updatePosts={updatePosts} dialog={modalControl} />
       )}
       <ModalComponent modalControl={modalControl} reload={setReload} />
     </main>

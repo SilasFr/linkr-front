@@ -19,9 +19,13 @@ async function login(user) {
   return response.data;
 }
 
-async function loadPosts(token) {
+async function loadPosts(token, offset) {
+  let offsetQuery = "";
+  if (offset) {
+    offsetQuery = `?offset=${offset}`;
+  }
   const config = createConfig(token);
-  const result = await axios.get(`${BASE_URL}/timeline`, config);
+  const result = await axios.get(`${BASE_URL}/timeline${offset}`, config);
   return result;
 }
 

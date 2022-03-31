@@ -7,12 +7,15 @@ import {
 import UserContext from "../../contexts/userContext";
 import IndividualPost from "../../components/IndividualPost";
 import TimelineContext from "../../contexts/timelineContext";
+import LoadingComponent from "../../components/LoadingComponent";
+import { api } from "../../services/api";
 
-export default function FeedPosts({ dialog }) {
+export default function FeedPosts({ updatePosts, dialog }) {
   const { userData } = useContext(UserContext);
-  const { timeline, setTimeLine } = useContext(TimelineContext);
+  const { timeline, setTimeline } = useContext(TimelineContext);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hasMore, setHasMore] = useState(true);
-  const [loadNumber, setLoadNumber] = useState(0);
+  const [loadNumber, setLoadNumber] = useState(1);
   if (typeof timeline === "string") {
     return (
       <TimelineMessage>
@@ -21,25 +24,25 @@ export default function FeedPosts({ dialog }) {
     );
   }
 
-  async function loadMorePosts() {
+  /*   async function loadMorePosts() {
     const response = await api.loadPosts(userData.token, loadNumber);
 
     if (typeof response.data === "string") {
       setHasMore(false);
       return;
     }
-    response.data.map((elem) => {
-      setTimeLine([...timeline, elem]);
-    });
+    const aux = [...timeline];
+    response.data.map((elem) => aux.push(elem));
+    setTimeline(aux);
 
     setLoadNumber(loadNumber + 1);
-  }
+  } */
 
   return (
     <PostsList>
       <InfiniteScroll
         pageStart={0}
-        loadMore={loadMorePosts}
+        loadMore={api.loadPosts(userData.token, loadNumber)}
         hasMore={hasMore}
         loader={<LoadingComponent />}
       >

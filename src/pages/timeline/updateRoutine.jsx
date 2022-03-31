@@ -54,12 +54,10 @@ export default function Update() {
           </UpdateContainer>
         );
       } else {
-        console.log("sem update");
         setUpdate(<div></div>);
       }
     } catch (e) {
-      console.log(e);
-      alert("error!");
+      alert("error!", e);
     }
     return;
   }

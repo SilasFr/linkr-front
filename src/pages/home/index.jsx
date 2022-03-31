@@ -61,7 +61,6 @@ export default function Home({ target }) {
       setReload(!reload);
       updateHashtags();
     } catch (error) {
-      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});

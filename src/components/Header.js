@@ -46,7 +46,6 @@ export default function HeaderComponent() {
       const result = await api.searchUser(userData.token, event.target.value);
       setSearchedUsers(result.data);
     } catch (e) {
-      console.log(e);
       alert("Houve um erro ao pesquisar, tente novamente");
       setSearchedUsers([]);
     }
@@ -67,10 +66,7 @@ export default function HeaderComponent() {
           <SearchUsers>
             {searchedUsers.map((item) => {
               return (
-                <Link
-                  to={`/user/${item.id}`}
-                  key={searchedUsers.indexOf(item)}
-                >
+                <Link to={`/user/${item.id}`} key={searchedUsers.indexOf(item)}>
                   <li>
                     <img src={item.profilePic} />
                     <span>{item.name}</span>

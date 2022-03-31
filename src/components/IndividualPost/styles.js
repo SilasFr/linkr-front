@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { AiOutlineComment } from "react-icons/ai";
 
-const PostCard = styled.li`
+const PostCard = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 15px;
   width: 100%;
-  height: 276px;
-  margin: 0 0 30px 0;
+  height: auto;
+  margin: 0px 0px 0px 0px;
   padding-top: 10px;
   background-color: #171717;
   border-radius: 16px;
@@ -57,6 +57,10 @@ const CommentButtonContainer = styled.div`
 const StyledCommentButton = styled(AiOutlineComment)`
   color: white;
   font-size: 20px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const CommentsContainer = styled.div`
@@ -68,10 +72,9 @@ const CommentsContainer = styled.div`
   background-color: #1e1e1e;
   border-radius: 0px 0px 16px 16px;
 
-  position: absolute;
-  top: 100%;
-
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  position: relative;
 
   ::before {
     content: "";
@@ -87,10 +90,7 @@ const CommentsContainer = styled.div`
 `;
 const CommentList = styled.ul`
   width: 95%;
-
-  /* position: absolute; */
   z-index: 2;
-
   list-style-type: none;
 `;
 const IndividualComment = styled.li`

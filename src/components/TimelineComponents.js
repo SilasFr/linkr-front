@@ -65,7 +65,7 @@ const Feed = styled.div`
 const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1000px;
+  gap: 50px;
   width: 100%;
   margin: 30px 0;
   @media (max-width: 450px) {

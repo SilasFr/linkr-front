@@ -31,6 +31,7 @@ export default function IndividualPost({
 }) {
   const [editing, setEditing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [isCommenting, setIsCommenting] = useState(true);
   const [newDescription, setNewDescription] = useState("loading");
 
   const { userData } = useContext(UserContext);
@@ -103,58 +104,74 @@ export default function IndividualPost({
   }, [editing]);
 
   return (
-    <PostCard key={post.id}>
-      <PostUserInfo>
-        <img src={post.profilePic} alt="user avatar" />
-        <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
-        <CommentsButton></CommentsButton>
-      </PostUserInfo>
-      <PostContent>
-        <h3>{post.userName}</h3>
-        {editing ? (
-          <input
-            value={newDescription}
-            onChange={handleInputChange}
-            onKeyDown={(e) => handleKeyDown(e)}
-            disabled={isUploading}
-            ref={inputRef}
-          ></input>
-        ) : (
-          <h4>{Hashtags({ ...post, description: newDescription })}</h4>
-        )}
-        <LinkPreview onClick={() => window.open(post.link)}>
-          <LinkData>
-            <h5>{post.title}</h5>
+    <li>
+      <div>
+        <PostCard key={post.id}>
+          <PostUserInfo>
+            <img src={post.profilePic} alt="user avatar" />
+            <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
+            <CommentsButton
+              isCommenting={isCommenting}
+              setIsCommenting={setIsCommenting}
+            ></CommentsButton>
+          </PostUserInfo>
+          <PostContent>
+            <h3>{post.userName}</h3>
+            {editing ? (
+              <input
+                value={newDescription}
+                onChange={handleInputChange}
+                onKeyDown={(e) => handleKeyDown(e)}
+                disabled={isUploading}
+                ref={inputRef}
+              ></input>
+            ) : (
+              <h4>{Hashtags({ ...post, description: newDescription })}</h4>
+            )}
+            <LinkPreview onClick={() => window.open(post.link)}>
+              <LinkData>
+                <h5>{post.title}</h5>
 
-            <p>{post.description}</p>
+                <p>{post.description}</p>
 
-            <h6>{post.link}</h6>
-          </LinkData>
-          <img src={post.image} alt={post.title} />
-        </LinkPreview>
-        {renderPenIcon && (
-          <PenIcon
-            postId={post.id}
-            dialog={dialog}
-            editing={editing}
-            setEditing={setEditing}
-          />
-        )}
-        {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
-      </PostContent>
-      <CommentsContainer>
-        <CommentList>
-          <IndividualComment>
-            <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1363x1920/f2dbced001e365f42b4307983536308d/photo-1648379420214-efe9cdb47e10.jpg"></img>
-            <div>
-              <h1>
-                João Amongus<p>•post's author</p>
-              </h1>
-              <span>Conteúdo do comentário</span>
-            </div>
-          </IndividualComment>
-        </CommentList>
-      </CommentsContainer>
-    </PostCard>
+                <h6>{post.link}</h6>
+              </LinkData>
+              <img src={post.image} alt={post.title} />
+            </LinkPreview>
+            {renderPenIcon && (
+              <PenIcon
+                postId={post.id}
+                dialog={dialog}
+                editing={editing}
+                setEditing={setEditing}
+              />
+            )}
+            {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
+          </PostContent>
+        </PostCard>
+      </div>
+      {isCommenting && (
+        <CommentsContainer>
+          <CommentList>
+            <IndividualComment>
+              <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1363x1920/f2dbced001e365f42b4307983536308d/photo-1648379420214-efe9cdb47e10.jpg"></img>
+              <div>
+                <h1>
+                  João Amongus<p>•post's author</p>
+                </h1>
+                <span>
+                  position: absolute;k position: absolute;k position: absolute;k
+                  position: absolute;k position: absolute;k position: absolute;k
+                  position: absolute;k position: absolute;k position: absolute;k
+                  position: absolute;k position: absolute;k position: absolute;k
+                  position: absolute;k position: absolute;k position: absolute;k
+                  position: absolute;k position: absolute;k
+                </span>
+              </div>
+            </IndividualComment>
+          </CommentList>
+        </CommentsContainer>
+      )}
+    </li>
   );
 }

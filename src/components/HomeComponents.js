@@ -16,7 +16,7 @@ const Header = styled.div`
   height: 72px;
   padding: 8px;
   background-color: #151515;
-  & h1 {
+  & a {
     margin: 0 auto 0 20px;
     font-size: 49px;
     line-height: 54px;
@@ -24,6 +24,9 @@ const Header = styled.div`
     font-weight: 700;
     letter-spacing: 0.05em;
     color: #ffffff;
+  }
+  & a:hover {
+    cursor: pointer;
   }
 `;
 
@@ -37,6 +40,10 @@ const UserMenu = styled.div`
   font-weight: 700;
   color: #ffffff;
   position: relative;
+
+  ion-icon:hover {
+    cursor: pointer;
+  }
 `;
 
 const MenuLogout = styled.div`
@@ -59,6 +66,9 @@ const MenuLogout = styled.div`
     line-height: 20px;
     letter-spacing: 0.05em;
     color: #ffffff;
+  }
+  p:hover {
+    cursor: pointer;
   }
   @media (max-width: 420px) {
     height: 43px;
@@ -189,6 +199,9 @@ const ButtonPublish = styled.button`
     background-color: #9f9f9f;
     pointer-events: none;
   }
+  :hover:not(:disabled) {
+    cursor: pointer;
+  }
 `;
 
 const NewPostUrl = styled.input`
@@ -213,40 +226,39 @@ const ContentContainer = styled.div`
   flex-direction: row;
   gap: 25px;
   margin: 0 auto;
-`
+`;
 const HashtagBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 300px;
   height: 400px;
-  
+
   background-color: #171717;
-  
+
   border-radius: 16px;
 
   margin-top: 180px;
 
-
-  h3{
-    font-family: 'Oswald';
+  h3 {
+    font-family: "Oswald";
     font-style: normal;
     font-weight: 700;
     font-size: 27px;
     line-height: 40px;
-    color: #FFFFFF;
+    color: #ffffff;
     padding-bottom: 12px;
     padding-left: 16px;
     padding-top: 10px;
   }
 
   li {
-    font-family: 'Lato';
+    font-family: "Lato";
     font-style: normal;
     font-weight: 700;
     font-size: 19px;
     line-height: 20px;
     letter-spacing: 0.05em;
-    color: #FFFFFF;
+    color: #ffffff;
     padding-top: 12px;
     padding-left: 16px;
     cursor: pointer;
@@ -255,13 +267,13 @@ const HashtagBox = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
-`
+`;
 
 const HorizontalLine = styled.div`
   height: 1px;
   width: 100%;
   background-color: #484848;
-`
+`;
 
 export {
   MainContainer,

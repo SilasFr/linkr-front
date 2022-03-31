@@ -305,6 +305,9 @@ const TrashCan = styled.div`
       font-size: 1rem;
     }
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Pen = styled.div`
   display: flex;
@@ -325,6 +328,10 @@ const Pen = styled.div`
       height: 24px;
     }
   }
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 const Like = styled.div`
   margin-top: 20px;
@@ -334,6 +341,9 @@ const Like = styled.div`
   ion-icon.liked {
     font-size: 50px;
     color: red;
+  }
+  :hover {
+    cursor: pointer;
   }
 `;
 

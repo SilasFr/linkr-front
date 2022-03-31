@@ -21,8 +21,12 @@ function App() {
               path="/hashtag/:hashtag"
               element={<Home target={"hashtag"} />}
             />
+<<<<<<< HEAD
             <Route path="/user/:id" element={<UserPage />} />
             <Route path="/count" element={<Update />} />
+=======
+            <Route path="/user/:id" element={<Home target={"user"} />} />
+>>>>>>> main
           </Routes>
         </BrowserRouter>
       </TimelineProvider>

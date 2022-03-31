@@ -24,25 +24,27 @@ export default function FeedPosts({ updatePosts, dialog }) {
     );
   }
 
-  /*   async function loadMorePosts() {
+  async function loadMorePosts() {
     const response = await api.loadPosts(userData.token, loadNumber);
 
     if (typeof response.data === "string") {
       setHasMore(false);
       return;
     }
-    const aux = [...timeline];
-    response.data.map((elem) => aux.push(elem));
+    let aux = [...timeline];
+    response.data.map((elem) => {
+      aux.push(elem);
+    });
     setTimeline(aux);
 
     setLoadNumber(loadNumber + 1);
-  } */
+  }
 
   return (
     <PostsList>
       <InfiniteScroll
         pageStart={0}
-        loadMore={api.loadPosts(userData.token, loadNumber)}
+        loadMore={loadMorePosts}
         hasMore={hasMore}
         loader={<LoadingComponent />}
       >

@@ -25,7 +25,6 @@ export default function Timeline() {
     onCloseModal,
   };
   async function updatePosts(offset) {
-    console.log("firou o updateposts");
     try {
       setLoading(true);
       const response = await api.loadPosts(userData.token, offset);

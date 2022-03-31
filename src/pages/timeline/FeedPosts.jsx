@@ -8,6 +8,7 @@ import IndividualPost from "../../components/IndividualPost";
 
 export default function FeedPosts({ posts, dialog }) {
   const { userData } = useContext(UserContext);
+  console.log("userData: ", userData);
   if (typeof posts === "string") {
     return (
       <TimelineMessage>

@@ -342,10 +342,6 @@ const StyledLike = styled(IoIosHeart)`
 `;
 
 const UpdateContainer = styled.div`
-  & ::before,
-  & ::-ms-ticks-before {
-    height: 0;
-  }
   width: 100%;
   height: 61px;
   padding: 0 20px;
@@ -353,7 +349,6 @@ const UpdateContainer = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
   cursor: pointer;
-  transition: height 1s;
 
   display: flex;
   align-items: center;

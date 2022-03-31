@@ -6,7 +6,7 @@ import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
 import ModalComponent from "./modal";
-import Update from "./Example";
+import Update from "./updateRoutine";
 
 export default function Timeline() {
   const { userData } = useContext(UserContext);

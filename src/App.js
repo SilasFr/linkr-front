@@ -6,7 +6,7 @@ import Home from "./pages/home";
 import UserPage from "./pages/userPage";
 import { UserProvider } from "./contexts/userContext";
 import { TimelineProvider } from "./contexts/timelineContext";
-import Update from "./pages/timeline/Example";
+import Update from "./pages/timeline/updateRoutine";
 
 function App() {
   return (

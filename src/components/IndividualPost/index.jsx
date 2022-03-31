@@ -1,20 +1,27 @@
-import PenIcon from "../pages/timeline/PenIcon";
-import TrashIcon from "../pages/timeline/TrashIcon";
+import PenIcon from "./PenIcon";
+import TrashIcon from "./TrashIcon";
 import {
   LinkData,
   LinkPreview,
-  PostCard,
   PostContent,
-  PostUserInfo,
   StyledHashtag,
-} from "./TimelineComponents";
+} from "../TimelineComponents";
 import { useState, useEffect, useRef, useContext } from "react";
 
 import ReactHashtag from "@mdnm/react-hashtag";
-import { api } from "../services/api";
-import UserContext from "../contexts/userContext";
+import { api } from "../../services/api";
+import UserContext from "../../contexts/userContext";
 
-import LikeIcon from "../pages/timeline/likeIcon";
+import LikeIcon from "./likeIcon";
+import CommentsButton from "./CommentsButton";
+import {
+  CommentList,
+  CommentsContainer,
+  IndividualComment,
+  PostCard,
+  PostUserInfo,
+} from "./styles";
+import { HorizontalLine } from "../HomeComponents";
 
 export default function IndividualPost({
   post,
@@ -100,6 +107,7 @@ export default function IndividualPost({
       <PostUserInfo>
         <img src={post.profilePic} alt="user avatar" />
         <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
+        <CommentsButton></CommentsButton>
       </PostUserInfo>
       <PostContent>
         <h3>{post.userName}</h3>
@@ -134,6 +142,19 @@ export default function IndividualPost({
         )}
         {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
       </PostContent>
+      <CommentsContainer>
+        <CommentList>
+          <IndividualComment>
+            <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1363x1920/f2dbced001e365f42b4307983536308d/photo-1648379420214-efe9cdb47e10.jpg"></img>
+            <div>
+              <h1>
+                João Amongus<p>•post's author</p>
+              </h1>
+              <span>Conteúdo do comentário</span>
+            </div>
+          </IndividualComment>
+        </CommentList>
+      </CommentsContainer>
     </PostCard>
   );
 }

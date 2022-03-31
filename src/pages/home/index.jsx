@@ -19,13 +19,14 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+import TimelineContext from "../../contexts/timelineContext";
 import UserPage from "../userPage";
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(true);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
   // ALTERAR ASSIM QUE POSSIVEL

@@ -46,7 +46,6 @@ export default function HeaderComponent() {
       const result = await api.searchUser(userData.token, event.target.value);
       setSearchedUsers(result.data);
     } catch (e) {
-      console.log(e);
       alert("Houve um erro ao pesquisar, tente novamente");
       setSearchedUsers([]);
     }

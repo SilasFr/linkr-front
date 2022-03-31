@@ -38,7 +38,6 @@ export default function IndividualPost({
       );
     }
   }
-  console.log(newDescription);
   useEffect(() => updatePost(), [editing]);
 
   function handleInputChange(e) {

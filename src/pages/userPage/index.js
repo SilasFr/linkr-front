@@ -11,8 +11,7 @@ import { ClipLoader } from "react-spinners";
 import ModalComponent from "../timeline/modal";
 import HeaderComponent from "../../components/Header";
 
-export default function UserPage() {
-  const userId = useParams().id;
+export default function UserPage({ userId, setUserName }) {
   const { userData } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,6 +29,10 @@ export default function UserPage() {
     try {
       setLoading(true);
       const response = await api.loadPostsByUserId(userData.token, userId);
+
+      // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
+      setUserName(response.data[0].userName + `'s posts`);
+      // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
       setPosts(response.data);
       setLoading(false);
     } catch {
@@ -40,23 +43,16 @@ export default function UserPage() {
   }, []);
 
   return (
-    <MainContainer>
-      <HeaderComponent />
-      <MainFeed>
-        <h1>{userData.name}</h1>
-        <Nav />
-        <main>
-          {loading ? (
-            <TimelineMessage>
-              <p>Loading... </p>
-              <ClipLoader color="white" />
-            </TimelineMessage>
-          ) : (
-            <FeedPosts posts={posts} dialog={modalControl} />
-          )}
-          <ModalComponent modalControl={modalControl} />
-        </main>
-      </MainFeed>
-    </MainContainer>
+    <main>
+      {loading ? (
+        <TimelineMessage>
+          <p>Loading... </p>
+          <ClipLoader color="white" />
+        </TimelineMessage>
+      ) : (
+        <FeedPosts posts={posts} dialog={modalControl} />
+      )}
+      <ModalComponent modalControl={modalControl} />
+    </main>
   );
 }

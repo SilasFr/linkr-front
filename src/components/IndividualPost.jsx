@@ -7,12 +7,15 @@ import {
   PostContent,
   PostUserInfo,
   StyledHashtag,
+  ContentSection,
+  CommentSection,
 } from "./TimelineComponents";
 import { useState, useEffect, useRef, useContext } from "react";
 
 import ReactHashtag from "@mdnm/react-hashtag";
 import { api } from "../services/api";
 import UserContext from "../contexts/userContext";
+import ComentForm from "./comentForm";
 
 import LikeIcon from "../pages/timeline/likeIcon";
 
@@ -97,43 +100,48 @@ export default function IndividualPost({
 
   return (
     <PostCard key={post.id}>
-      <PostUserInfo>
-        <img src={post.profilePic} alt="user avatar" />
-        <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
-      </PostUserInfo>
-      <PostContent>
-        <h3>{post.userName}</h3>
-        {editing ? (
-          <input
-            value={newDescription}
-            onChange={handleInputChange}
-            onKeyDown={(e) => handleKeyDown(e)}
-            disabled={isUploading}
-            ref={inputRef}
-          ></input>
-        ) : (
-          <h4>{Hashtags({ ...post, description: newDescription })}</h4>
-        )}
-        <LinkPreview onClick={() => window.open(post.link)}>
-          <LinkData>
-            <h5>{post.title}</h5>
+      <ContentSection>
+        <PostUserInfo>
+          <img src={post.profilePic} alt="user avatar" />
+          <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
+        </PostUserInfo>
+        <PostContent>
+          <h3>{post.userName}</h3>
+          {editing ? (
+            <input
+              value={newDescription}
+              onChange={handleInputChange}
+              onKeyDown={(e) => handleKeyDown(e)}
+              disabled={isUploading}
+              ref={inputRef}
+            ></input>
+          ) : (
+            <h4>{Hashtags({ ...post, description: newDescription })}</h4>
+          )}
+          <LinkPreview onClick={() => window.open(post.link)}>
+            <LinkData>
+              <h5>{post.title}</h5>
 
-            <p>{post.description}</p>
+              <p>{post.description}</p>
 
-            <h6>{post.link}</h6>
-          </LinkData>
-          <img src={post.image} alt={post.title} />
-        </LinkPreview>
-        {renderPenIcon && (
-          <PenIcon
-            postId={post.id}
-            dialog={dialog}
-            editing={editing}
-            setEditing={setEditing}
-          />
-        )}
-        {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
-      </PostContent>
+              <h6>{post.link}</h6>
+            </LinkData>
+            <img src={post.image} alt={post.title} />
+          </LinkPreview>
+          {renderPenIcon && (
+            <PenIcon
+              postId={post.id}
+              dialog={dialog}
+              editing={editing}
+              setEditing={setEditing}
+            />
+          )}
+          {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
+        </PostContent>
+      </ContentSection>
+      <CommentSection>
+        <ComentForm postId={post.id} />
+      </CommentSection>
     </PostCard>
   );
 }

@@ -117,6 +117,36 @@ async function dislikePost(id, token) {
   return response;
 }
 
+async function verifyFollow(sessionUserId, userId) {
+  const response = await axios.post(`${BASE_URL}/follows`,{
+    sessionUserId: parseInt(sessionUserId),
+    userId: parseInt(userId)
+  });
+  return response.data
+}
+
+async function follow(sessionUserId, userId) {
+  const response = await axios.post(`${BASE_URL}/follow`,{
+    sessionUserId: parseInt(sessionUserId),
+    userId: parseInt(userId)
+  });
+  return response.data
+}
+
+async function unfollow(sessionUserId, userId) {
+  const response = await axios.post(`${BASE_URL}/unfollow`,{
+    sessionUserId: parseInt(sessionUserId),
+    userId: parseInt(userId)
+  });
+  return response.data
+}
+
+async function getUserId(token){
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/userpage/user`, config)
+  return response.data
+}
+
 export const api = {
   createUser,
   login,
@@ -135,4 +165,8 @@ export const api = {
   getLikesByPostId,
   likePost,
   dislikePost,
+  verifyFollow,
+  follow,
+  unfollow,
+  getUserId,
 };

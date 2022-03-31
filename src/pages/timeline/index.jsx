@@ -6,9 +6,12 @@ import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
 import ModalComponent from "./modal";
+import Update from "./updateRoutine";
 
-export default function Timeline({ reload, setReload }) {
+export default function Timeline() {
   const { userData } = useContext(UserContext);
+  const { timeline, setTimeline } = useContext(TimelineContext);
+  const { reload, setReload } = useContext(TimelineContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,7 +27,7 @@ export default function Timeline({ reload, setReload }) {
     try {
       setLoading(true);
       const response = await api.loadPosts(userData.token);
-      setPosts(response.data);
+      setTimeline(response.data);
     } catch (e) {
       alert(
         '"An error occured while trying to fetch the posts, please refresh the page"'
@@ -39,13 +42,14 @@ export default function Timeline({ reload, setReload }) {
 
   return (
     <main>
+      <Update />
       {loading ? (
         <TimelineMessage>
           <p>Loading... </p>
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        <FeedPosts posts={posts} dialog={modalControl} />
+        <FeedPosts dialog={modalControl} />
       )}
       <ModalComponent modalControl={modalControl} reload={setReload} />
     </main>

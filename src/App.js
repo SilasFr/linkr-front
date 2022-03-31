@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import UserPage from "./pages/userPage";
 import { UserProvider } from "./contexts/userContext";
 import { TimelineProvider } from "./contexts/timelineContext";
+import Update from "./pages/timeline/updateRoutine";
 
 function App() {
   return (
@@ -20,7 +21,12 @@ function App() {
               path="/hashtag/:hashtag"
               element={<Home target={"hashtag"} />}
             />
+<<<<<<< HEAD
+            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/count" element={<Update />} />
+=======
             <Route path="/user/:id" element={<Home target={"user"} />} />
+>>>>>>> main
           </Routes>
         </BrowserRouter>
       </TimelineProvider>

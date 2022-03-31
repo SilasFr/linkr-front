@@ -19,13 +19,17 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+<<<<<<< HEAD
+import TimelineContext from "../../contexts/timelineContext";
+=======
 import UserPage from "../userPage";
+>>>>>>> main
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(true);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
   // ALTERAR ASSIM QUE POSSIVEL
@@ -115,6 +119,10 @@ export default function Home({ target }) {
               </NewPostForm>
             </NewPost>
           )}
+<<<<<<< HEAD
+          {target === "timeline" && <Timeline />}
+          {target !== "timeline" && <Topics />}
+=======
           {target === "timeline" && (
             <Timeline reload={reload} setReload={setReload} />
           )}
@@ -124,6 +132,7 @@ export default function Home({ target }) {
           {target === "user" && (
             <UserPage userId={id} setUserName={setUserName} />
           )}
+>>>>>>> main
         </MainFeed>
         <HashtagBox>
           <h3>trending</h3>

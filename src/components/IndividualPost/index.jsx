@@ -31,8 +31,9 @@ export default function IndividualPost({
 }) {
   const [editing, setEditing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [isCommenting, setIsCommenting] = useState(true);
   const [newDescription, setNewDescription] = useState("loading");
+  const [isCommenting, setIsCommenting] = useState(false);
+  const [commentsList, setCommentsList] = useState([]);
 
   const { userData } = useContext(UserContext);
 
@@ -111,8 +112,11 @@ export default function IndividualPost({
             <img src={post.profilePic} alt="user avatar" />
             <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
             <CommentsButton
+              postId={post.id}
               isCommenting={isCommenting}
               setIsCommenting={setIsCommenting}
+              setCommentsList={setCommentsList}
+              quantity={post.commentQty}
             ></CommentsButton>
           </PostUserInfo>
           <PostContent>
@@ -153,22 +157,23 @@ export default function IndividualPost({
       {isCommenting && (
         <CommentsContainer>
           <CommentList>
-            <IndividualComment>
-              <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1363x1920/f2dbced001e365f42b4307983536308d/photo-1648379420214-efe9cdb47e10.jpg"></img>
-              <div>
-                <h1>
-                  João Amongus<p>•post's author</p>
-                </h1>
-                <span>
-                  position: absolute;k position: absolute;k position: absolute;k
-                  position: absolute;k position: absolute;k position: absolute;k
-                  position: absolute;k position: absolute;k position: absolute;k
-                  position: absolute;k position: absolute;k position: absolute;k
-                  position: absolute;k position: absolute;k position: absolute;k
-                  position: absolute;k position: absolute;k
-                </span>
-              </div>
-            </IndividualComment>
+            {commentsList &&
+              commentsList.map((comment) => {
+                return (
+                  <IndividualComment key={commentsList.indexOf(comment)}>
+                    <img src={comment.profilePic}></img>
+                    <div>
+                      <h1>
+                        {comment.name}
+                        {comment.isAuthor && <p>• post's author</p>}
+                        {comment.followed && <p>• followed</p>}
+                        {comment.authorId === userData.id && <p>• you</p>}
+                      </h1>
+                      <span>{comment.content}</span>
+                    </div>
+                  </IndividualComment>
+                );
+              })}
           </CommentList>
         </CommentsContainer>
       )}

@@ -109,7 +109,7 @@ export default function IndividualPost({
     }
     setNewDescription("loading");
   }, [editing]);
-
+  console.log(commentsList);
   return (
     <li>
       <div>
@@ -175,7 +175,10 @@ export default function IndividualPost({
                       <h1>
                         {comment.name}
                         {comment.isAuthor && <p>• post's author</p>}
-                        {comment.followed && <p>• followed</p>}
+                        {comment.followed &&
+                          comment.authorId !== userData.id && (
+                            <p>• following</p>
+                          )}
                         {comment.authorId === userData.id && <p>• you</p>}
                       </h1>
                       <span>{comment.content}</span>

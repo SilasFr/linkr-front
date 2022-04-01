@@ -10,7 +10,7 @@ import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext.js";
 
 export default function LikeIcon({ id, postInfo }) {
-  let { likesList, likedByUser } = postInfo;
+  let { likedByUser } = postInfo;
   const { userData } = useContext(UserContext);
   const [tooltipMessage, SetTooltipMessage] = useState("");
   const token = userData.token;
@@ -23,7 +23,7 @@ export default function LikeIcon({ id, postInfo }) {
     setLikesNumber(`${nameList.length} likes`);
 
     if (nameList.length > 2) {
-      likedByUser
+      liked
         ? SetTooltipMessage(
             `Você, ${nameList[1].name} e outras ${
               nameList.length - 2
@@ -35,13 +35,13 @@ export default function LikeIcon({ id, postInfo }) {
             } pessoas curtiram esse post!`
           );
     } else if (nameList.length === 2) {
-      likedByUser
+      liked
         ? SetTooltipMessage(`Você e ${nameList[1].name} curtiram esse post`)
         : SetTooltipMessage(
             `${nameList[0].name} e ${nameList[1].name} curtiram esse post`
           );
     } else if (nameList.length === 1) {
-      likedByUser
+      liked
         ? SetTooltipMessage(`Você curtiu esse post`)
         : SetTooltipMessage(`${nameList[0].name} curtiu esse post`);
     } else if (nameList.length === 0) {
@@ -54,11 +54,17 @@ export default function LikeIcon({ id, postInfo }) {
     try {
       if (!liked) {
         const promise = api.likePost(id, userData.token);
-        promise.then(() => setLiked(true));
+        promise.then(() => {
+          setLiked(true);
+          likedByUser = true;
+        });
         promise.catch(() => alert("Erro ao dar like"));
       } else {
         const promise = api.dislikePost(id, userData.token);
-        promise.then(() => setLiked(false));
+        promise.then(() => {
+          setLiked(false);
+          likedByUser = false;
+        });
         promise.catch(() => alert("Erro ao dar dislike"));
       }
     } catch (e) {

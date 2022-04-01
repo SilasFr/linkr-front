@@ -114,8 +114,8 @@ export default function IndividualPost({
   return (
     <li>
       <div>
+        {post.isReposted && <RepostedBy userId={post.reposterId} />}
         <PostCard key={post.id}>
-          {post.isReposted && <RepostedBy userId={post.reposterId} />}
           <PostUserInfo>
             <img src={post.profilePic} alt="user avatar" />
             <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />

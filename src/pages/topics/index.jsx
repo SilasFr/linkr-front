@@ -6,13 +6,15 @@ import { api } from "../../services/api";
 import { ClipLoader } from "react-spinners";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import FeedPosts from "../timeline/FeedPosts";
+import TimelineContext from "../../contexts/timelineContext";
 
-export default function Topics({ reload, setReload }) {
+export default function Topics() {
   const { hashtag } = useParams();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useContext(UserContext);
+  const { reload, setReload } = useContext(TimelineContext);
 
   async function updatePosts() {
     try {

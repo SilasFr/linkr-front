@@ -5,20 +5,22 @@ import {
 } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
 import IndividualPost from "../../components/IndividualPost";
+import TimelineContext from "../../contexts/timelineContext";
 
-export default function FeedPosts({ posts, dialog }) {
+export default function FeedPosts({ dialog }) {
   const { userData } = useContext(UserContext);
-  if (typeof posts === "string") {
+  const { timeline } = useContext(TimelineContext);
+  if (typeof timeline === "string") {
     return (
       <TimelineMessage>
-        <p>{posts}</p>
+        <p>{timeline}</p>
       </TimelineMessage>
     );
   }
 
   return (
     <PostsList>
-      {posts.map((post) => {
+      {timeline.map((post) => {
         let renderTrashIcon = false;
         let renderPenIcon = false;
         if (userData.name === post.userName) {
@@ -27,7 +29,7 @@ export default function FeedPosts({ posts, dialog }) {
         }
         return (
           <IndividualPost
-            key={posts.indexOf(post)}
+            key={timeline.indexOf(post)}
             post={post}
             dialog={dialog}
             renderPenIcon={renderPenIcon}

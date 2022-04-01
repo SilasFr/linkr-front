@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   MainContainer,
@@ -19,15 +19,28 @@ import Timeline from "../timeline";
 import Topics from "../topics";
 import * as extract from "mention-hashtag";
 import HeaderComponent from "../../components/Header";
+import TimelineContext from "../../contexts/timelineContext";
+import UserPage from "../userPage";
+import styled from "styled-components";
 
 export default function Home({ target }) {
   const { userData } = useContext(UserContext);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(true);
+  const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
-  const { hashtag } = useParams();
+  const [sessionUserId, setSessionUserId] = useState(null)
+  const [followState, setFollowState] = useState(null)
+  const [followButton, setFollowButton] = useState(null)
+  const [disabled, setDisabled] = useState(false)
+  const userId = useParams().id;
+
+  // ALTERAR ASSIM QUE POSSIVEL
+  const [userName, setUserName] = useState("loading");
+  // ALTERAR ASSIM QUE POSSIVEL
+
+  const { hashtag, id } = useParams();
 
   async function updateHashtags() {
     try {
@@ -60,6 +73,7 @@ export default function Home({ target }) {
       setLoading(false);
       setReload(!reload);
       updateHashtags();
+      setFormData({});
     } catch (error) {
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
@@ -70,12 +84,62 @@ export default function Home({ target }) {
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
+
+  useEffect(async () => {
+    try {
+      const response = await api.getUserId(userData.token);
+      setSessionUserId(response.userId)
+    } catch (error) {
+      console.log(error)
+    }
+  }, []);
+
+  useEffect(async () => {
+    try {
+      const verifyFollow = await api.verifyFollow(sessionUserId, userId)
+      if(verifyFollow.rows.length !== 0) {
+        setFollowState(true)
+        setFollowButton('unfollow')
+      } else {
+        setFollowState(false)
+        setFollowButton('follow')
+      }
+    } catch (error){
+      alert('Somthing went wrong. Please try again later.')
+    }
+  }, [sessionUserId, userId])
+
+  async function handleFollow(sessionUserId, userId) {
+    try {
+      setDisabled(true)
+      if(followState === true) {
+        await api.unfollow(sessionUserId, userId)
+        setFollowState(false)
+        setFollowButton('follow')
+      }
+
+      if(followState === false) {
+        await api.follow(sessionUserId, userId)
+        setFollowState(true)
+        setFollowButton('unfollow')
+      }
+      setDisabled(false)
+    } catch (error) {
+      console.log('erro no handleFollow')
+      alert('Somthing went wrong. Please try again later.')
+    }
+  }
+
   return (
     <MainContainer>
       <HeaderComponent />
       <ContentContainer>
         <MainFeed>
-          <h1>{target !== "timeline" ? `#${hashtag}` : target}</h1>
+          <h1>
+            {target === "hashtag" && `#${hashtag}`}
+            {target === "timeline" && "timeline"}
+            {target === "user" && userName}
+          </h1>
           {target === "timeline" && (
             <NewPost>
               <PostUserInfo>
@@ -107,24 +171,100 @@ export default function Home({ target }) {
           {target === "timeline" && (
             <Timeline reload={reload} setReload={setReload} />
           )}
-          {target !== "timeline" && (
+          {target === "hashtag" && (
             <Topics reload={reload} setReload={setReload} />
           )}
+          {target === "user" && (
+            <UserPage userId={id} setUserName={setUserName} />
+          )}
         </MainFeed>
-        <HashtagBox>
-          <h3>trending</h3>
-          <HorizontalLine></HorizontalLine>
-          <ul>
-            {typeof hashtagsArray === "string"
-              ? ""
-              : hashtagsArray.map((hashtag) => (
+        {target === "user" && 
+          (
+          <Aside>
+            {parseInt(sessionUserId) !== parseInt(userId) ?
+              <FollowButton disabled={disabled} className={`${followButton}`} onClick={() => handleFollow(sessionUserId, userId)}>
+                {followState === false ? "Follow" : "Unfollow"}
+              </FollowButton>
+              :
+              <></>
+            }
+            <HashtagBox>
+              <h3>trending</h3>
+              <HorizontalLine></HorizontalLine>
+              <ul>
+                {typeof hashtagsArray === "string"
+                  ? ""
+                  : hashtagsArray.map((hashtag) => (
+                    <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
+                        <li># {hashtag.topic}</li>
+                      </Link>
+                    ))}
+              </ul>
+            </HashtagBox>
+          </Aside>
+        )}
+        {target === "hashtag" || target === "timeline" && (
+          <HashtagBox>
+            <h3>trending</h3>
+            <HorizontalLine></HorizontalLine>
+            <ul>
+              {typeof hashtagsArray === "string"
+                ? ""
+                : hashtagsArray.map((hashtag) => (
                   <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
-                    <li># {hashtag.topic}</li>
-                  </Link>
-                ))}
-          </ul>
-        </HashtagBox>
+                      <li># {hashtag.topic}</li>
+                    </Link>
+                  ))}
+            </ul>
+          </HashtagBox>
+        )}
       </ContentContainer>
     </MainContainer>
   );
 }
+
+const Aside = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .follow {
+    background: #1877F2;
+    border-radius: 5px;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+  }
+
+  .unfollow{
+    background: #FFFFFF;
+    border-radius: 5px;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1877F2;
+  }
+`
+
+const FollowButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 112px;
+  height: 31px;
+  left: 1066px;
+  top: 141px;
+
+  margin-top: 100px;
+  margin-bottom: -95px;
+
+  cursor: pointer;
+`

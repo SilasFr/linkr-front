@@ -48,6 +48,7 @@ export default function UserPage({ userId, setUserName }) {
         </TimelineMessage>
       ) : (
         <FeedPosts
+          posts={posts}
           identifier={userData.id}
           type={"user"}
           dialog={modalControl}

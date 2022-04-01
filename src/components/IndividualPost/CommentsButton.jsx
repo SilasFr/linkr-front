@@ -16,6 +16,9 @@ export default function CommentsButton({
         const response = await api.readComments(postId, token);
         setCommentsList(response.data);
       } catch (e) {
+        if ((response = [])) {
+          return setIsCommenting(!isCommenting);
+        }
         alert("Erro ao receber os comentários");
         setIsCommenting(!isCommenting);
       }

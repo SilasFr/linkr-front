@@ -52,7 +52,6 @@ export default function UserPage({ userId, setUserName }) {
           identifier={userData.id}
           type={"user"}
           dialog={modalControl}
-          posts={posts}
         />
       )}
       <ModalComponent modalControl={modalControl} />

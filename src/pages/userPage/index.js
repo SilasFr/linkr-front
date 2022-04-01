@@ -5,12 +5,8 @@ import UserContext from "../../contexts/userContext";
 import { api } from "../../services/api";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import { ClipLoader } from "react-spinners";
-<<<<<<< HEAD
 import ModalComponent from "../timeline/modalDelete";
-=======
-import ModalComponent from "../timeline/modal";
 import TimelineContext from "../../contexts/timelineContext";
->>>>>>> main
 
 export default function UserPage({ userId, setUserName }) {
   const { userData } = useContext(UserContext);
@@ -51,15 +47,12 @@ export default function UserPage({ userId, setUserName }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-<<<<<<< HEAD
-        <FeedPosts posts={posts} dialog={modalControl} />
-=======
         <FeedPosts
           identifier={userData.id}
           type={"user"}
           dialog={modalControl}
+          posts={posts}
         />
->>>>>>> main
       )}
       <ModalComponent modalControl={modalControl} />
     </main>

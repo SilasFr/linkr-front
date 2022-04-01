@@ -476,10 +476,7 @@ export {
   InteractionMenu,
   RepostedByIcon,
   ContentSection,
-<<<<<<< HEAD
-=======
   CommentSection,
   LikeContainer,
   LikesNumber,
->>>>>>> main
 };

@@ -26,16 +26,11 @@ export default function UserPage({ userId, setUserName }) {
     try {
       setLoading(true);
       const response = await api.loadPostsByUserId(userData.token, userId);
-<<<<<<< HEAD
-      setUserName(response.data.author + `'s posts`);
-      setPosts(response.data.posts);
-=======
 
       // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
       setUserName(response.data[0].userName + `'s posts`);
       // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
       setTimeline(response.data);
->>>>>>> main
       setLoading(false);
     } catch {
       alert(
@@ -52,15 +47,12 @@ export default function UserPage({ userId, setUserName }) {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-<<<<<<< HEAD
-        <FeedPosts posts={posts} dialog={modalControl} />
-=======
         <FeedPosts
+          posts={posts}
           identifier={userData.id}
           type={"user"}
           dialog={modalControl}
         />
->>>>>>> main
       )}
       <ModalComponent modalControl={modalControl} />
     </main>

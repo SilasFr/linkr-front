@@ -20,7 +20,7 @@ export default function Topics() {
   async function updatePosts() {
     try {
       setLoading(true);
-      const response = await api.loadPostsByHashtag(hashtag, userData.token);
+      const response = await api.loadPostsByHashtag(userData.token, hashtag);
       setTimeline(response.data);
     } catch (e) {
       if (e.response.status === 404) {

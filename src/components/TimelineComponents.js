@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { IoIosHeart, IoIosSync } from "react-icons/io";
+import { IoIosHeart, IoIosSync, IoIosRepeat } from "react-icons/io";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -71,10 +73,28 @@ const PostsList = styled.ul`
   @media (max-width: 450px) {
     width: 100vw;
   }
-  & > div {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+`;
+
+const PostCard = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin: 0 0 30px 0;
+  padding-top: 10px;
+  background-color: #171717;
+  border-radius: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  @media (max-width: 450px) {
+    width: 100%;
+    border-radius: 0;
+    min-height: 232px;
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
   }
 `;
 
@@ -308,9 +328,8 @@ const Pen = styled.div`
   }
 `;
 const Like = styled.div`
-  margin-top: 20px;
   color: #fff;
-  font-size: 20px;
+  font-size: 22px;
 
   ion-icon.liked {
     font-size: 50px;
@@ -336,7 +355,6 @@ const StyledLike = styled(IoIosHeart)`
 const LikesNumber = styled.p`
   font-size: 11px;
   color: white;
-  margin-top: 5px;
 `;
 
 const UpdateContainer = styled.div`
@@ -371,6 +389,60 @@ const UpdateIcon = styled(IoIosSync)`
   color: #fff;
 `;
 
+const RepostIcon = styled(IoIosRepeat)`
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+const CommentsIcon = styled(IoChatbubbleEllipsesOutline)`
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+`;
+
+const InteractionMenu = styled.div`
+  margin-top: 30px;
+  max-width: 70px;
+  word-break: keep-all;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #ffffff;
+`;
+
+const RepostedByIcon = styled.div`
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding-left: 20px;
+  margin-top: 20px;
+
+  background: #1e1e1e;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+
+  color: #ffffff;
+`;
+
 const ContentSection = styled.div`
   width: 100%;
   display: flex;
@@ -399,6 +471,10 @@ export {
   StyledLike,
   UpdateContainer,
   UpdateIcon,
+  RepostIcon,
+  CommentsIcon,
+  InteractionMenu,
+  RepostedByIcon,
   ContentSection,
   CommentSection,
   LikeContainer,

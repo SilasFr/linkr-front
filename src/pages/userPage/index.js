@@ -5,7 +5,7 @@ import UserContext from "../../contexts/userContext";
 import { api } from "../../services/api";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import { ClipLoader } from "react-spinners";
-import ModalComponent from "../timeline/modal";
+import ModalComponent from "../timeline/modalDelete";
 import TimelineContext from "../../contexts/timelineContext";
 
 export default function UserPage({ userId, setUserName }) {

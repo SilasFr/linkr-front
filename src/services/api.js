@@ -179,6 +179,22 @@ async function getUserId(token) {
   return response.data;
 }
 
+async function repost(token, postId) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${postId}/repost`,
+    {},
+    config
+  );
+  return response;
+}
+
+async function getUserById(token, userId) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/user/${userId}`, config);
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -203,4 +219,6 @@ export const api = {
   follow,
   unfollow,
   getUserId,
+  repost,
+  getUserById,
 };

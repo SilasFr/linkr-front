@@ -5,7 +5,7 @@ import UserContext from "../../contexts/userContext";
 import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
-import ModalComponent from "./modal";
+import ModalComponent from "./modalDelete";
 import Update from "./updateRoutine";
 import LoadingComponent from "../../components/LoadingComponent";
 
@@ -52,7 +52,7 @@ export default function Timeline() {
           dialog={modalControl}
         />
       )}
-      <ModalComponent modalControl={modalControl} reload={setReload} />
+      <ModalComponent modalControl={modalControl} />
     </main>
   );
 }

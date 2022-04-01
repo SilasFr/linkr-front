@@ -7,6 +7,7 @@ export function TimelineProvider({ children }) {
   const [deletePost, setDeletePost] = useState({});
   const [editPost, setEditPost] = useState({});
   const [reload, setReload] = useState(true);
+  const [repostModal, setRepostModal] = useState(false);
 
   return (
     <TimelineContext.Provider
@@ -19,6 +20,8 @@ export function TimelineProvider({ children }) {
         setEditPost,
         reload,
         setReload,
+        repostModal,
+        setRepostModal,
       }}
     >
       {children}

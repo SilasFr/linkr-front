@@ -44,6 +44,7 @@ export default function SignIn() {
         name: response.name,
         token: response.token,
         profilePic: response.profilePic,
+        id: response.id,
       });
 
       setLoading(false);

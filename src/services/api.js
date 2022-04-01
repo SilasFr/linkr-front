@@ -28,14 +28,28 @@ async function loadPosts(token, offset) {
   return result;
 }
 
-async function loadPostsByHashtag(hashtag, token) {
+async function loadPostsByHashtag(token, hashtag, offset) {
+  let offsetQuery = "";
+  if (offset) {
+    offsetQuery = `?offset=${offset}`;
+  }
   const config = createConfig(token);
-  const result = await axios.get(`${BASE_URL}/hashtag/${hashtag}`, config);
+  const result = await axios.get(
+    `${BASE_URL}/hashtag/${hashtag}${offsetQuery}`,
+    config
+  );
   return result;
 }
-async function loadPostsByUserId(token, userId) {
+async function loadPostsByUserId(token, userId, offset) {
+  let offsetQuery = "";
+  if (offset) {
+    offsetQuery = `?offset=${offset}`;
+  }
   const config = createConfig(token);
-  const result = await axios.get(`${BASE_URL}/timeline/${userId}`, config);
+  const result = await axios.get(
+    `${BASE_URL}/timeline/${userId}${offsetQuery}`,
+    config
+  );
   return result;
 }
 

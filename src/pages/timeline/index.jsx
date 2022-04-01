@@ -46,7 +46,11 @@ export default function Timeline() {
       {loading ? (
         <LoadingComponent />
       ) : (
-        <FeedPosts updatePosts={updatePosts} dialog={modalControl} />
+        <FeedPosts
+          type={"main"}
+          updatePosts={updatePosts}
+          dialog={modalControl}
+        />
       )}
       <ModalComponent modalControl={modalControl} />
     </main>

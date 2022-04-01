@@ -36,9 +36,7 @@ export default function Home({ target }) {
   const [disabled, setDisabled] = useState(false);
   const userId = useParams().id;
 
-  // ALTERAR ASSIM QUE POSSIVEL
   const [userName, setUserName] = useState("loading");
-  // ALTERAR ASSIM QUE POSSIVEL
 
   const { hashtag, id } = useParams();
 
@@ -75,7 +73,6 @@ export default function Home({ target }) {
       updateHashtags();
       setFormData({});
     } catch (error) {
-      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});
@@ -90,9 +87,7 @@ export default function Home({ target }) {
     try {
       const response = await api.getUserId(userData.token);
       setSessionUserId(response.userId);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }, []);
 
   useEffect(async () => {
@@ -126,7 +121,6 @@ export default function Home({ target }) {
       }
       setDisabled(false);
     } catch (error) {
-      console.log("erro no handleFollow");
       alert("Somthing went wrong. Please try again later.");
     }
   }

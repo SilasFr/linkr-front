@@ -134,6 +134,11 @@ async function dislikePost(id, token) {
   return response;
 }
 
+async function readComments(id, token) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/posts/${id}/comment`, config);
+  return response;
+}
 async function postComment(postId, comment, token) {
   const config = createConfig(token);
   const response = await axios.post(
@@ -192,6 +197,7 @@ export const api = {
   getLikesByPostId,
   likePost,
   dislikePost,
+  readComments,
   postComment,
   verifyFollow,
   follow,

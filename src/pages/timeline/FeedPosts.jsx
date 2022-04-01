@@ -13,7 +13,6 @@ import { api } from "../../services/api";
 export default function FeedPosts({ identifier, type, dialog }) {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
-  const { reload, setReload } = useContext(TimelineContext);
   const [hasMore, setHasMore] = useState(true);
   const [loadNumber, setLoadNumber] = useState(1);
   console.log("tyupe: ", type);
@@ -68,7 +67,7 @@ export default function FeedPosts({ identifier, type, dialog }) {
         {timeline.map((post) => {
           let renderTrashIcon = false;
           let renderPenIcon = false;
-          if (userData.name === post.userName) {
+          if (userData.id === post.author) {
             renderTrashIcon = true;
             renderPenIcon = true;
           }

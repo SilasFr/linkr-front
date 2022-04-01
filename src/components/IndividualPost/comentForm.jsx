@@ -1,10 +1,15 @@
 import { useContext, useState } from "react";
 import { IoPaperPlaneOutline } from "react-icons/io5";
-import UserContext from "../contexts/userContext";
+import UserContext from "../../contexts/userContext";
 import styled from "styled-components";
-import { api } from "../services/api";
+import { api } from "../../services/api";
 
-export default function ComentForm({ postId }) {
+export default function ComentForm({
+  postId,
+  setCommentsList,
+  setCommentsQty,
+  commentsQty,
+}) {
   const { userData } = useContext(UserContext);
   const token = userData.token;
   const [loading, setLoading] = useState(false);
@@ -19,6 +24,10 @@ export default function ComentForm({ postId }) {
 
     try {
       await api.postComment(postId, formData.comment, token);
+      setFormData({ ...formData, comment: "" });
+      const response = await api.readComments(postId, token);
+      setCommentsList(response.data);
+      setCommentsQty(parseInt(commentsQty) + 1);
     } catch {
       alert("Erro ao comentar");
     }
@@ -33,26 +42,27 @@ export default function ComentForm({ postId }) {
   return (
     <Container onSubmit={handleSubmit}>
       <UserPic src={userData.profilePic} />
-      <Fixed>
-        <StyledInput
-          value={formData.comment}
-          onChange={handleInputChange}
-          name="comment"
-          type="text"
-          placeholder="write a comment..."
-        />
-        <SendButton type="submit" onClick={handleSubmit} disabled={loading} />
-      </Fixed>
+      <StyledInput
+        value={formData.comment}
+        onChange={handleInputChange}
+        name="comment"
+        type="text"
+        placeholder="write a comment..."
+      />
+      <SendButton type="submit" disabled={loading} />
     </Container>
   );
 }
 
 const Container = styled.form`
-  width: 100%;
+  width: 95%;
   display: flex;
   align-items: center;
-  justify-content: center;
   padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+  position: relative;
 `;
 const StyledInput = styled.input`
   display: flex;
@@ -81,11 +91,6 @@ const SendButton = styled(IoPaperPlaneOutline)`
   color: white;
   size: 15px;
   position: absolute;
-  right: 0px;
+  right: 3%;
   top: 14px;
-`;
-
-const Fixed = styled.div`
-  width: 80%;
-  position: relative;
 `;

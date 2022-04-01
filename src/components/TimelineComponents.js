@@ -40,6 +40,7 @@ const Feed = styled.div`
       background-color: #fff;
       border-radius: 16px;
       .profile-pic {
+        height: 60px;
         width: 60px;
       }
       .post-info {
@@ -64,30 +65,18 @@ const Feed = styled.div`
 const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 50px;
+  width: 611px;
   margin: 30px 0;
   @media (max-width: 450px) {
     width: 100vw;
   }
-`;
-
-const PostCard = styled.li`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  margin: 0 0 30px 0;
-  padding-top: 10px;
-  background-color: #171717;
-  border-radius: 16px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  position: relative;
-  @media (max-width: 450px) {
-    width: 100%;
-    border-radius: 0;
-    height: 232px;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
   }
-`; /* height: 276px; */
+`;
 
 const PostContent = styled.div`
   display: flex;
@@ -126,20 +115,6 @@ const PostContent = styled.div`
     line-height: 17px;
 
     color: #4c4c4c;
-  }
-`;
-
-const PostUserInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50px;
-  height: 150px;
-  margin: 16px auto auto 16px;
-  & img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
   }
 `;
 
@@ -411,9 +386,7 @@ export {
   Container,
   Feed,
   PostsList,
-  PostCard,
   PostContent,
-  PostUserInfo,
   LinkPreview,
   LinkData,
   TimelineMessage,

@@ -9,36 +9,35 @@ export default function LikeIcon({ id, postInfo }) {
   const { userData } = useContext(UserContext);
   const [tooltipMessage, SetTooltipMessage] = useState("");
   const token = userData.token;
-
   const [liked, setLiked] = useState(likedByUser);
-  if (likesList[0] === null) likesList = [];
+  if (postInfo.likesList[0] === null) postInfo.likesList = [];
 
   useEffect(async () => {
     let nameList = await api.getLikesByPostId(id, token);
 
-    if (likesList.length > 2) {
+    if (nameList.length > 2) {
       likedByUser
         ? SetTooltipMessage(
             `Você, ${nameList[1].name} e outras ${
-              likesList.length - 2
+              nameList.length - 2
             } pessoas curtiram esse post!`
           )
         : SetTooltipMessage(
             `${nameList[0].name}, ${nameList[1].name} e outras ${
-              likesList.length - 2
+              nameList.length - 2
             } pessoas curtiram esse post!`
           );
-    } else if (likesList.length === 2) {
+    } else if (nameList.length === 2) {
       likedByUser
         ? SetTooltipMessage(`Você e ${nameList[1].name} curtiram esse post`)
         : SetTooltipMessage(
             `${nameList[0].name} e ${nameList[1].name} curtiram esse post`
           );
-    } else if (likesList.length === 1) {
+    } else if (nameList.length === 1) {
       likedByUser
         ? SetTooltipMessage(`Você curtiu esse post`)
         : SetTooltipMessage(`${nameList[0].name} curtiu esse post`);
-    } else if (likesList.length === 0) {
+    } else if (nameList.length === 0) {
       SetTooltipMessage(`Ninguem curtiu esse post ainda`);
     }
     ReactTooltip.rebuild();
@@ -46,19 +45,18 @@ export default function LikeIcon({ id, postInfo }) {
 
   function toggleLike() {
     try {
-      if (liked) {
+      if (!liked) {
         const promise = api.likePost(id, userData.token);
-        promise.then((response) => console.log(response.data));
-        promise.catch((error) => console.log("error> ", error.response));
+        promise.then(() => setLiked(true));
+        promise.catch(() => alert("Erro ao dar like"));
       } else {
         const promise = api.dislikePost(id, userData.token);
-        promise.then((response) => console.log(response.data));
-        promise.catch((error) => console.log(error.response));
+        promise.then(() => setLiked(false));
+        promise.catch(() => alert("Erro ao dar dislike"));
       }
     } catch (e) {
       alert("Erro! Não foi possível dar like no post.");
     }
-    setLiked(!liked);
   }
 
   function renderLike() {

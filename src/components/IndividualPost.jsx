@@ -18,6 +18,7 @@ import UserContext from "../contexts/userContext";
 import ComentForm from "./comentForm";
 
 import LikeIcon from "../pages/timeline/likeIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function IndividualPost({
   post,
@@ -30,6 +31,8 @@ export default function IndividualPost({
   const [newDescription, setNewDescription] = useState("loading");
 
   const { userData } = useContext(UserContext);
+
+  const navigate = useNavigate()
 
   async function updatePost() {
     try {
@@ -106,7 +109,7 @@ export default function IndividualPost({
           <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
         </PostUserInfo>
         <PostContent>
-          <h3>{post.userName}</h3>
+          <h3 onClick={() => navigate(`/user/${post.author}`)}>{post.userName}</h3>
           {editing ? (
             <input
               value={newDescription}
@@ -121,7 +124,7 @@ export default function IndividualPost({
           <LinkPreview onClick={() => window.open(post.link)}>
             <LinkData>
               <h5>{post.title}</h5>
-
+              
               <p>{post.description}</p>
 
               <h6>{post.link}</h6>

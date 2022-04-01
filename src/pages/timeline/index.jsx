@@ -13,7 +13,6 @@ export default function Timeline() {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
   const { reload, setReload } = useContext(TimelineContext);
-  /*   const [posts, setPosts] = useState([]); */
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);

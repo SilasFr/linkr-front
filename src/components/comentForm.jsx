@@ -8,7 +8,7 @@ export default function ComentForm({ postId }) {
   const { userData } = useContext(UserContext);
   const token = userData.token;
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ comment: "" });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,6 +23,7 @@ export default function ComentForm({ postId }) {
       alert("Erro ao comentar");
     }
     setLoading(false);
+    setFormData({ comment: "" });
   }
 
   function handleInputChange(e) {
@@ -40,7 +41,7 @@ export default function ComentForm({ postId }) {
           type="text"
           placeholder="write a comment..."
         />
-        <SendButton type="submit" disabled={loading} />
+        <SendButton type="submit" onClick={handleSubmit} disabled={loading} />
       </Fixed>
     </Container>
   );

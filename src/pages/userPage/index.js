@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import FeedPosts from "../timeline/FeedPosts";
 import UserContext from "../../contexts/userContext";
-import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import Nav from "../timeline/navbar";
 import { TimelineMessage } from "../../components/TimelineComponents";
-import { MainContainer, MainFeed } from "../../components/HomeComponents";
 import { ClipLoader } from "react-spinners";
 import ModalComponent from "../timeline/modal";
-import HeaderComponent from "../../components/Header";
+import styled from "styled-components";
 
 export default function UserPage({ userId, setUserName }) {
   const { userData } = useContext(UserContext);
@@ -51,7 +48,7 @@ export default function UserPage({ userId, setUserName }) {
         </TimelineMessage>
       ) : (
         <FeedPosts posts={posts} dialog={modalControl} />
-      )}
+        )}
       <ModalComponent modalControl={modalControl} />
     </main>
   );

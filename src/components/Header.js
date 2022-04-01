@@ -69,7 +69,11 @@ export default function HeaderComponent() {
                 <Link to={`/user/${item.id}`} key={searchedUsers.indexOf(item)}>
                   <li>
                     <img src={item.profilePic} />
-                    <span>{item.name}</span>
+                    <span>
+                      {item.name}
+                      {item.followed && <p>•following</p>}
+                      {item.id === userData.id && <p>•you</p>}
+                    </span>
                   </li>
                 </Link>
               );

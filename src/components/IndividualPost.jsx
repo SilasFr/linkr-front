@@ -18,6 +18,7 @@ import UserContext from "../contexts/userContext";
 import ComentForm from "./comentForm";
 
 import LikeIcon from "../pages/timeline/likeIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function IndividualPost({
   post,
@@ -30,6 +31,8 @@ export default function IndividualPost({
   const [newDescription, setNewDescription] = useState("loading");
 
   const { userData } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   async function updatePost() {
     try {

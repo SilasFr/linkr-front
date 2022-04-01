@@ -13,6 +13,7 @@ import {
   HashtagBox,
   HorizontalLine,
 } from "../../components/HomeComponents";
+import { Aside, FollowButton } from "../../components/FollowComponents";
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 import Timeline from "../timeline";
@@ -28,6 +29,12 @@ export default function Home({ target }) {
   const [loading, setLoading] = useState(false);
   const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
+
+  const [sessionUserId, setSessionUserId] = useState(null)
+  const [followState, setFollowState] = useState(null)
+  const [followButton, setFollowButton] = useState(null)
+  const [disabled, setDisabled] = useState(false)
+  const userId = useParams().id;
 
   // ALTERAR ASSIM QUE POSSIVEL
   const [userName, setUserName] = useState("loading");
@@ -78,6 +85,52 @@ export default function Home({ target }) {
   function handleInputChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
+
+  useEffect(async () => {
+    try {
+      const response = await api.getUserId(userData.token);
+      setSessionUserId(response.userId)
+    } catch (error) {
+      console.log(error)
+    }
+  }, []);
+
+  useEffect(async () => {
+    try {
+      const verifyFollow = await api.verifyFollow(sessionUserId, userId)
+      if(verifyFollow.rows.length !== 0) {
+        setFollowState(true)
+        setFollowButton('unfollow')
+      } else {
+        setFollowState(false)
+        setFollowButton('follow')
+      }
+    } catch (error){
+      alert('Somthing went wrong. Please try again later.')
+    }
+  }, [sessionUserId, userId])
+
+  async function handleFollow(sessionUserId, userId) {
+    try {
+      setDisabled(true)
+      if(followState === true) {
+        await api.unfollow(sessionUserId, userId)
+        setFollowState(false)
+        setFollowButton('follow')
+      }
+
+      if(followState === false) {
+        await api.follow(sessionUserId, userId)
+        setFollowState(true)
+        setFollowButton('unfollow')
+      }
+      setDisabled(false)
+    } catch (error) {
+      console.log('erro no handleFollow')
+      alert('Somthing went wrong. Please try again later.')
+    }
+  }
+
   function handleTopicChange() {
     setReload(!reload);
   }
@@ -129,23 +182,46 @@ export default function Home({ target }) {
             <UserPage userId={id} setUserName={setUserName} />
           )}
         </MainFeed>
-        <HashtagBox>
-          <h3>trending</h3>
-          <HorizontalLine></HorizontalLine>
-          <ul>
-            {typeof hashtagsArray === "string"
-              ? ""
-              : hashtagsArray.map((hashtag) => (
-                  <Link
-                    to={`/hashtag/${hashtag.topic}`}
-                    key={hashtag.id}
-                    onClick={handleTopicChange}
-                  >
-                    <li># {hashtag.topic}</li>
-                  </Link>
-                ))}
-          </ul>
-        </HashtagBox>
+        {target === "user" && 
+          (
+          <Aside>
+            {parseInt(sessionUserId) !== parseInt(userId) ?
+              <FollowButton disabled={disabled} className={`${followButton}`} onClick={() => handleFollow(sessionUserId, userId)}>
+                {followState === false ? "Follow" : "Unfollow"}
+              </FollowButton>
+              :
+              <></>
+            }
+            <HashtagBox>
+              <h3>trending</h3>
+              <HorizontalLine></HorizontalLine>
+              <ul>
+                {typeof hashtagsArray === "string"
+                  ? ""
+                  : hashtagsArray.map((hashtag) => (
+                    <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
+                        <li># {hashtag.topic}</li>
+                      </Link>
+                    ))}
+              </ul>
+            </HashtagBox>
+          </Aside>
+        )}
+        {target === "hashtag" || target === "timeline" && (
+          <HashtagBox>
+            <h3>trending</h3>
+            <HorizontalLine></HorizontalLine>
+            <ul>
+              {typeof hashtagsArray === "string"
+                ? ""
+                : hashtagsArray.map((hashtag) => (
+                  <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
+                      <li># {hashtag.topic}</li>
+                    </Link>
+                  ))}
+            </ul>
+          </HashtagBox>
+        )}
       </ContentContainer>
     </MainContainer>
   );

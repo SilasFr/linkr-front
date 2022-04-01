@@ -114,6 +114,8 @@ const SearchUsers = styled.ul`
       height: 39px;
     }
     span {
+      display: flex;
+
       margin-left: 12px;
 
       font-family: "Lato";
@@ -122,6 +124,9 @@ const SearchUsers = styled.ul`
       font-size: 19px;
       line-height: 23px;
       color: #515151;
+    }
+    span p {
+      color: #c5c5c5;
     }
   }
 

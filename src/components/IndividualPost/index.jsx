@@ -24,6 +24,7 @@ import {
   PostCard,
   PostUserInfo,
 } from "./styles";
+import ComentForm from "./comentForm";
 
 export default function IndividualPost({
   post,
@@ -182,6 +183,7 @@ export default function IndividualPost({
                 );
               })}
           </CommentList>
+          <ComentForm postId={post.id} />
         </CommentsContainer>
       )}
     </li>

@@ -357,6 +357,17 @@ const UpdateIcon = styled(IoIosSync)`
   color: #fff;
 `;
 
+const ContentSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const CommentSection = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 3px 15px;
+`;
+
 export {
   Container,
   Feed,
@@ -374,4 +385,6 @@ export {
   StyledLike,
   UpdateContainer,
   UpdateIcon,
+  ContentSection,
+  CommentSection,
 };

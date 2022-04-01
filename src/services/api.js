@@ -125,6 +125,16 @@ async function readComments(id, token) {
   const response = await axios.get(`${BASE_URL}/posts/${id}/comment`, config);
   return response;
 }
+async function postComment(postId, comment, token) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${postId}/comment`,
+    { postId: postId, comment: comment },
+    config
+  );
+  return response;
+}
+
 async function verifyFollow(sessionUserId, userId) {
   const response = await axios.post(`${BASE_URL}/follows`, {
     sessionUserId: parseInt(sessionUserId),
@@ -174,6 +184,7 @@ export const api = {
   likePost,
   dislikePost,
   readComments,
+  postComment,
   verifyFollow,
   follow,
   unfollow,

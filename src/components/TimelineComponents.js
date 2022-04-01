@@ -66,7 +66,7 @@ const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 50px;
-  width: 100%;
+  width: 611px;
   margin: 30px 0;
   @media (max-width: 450px) {
     width: 100vw;

@@ -5,7 +5,7 @@ import {
   TimelineMessage,
 } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
-import IndividualPost from "../../components/IndividualPost";
+import IndividualPost from "../../components/IndividualPost/index";
 import TimelineContext from "../../contexts/timelineContext";
 import LoadingComponent from "../../components/LoadingComponent";
 import { api } from "../../services/api";

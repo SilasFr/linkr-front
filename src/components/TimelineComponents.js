@@ -428,6 +428,7 @@ const RepostedByIcon = styled.div`
 
   color: #ffffff;
 `;
+
 const ContentSection = styled.div`
   width: 100%;
   display: flex;
@@ -461,5 +462,4 @@ export {
   InteractionMenu,
   RepostedByIcon,
   ContentSection,
-  CommentSection,
 };

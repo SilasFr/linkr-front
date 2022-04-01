@@ -41,9 +41,11 @@ export default function SignIn() {
       const response = await api.login(formData);
 
       login({
+        id: response.id,
         name: response.name,
         token: response.token,
         profilePic: response.profilePic,
+        id: response.id,
       });
 
       setLoading(false);

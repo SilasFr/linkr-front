@@ -5,7 +5,9 @@ const PostCard = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 15px;
+  min-width: 100%;
   width: 100%;
+  max-width: 100%;
   height: auto;
   margin: 0px 0px 0px 0px;
   padding-top: 10px;

@@ -9,6 +9,9 @@ import {
 import { useState, useEffect, useRef, useContext } from "react";
 
 import ReactHashtag from "@mdnm/react-hashtag";
+
+import { useNavigate } from "react-router-dom";
+
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext";
 
@@ -21,7 +24,6 @@ import {
   PostCard,
   PostUserInfo,
 } from "./styles";
-import { HorizontalLine } from "../HomeComponents";
 
 export default function IndividualPost({
   post,
@@ -36,6 +38,8 @@ export default function IndividualPost({
   const [commentsList, setCommentsList] = useState([]);
 
   const { userData } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   async function updatePost() {
     try {
@@ -117,10 +121,13 @@ export default function IndividualPost({
               setIsCommenting={setIsCommenting}
               setCommentsList={setCommentsList}
               quantity={post.commentQty}
+              token={userData.token}
             ></CommentsButton>
           </PostUserInfo>
           <PostContent>
-            <h3>{post.userName}</h3>
+            <h3 onClick={() => navigate(`/user/${post.author}`)}>
+              {post.userName}
+            </h3>
             {editing ? (
               <input
                 value={newDescription}

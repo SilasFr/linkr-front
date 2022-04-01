@@ -109,7 +109,6 @@ export default function IndividualPost({
     }
     setNewDescription("loading");
   }, [editing]);
-  console.log(commentsList);
   return (
     <li>
       <div>

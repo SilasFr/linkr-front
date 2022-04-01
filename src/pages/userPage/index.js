@@ -26,11 +26,8 @@ export default function UserPage({ userId, setUserName }) {
     try {
       setLoading(true);
       const response = await api.loadPostsByUserId(userData.token, userId);
-
-      // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
-      setUserName(response.data[0].userName + `'s posts`);
-      // ALTERAR ASSIM QUE POSSIVEL, FUNÇÃO ENGATILHADA
-      setPosts(response.data);
+      setUserName(response.data.author + `'s posts`);
+      setPosts(response.data.posts);
       setLoading(false);
     } catch {
       alert(
@@ -48,7 +45,7 @@ export default function UserPage({ userId, setUserName }) {
         </TimelineMessage>
       ) : (
         <FeedPosts posts={posts} dialog={modalControl} />
-        )}
+      )}
       <ModalComponent modalControl={modalControl} />
     </main>
   );

@@ -5,8 +5,7 @@ import UserContext from "../../contexts/userContext";
 import { api } from "../../services/api";
 import { TimelineMessage } from "../../components/TimelineComponents";
 import { ClipLoader } from "react-spinners";
-import ModalComponent from "../timeline/modal";
-import styled from "styled-components";
+import ModalComponent from "../timeline/modalDelete";
 
 export default function UserPage({ userId, setUserName }) {
   const { userData } = useContext(UserContext);
@@ -48,7 +47,7 @@ export default function UserPage({ userId, setUserName }) {
         </TimelineMessage>
       ) : (
         <FeedPosts posts={posts} dialog={modalControl} />
-        )}
+      )}
       <ModalComponent modalControl={modalControl} />
     </main>
   );

@@ -5,7 +5,7 @@ import UserContext from "../../contexts/userContext";
 import TimelineContext from "../../contexts/timelineContext";
 import { api } from "../../services/api";
 import FeedPosts from "./FeedPosts";
-import ModalComponent from "./modal";
+import ModalComponent from "./modalDelete";
 import Update from "./updateRoutine";
 import LoadingComponent from "../../components/LoadingComponent";
 
@@ -13,7 +13,6 @@ export default function Timeline() {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
   const { reload, setReload } = useContext(TimelineContext);
-  /*   const [posts, setPosts] = useState([]); */
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -49,7 +48,7 @@ export default function Timeline() {
       ) : (
         <FeedPosts updatePosts={updatePosts} dialog={modalControl} />
       )}
-      <ModalComponent modalControl={modalControl} reload={setReload} />
+      <ModalComponent modalControl={modalControl} />
     </main>
   );
 }

@@ -10,10 +10,9 @@ import TimelineContext from "../../contexts/timelineContext";
 import LoadingComponent from "../../components/LoadingComponent";
 import { api } from "../../services/api";
 
-export default function FeedPosts({ updatePosts, dialog }) {
+export default function FeedPosts({ dialog }) {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
-  const { reload, setReload } = useContext(TimelineContext);
   const [hasMore, setHasMore] = useState(true);
   const [loadNumber, setLoadNumber] = useState(1);
   if (typeof timeline === "string") {
@@ -51,7 +50,7 @@ export default function FeedPosts({ updatePosts, dialog }) {
         {timeline.map((post) => {
           let renderTrashIcon = false;
           let renderPenIcon = false;
-          if (userData.name === post.userName) {
+          if (userData.id === post.author) {
             renderTrashIcon = true;
             renderPenIcon = true;
           }

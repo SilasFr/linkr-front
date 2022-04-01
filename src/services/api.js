@@ -120,6 +120,21 @@ async function dislikePost(id, token) {
   return response;
 }
 
+async function readComments(id, token) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/posts/${id}/comment`, config);
+  return response;
+}
+async function postComment(postId, comment, token) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${postId}/comment`,
+    { postId: postId, comment: comment },
+    config
+  );
+  return response;
+}
+
 async function verifyFollow(sessionUserId, userId) {
   const response = await axios.post(`${BASE_URL}/follows`, {
     sessionUserId: parseInt(sessionUserId),
@@ -150,6 +165,22 @@ async function getUserId(token) {
   return response.data;
 }
 
+async function repost(token, postId) {
+  const config = createConfig(token);
+  const response = await axios.post(
+    `${BASE_URL}/posts/${postId}/repost`,
+    {},
+    config
+  );
+  return response;
+}
+
+async function getUserById(token, userId) {
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/user/${userId}`, config);
+  return response;
+}
+
 export const api = {
   createUser,
   login,
@@ -168,8 +199,12 @@ export const api = {
   getLikesByPostId,
   likePost,
   dislikePost,
+  readComments,
+  postComment,
   verifyFollow,
   follow,
   unfollow,
   getUserId,
+  repost,
+  getUserById,
 };

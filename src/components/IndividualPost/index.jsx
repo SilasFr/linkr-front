@@ -1,28 +1,31 @@
-import PenIcon from "../pages/timeline/PenIcon";
-import TrashIcon from "../pages/timeline/TrashIcon";
-import Repost from "../pages/timeline/repost";
+import PenIcon from "./PenIcon";
+import TrashIcon from "./TrashIcon";
 import {
-  CommentsIcon,
-  InteractionMenu,
   LinkData,
   LinkPreview,
-  PostCard,
   PostContent,
-  PostUserInfo,
   StyledHashtag,
-  ContentSection,
-  CommentSection,
-} from "./TimelineComponents";
+} from "../TimelineComponents";
 import { useState, useEffect, useRef, useContext } from "react";
 
 import ReactHashtag from "@mdnm/react-hashtag";
-import { api } from "../services/api";
-import UserContext from "../contexts/userContext";
-import ComentForm from "./comentForm";
 
-import LikeIcon from "../pages/timeline/likeIcon";
-import RepostedBy from "../pages/timeline/repostedBy";
 import { useNavigate } from "react-router-dom";
+
+import { api } from "../../services/api";
+import UserContext from "../../contexts/userContext";
+
+import LikeIcon from "./likeIcon";
+import CommentsButton from "./CommentsButton";
+import {
+  CommentList,
+  CommentsContainer,
+  IndividualComment,
+  PostCard,
+  PostUserInfo,
+} from "./styles";
+import ComentForm from "./comentForm";
+import RepostedBy from "../../pages/timeline/repostedBy";
 
 export default function IndividualPost({
   post,
@@ -33,6 +36,9 @@ export default function IndividualPost({
   const [editing, setEditing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [newDescription, setNewDescription] = useState("loading");
+  const [isCommenting, setIsCommenting] = useState(false);
+  const [commentsList, setCommentsList] = useState([]);
+  const [commentsQty, setCommentsQty] = useState(post.commentQty);
 
   const { userData } = useContext(UserContext);
 
@@ -106,24 +112,26 @@ export default function IndividualPost({
   }, [editing]);
 
   return (
-    <>
-      <PostCard key={post.id}>
-        {post.isReposted && <RepostedBy userId={post.reposterId} />}
-        <ContentSection>
+    <li>
+      <div>
+        <PostCard key={post.id}>
+          {post.isReposted && <RepostedBy userId={post.reposterId} />}
           <PostUserInfo>
             <img src={post.profilePic} alt="user avatar" />
-            <InteractionMenu>
-              <LikeIcon
-                key={post.id * Date.now()}
-                id={post.id}
-                postInfo={post}
-              />
-              <CommentsIcon />
-              <Repost reposts={post.timesReposted} postId={post.id} />
-            </InteractionMenu>
+            <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
+            <CommentsButton
+              postId={post.id}
+              isCommenting={isCommenting}
+              setIsCommenting={setIsCommenting}
+              setCommentsList={setCommentsList}
+              commentsQty={commentsQty}
+              token={userData.token}
+            ></CommentsButton>
           </PostUserInfo>
           <PostContent>
-            <h3>{post.userName}</h3>
+            <h3 onClick={() => navigate(`/user/${post.author}`)}>
+              {post.userName}
+            </h3>
             {editing ? (
               <input
                 value={newDescription}
@@ -155,11 +163,37 @@ export default function IndividualPost({
             )}
             {renderTrashIcon && <TrashIcon postId={post.id} dialog={dialog} />}
           </PostContent>
-        </ContentSection>
-        <CommentSection>
-          <ComentForm postId={post.id} />
-        </CommentSection>
-      </PostCard>
-    </>
+        </PostCard>
+      </div>
+      {isCommenting && (
+        <CommentsContainer>
+          <CommentList>
+            {commentsList &&
+              commentsList.map((comment) => {
+                return (
+                  <IndividualComment key={commentsList.indexOf(comment)}>
+                    <img src={comment.profilePic}></img>
+                    <div>
+                      <h1>
+                        {comment.name}
+                        {comment.isAuthor && <p>• post's author</p>}
+                        {comment.followed && <p>• followed</p>}
+                        {comment.authorId === userData.id && <p>• you</p>}
+                      </h1>
+                      <span>{comment.content}</span>
+                    </div>
+                  </IndividualComment>
+                );
+              })}
+          </CommentList>
+          <ComentForm
+            postId={post.id}
+            setCommentsList={setCommentsList}
+            setCommentsQty={setCommentsQty}
+            commentsQty={commentsQty}
+          />
+        </CommentsContainer>
+      )}
+    </li>
   );
 }

@@ -1,5 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Like, StyledLike } from "../../components/TimelineComponents";
+import {
+  Like,
+  StyledLike,
+  LikeContainer,
+  LikesNumber,
+} from "../../components/TimelineComponents";
 import ReactTooltip from "react-tooltip";
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext.js";
@@ -10,10 +15,12 @@ export default function LikeIcon({ id, postInfo }) {
   const [tooltipMessage, SetTooltipMessage] = useState("");
   const token = userData.token;
   const [liked, setLiked] = useState(likedByUser);
+  const [likesNumber, setLikesNumber] = useState("");
   if (postInfo.likesList[0] === null) postInfo.likesList = [];
 
   useEffect(async () => {
     let nameList = await api.getLikesByPostId(id, token);
+    setLikesNumber(`${nameList.length} likes`);
 
     if (nameList.length > 2) {
       likedByUser
@@ -62,8 +69,9 @@ export default function LikeIcon({ id, postInfo }) {
   function renderLike() {
     if (liked) {
       return (
-        <>
+        <LikeContainer>
           <StyledLike onClick={toggleLike} data-tip data-for={`tooltip${id}`} />
+          <LikesNumber>{likesNumber}</LikesNumber>
           <ReactTooltip
             id={`tooltip${id}`}
             place="bottom"
@@ -72,11 +80,11 @@ export default function LikeIcon({ id, postInfo }) {
           >
             {tooltipMessage}
           </ReactTooltip>
-        </>
+        </LikeContainer>
       );
     } else {
       return (
-        <>
+        <LikeContainer>
           <ion-icon
             data-tip
             data-for={`tooltip${id}`}
@@ -84,6 +92,7 @@ export default function LikeIcon({ id, postInfo }) {
             name="heart-outline"
             className=""
           ></ion-icon>
+          <LikesNumber>{likesNumber}</LikesNumber>
           <ReactTooltip
             id={`tooltip${id}`}
             place="bottom"
@@ -92,7 +101,7 @@ export default function LikeIcon({ id, postInfo }) {
           >
             {tooltipMessage}
           </ReactTooltip>
-        </>
+        </LikeContainer>
       );
     }
   }

@@ -67,7 +67,9 @@ const StyledCommentButton = styled(AiOutlineComment)`
 
 const CommentsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: fit-content;
 

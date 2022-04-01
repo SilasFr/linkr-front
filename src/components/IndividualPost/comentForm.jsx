@@ -32,26 +32,27 @@ export default function ComentForm({ postId }) {
   return (
     <Container onSubmit={handleSubmit}>
       <UserPic src={userData.profilePic} />
-      <Fixed>
-        <StyledInput
-          value={formData.comment}
-          onChange={handleInputChange}
-          name="comment"
-          type="text"
-          placeholder="write a comment..."
-        />
-        <SendButton type="submit" disabled={loading} />
-      </Fixed>
+      <StyledInput
+        value={formData.comment}
+        onChange={handleInputChange}
+        name="comment"
+        type="text"
+        placeholder="write a comment..."
+      />
+      <SendButton type="submit" disabled={loading} />
     </Container>
   );
 }
 
 const Container = styled.form`
-  width: 100%;
+  width: 95%;
   display: flex;
   align-items: center;
-  justify-content: center;
   padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+  position: relative;
 `;
 const StyledInput = styled.input`
   display: flex;
@@ -80,11 +81,6 @@ const SendButton = styled(IoPaperPlaneOutline)`
   color: white;
   size: 15px;
   position: absolute;
-  right: 0px;
+  right: 3%;
   top: 14px;
-`;
-
-const Fixed = styled.div`
-  width: 80%;
-  position: relative;
 `;

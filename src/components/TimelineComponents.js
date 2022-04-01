@@ -355,7 +355,6 @@ const StyledLike = styled(IoIosHeart)`
 const LikesNumber = styled.p`
   font-size: 11px;
   color: white;
-  margin-top: 5px;
 `;
 
 const UpdateContainer = styled.div`
@@ -410,7 +409,7 @@ const InteractionMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 
   font-family: "Lato";
   font-style: normal;
@@ -429,6 +428,7 @@ const RepostedByIcon = styled.div`
   gap: 10px;
 
   padding-left: 20px;
+  margin-top: 20px;
 
   background: #1e1e1e;
   border-top-right-radius: 16px;

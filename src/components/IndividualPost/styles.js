@@ -4,7 +4,7 @@ import { AiOutlineComment } from "react-icons/ai";
 const PostCard = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  gap: 20px;
   min-width: 100%;
   width: 100%;
   max-width: 100%;
@@ -12,7 +12,8 @@ const PostCard = styled.div`
   margin: 0px 0px 0px 0px;
   padding-top: 10px;
   background-color: #171717;
-  border-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   position: relative;
   @media (max-width: 450px) {

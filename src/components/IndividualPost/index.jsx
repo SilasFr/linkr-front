@@ -1,6 +1,8 @@
 import PenIcon from "./PenIcon";
 import TrashIcon from "./TrashIcon";
+import Repost from "../../pages/timeline/repost";
 import {
+  InteractionMenu,
   LinkData,
   LinkPreview,
   PostContent,
@@ -117,15 +119,22 @@ export default function IndividualPost({
         <PostCard key={post.id}>
           <PostUserInfo>
             <img src={post.profilePic} alt="user avatar" />
-            <LikeIcon key={post.id * Date.now()} id={post.id} postInfo={post} />
-            <CommentsButton
-              postId={post.id}
-              isCommenting={isCommenting}
-              setIsCommenting={setIsCommenting}
-              setCommentsList={setCommentsList}
-              commentsQty={commentsQty}
-              token={userData.token}
-            ></CommentsButton>
+            <InteractionMenu>
+              <LikeIcon
+                key={post.id * Date.now()}
+                id={post.id}
+                postInfo={post}
+              />
+              <CommentsButton
+                postId={post.id}
+                isCommenting={isCommenting}
+                setIsCommenting={setIsCommenting}
+                setCommentsList={setCommentsList}
+                commentsQty={commentsQty}
+                token={userData.token}
+              ></CommentsButton>
+              <Repost reposts={post.timesReposted} postId={post.id} />
+            </InteractionMenu>
           </PostUserInfo>
           <PostContent>
             <h3 onClick={() => navigate(`/user/${post.author}`)}>

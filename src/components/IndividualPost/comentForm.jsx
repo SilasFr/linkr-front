@@ -13,7 +13,7 @@ export default function ComentForm({
   const { userData } = useContext(UserContext);
   const token = userData.token;
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ comment: "" });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +32,7 @@ export default function ComentForm({
       alert("Erro ao comentar");
     }
     setLoading(false);
+    setFormData({ comment: "" });
   }
 
   function handleInputChange(e) {

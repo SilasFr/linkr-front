@@ -321,8 +321,22 @@ const Like = styled.div`
   }
 `;
 
+const LikeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+`;
+
 const StyledLike = styled(IoIosHeart)`
   color: red;
+`;
+
+const LikesNumber = styled.p`
+  font-size: 11px;
+  color: white;
+  margin-top: 5px;
 `;
 
 const UpdateContainer = styled.div`
@@ -387,4 +401,6 @@ export {
   UpdateIcon,
   ContentSection,
   CommentSection,
+  LikeContainer,
+  LikesNumber,
 };

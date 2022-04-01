@@ -28,7 +28,7 @@ export default function SignUp() {
       setLoading(false);
       if (e.response.status === 409) {
         alert(
-          "Este email já foi cadastrado! Cadastre outro email e tente novamente."
+          "Este email e/ou nome de usuário já foi cadastrado! Por favor tente novamente."
         );
       } else {
         alert(e.response.data);

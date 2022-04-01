@@ -37,6 +37,7 @@ export default function IndividualPost({
   const [newDescription, setNewDescription] = useState("loading");
   const [isCommenting, setIsCommenting] = useState(false);
   const [commentsList, setCommentsList] = useState([]);
+  const [commentsQty, setCommentsQty] = useState(post.commentQty);
 
   const { userData } = useContext(UserContext);
 
@@ -121,7 +122,7 @@ export default function IndividualPost({
               isCommenting={isCommenting}
               setIsCommenting={setIsCommenting}
               setCommentsList={setCommentsList}
-              quantity={post.commentQty}
+              commentsQty={commentsQty}
               token={userData.token}
             ></CommentsButton>
           </PostUserInfo>
@@ -183,7 +184,12 @@ export default function IndividualPost({
                 );
               })}
           </CommentList>
-          <ComentForm postId={post.id} />
+          <ComentForm
+            postId={post.id}
+            setCommentsList={setCommentsList}
+            setCommentsQty={setCommentsQty}
+            commentsQty={commentsQty}
+          />
         </CommentsContainer>
       )}
     </li>

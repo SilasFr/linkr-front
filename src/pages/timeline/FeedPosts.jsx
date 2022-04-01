@@ -51,7 +51,7 @@ export default function FeedPosts({ updatePosts, dialog }) {
         {timeline.map((post) => {
           let renderTrashIcon = false;
           let renderPenIcon = false;
-          if (userData.name === post.userName) {
+          if (userData.id === post.author) {
             renderTrashIcon = true;
             renderPenIcon = true;
           }

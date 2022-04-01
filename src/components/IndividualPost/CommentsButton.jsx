@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { api } from "../../services/api";
 import { CommentButtonContainer, StyledCommentButton } from "./styles";
 
 export default function CommentsButton({
-  quantity,
+  commentsQty,
   setCommentsList,
   postId,
   isCommenting,
@@ -26,7 +27,7 @@ export default function CommentsButton({
   return (
     <CommentButtonContainer>
       <StyledCommentButton onClick={handleComment}></StyledCommentButton>
-      <p>{quantity} comments</p>
+      <p>{commentsQty} comments</p>
     </CommentButtonContainer>
   );
 }

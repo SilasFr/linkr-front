@@ -4,7 +4,12 @@ import UserContext from "../../contexts/userContext";
 import styled from "styled-components";
 import { api } from "../../services/api";
 
-export default function ComentForm({ postId }) {
+export default function ComentForm({
+  postId,
+  setCommentsList,
+  setCommentsQty,
+  commentsQty,
+}) {
   const { userData } = useContext(UserContext);
   const token = userData.token;
   const [loading, setLoading] = useState(false);
@@ -19,6 +24,10 @@ export default function ComentForm({ postId }) {
 
     try {
       await api.postComment(postId, formData.comment, token);
+      setFormData({ ...formData, comment: "" });
+      const response = await api.readComments(postId, token);
+      setCommentsList(response.data);
+      setCommentsQty(parseInt(commentsQty) + 1);
     } catch {
       alert("Erro ao comentar");
     }

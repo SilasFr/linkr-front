@@ -36,9 +36,9 @@ export default function Home({ target }) {
   const [disabled, setDisabled] = useState(false)
   const userId = useParams().id;
 
-  // ALTERAR ASSIM QUE POSSIVEL
+  
   const [userName, setUserName] = useState("loading");
-  // ALTERAR ASSIM QUE POSSIVEL
+  
 
   const { hashtag, id } = useParams();
 

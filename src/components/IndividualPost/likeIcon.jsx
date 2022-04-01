@@ -1,44 +1,50 @@
 import { useContext, useEffect, useState } from "react";
-import { Like, StyledLike } from "../../components/TimelineComponents";
+import {
+  Like,
+  StyledLike,
+  LikeContainer,
+  LikesNumber,
+} from "../../components/TimelineComponents";
 import ReactTooltip from "react-tooltip";
 import { api } from "../../services/api";
 import UserContext from "../../contexts/userContext.js";
 
 export default function LikeIcon({ id, postInfo }) {
-  let { likesList, likedByUser } = postInfo;
+  let { likedByUser } = postInfo;
   const { userData } = useContext(UserContext);
   const [tooltipMessage, SetTooltipMessage] = useState("");
   const token = userData.token;
-
   const [liked, setLiked] = useState(likedByUser);
-  if (likesList[0] === null) likesList = [];
+  const [likesNumber, setLikesNumber] = useState("");
+  if (postInfo.likesList[0] === null) postInfo.likesList = [];
 
   useEffect(async () => {
     let nameList = await api.getLikesByPostId(id, token);
+    setLikesNumber(`${nameList.length} likes`);
 
-    if (likesList.length > 2) {
-      likedByUser
+    if (nameList.length > 2) {
+      liked
         ? SetTooltipMessage(
             `Você, ${nameList[1].name} e outras ${
-              likesList.length - 2
+              nameList.length - 2
             } pessoas curtiram esse post!`
           )
         : SetTooltipMessage(
             `${nameList[0].name}, ${nameList[1].name} e outras ${
-              likesList.length - 2
+              nameList.length - 2
             } pessoas curtiram esse post!`
           );
-    } else if (likesList.length === 2) {
-      likedByUser
+    } else if (nameList.length === 2) {
+      liked
         ? SetTooltipMessage(`Você e ${nameList[1].name} curtiram esse post`)
         : SetTooltipMessage(
             `${nameList[0].name} e ${nameList[1].name} curtiram esse post`
           );
-    } else if (likesList.length === 1) {
-      likedByUser
+    } else if (nameList.length === 1) {
+      liked
         ? SetTooltipMessage(`Você curtiu esse post`)
         : SetTooltipMessage(`${nameList[0].name} curtiu esse post`);
-    } else if (likesList.length === 0) {
+    } else if (nameList.length === 0) {
       SetTooltipMessage(`Ninguem curtiu esse post ainda`);
     }
     ReactTooltip.rebuild();
@@ -46,26 +52,32 @@ export default function LikeIcon({ id, postInfo }) {
 
   function toggleLike() {
     try {
-      if (liked) {
+      if (!liked) {
         const promise = api.likePost(id, userData.token);
-        promise.then((response) => console.log(response.data));
-        promise.catch((error) => console.log("error> ", error.response));
+        promise.then(() => {
+          setLiked(true);
+          likedByUser = true;
+        });
+        promise.catch(() => alert("Erro ao dar like"));
       } else {
         const promise = api.dislikePost(id, userData.token);
-        promise.then((response) => console.log(response.data));
-        promise.catch((error) => console.log(error.response));
+        promise.then(() => {
+          setLiked(false);
+          likedByUser = false;
+        });
+        promise.catch(() => alert("Erro ao dar dislike"));
       }
     } catch (e) {
       alert("Erro! Não foi possível dar like no post.");
     }
-    setLiked(!liked);
   }
 
   function renderLike() {
     if (liked) {
       return (
-        <>
+        <LikeContainer>
           <StyledLike onClick={toggleLike} data-tip data-for={`tooltip${id}`} />
+          <LikesNumber>{likesNumber}</LikesNumber>
           <ReactTooltip
             id={`tooltip${id}`}
             place="bottom"
@@ -74,11 +86,11 @@ export default function LikeIcon({ id, postInfo }) {
           >
             {tooltipMessage}
           </ReactTooltip>
-        </>
+        </LikeContainer>
       );
     } else {
       return (
-        <>
+        <LikeContainer>
           <ion-icon
             data-tip
             data-for={`tooltip${id}`}
@@ -86,6 +98,7 @@ export default function LikeIcon({ id, postInfo }) {
             name="heart-outline"
             className=""
           ></ion-icon>
+          <LikesNumber>{likesNumber}</LikesNumber>
           <ReactTooltip
             id={`tooltip${id}`}
             place="bottom"
@@ -94,7 +107,7 @@ export default function LikeIcon({ id, postInfo }) {
           >
             {tooltipMessage}
           </ReactTooltip>
-        </>
+        </LikeContainer>
       );
     }
   }

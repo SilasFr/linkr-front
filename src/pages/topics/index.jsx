@@ -11,17 +11,17 @@ import TimelineContext from "../../contexts/timelineContext";
 export default function Topics() {
   const { hashtag } = useParams();
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userData } = useContext(UserContext);
   const { reload, setReload } = useContext(TimelineContext);
+  const { timeline, setTimeline } = useContext(TimelineContext);
   const [backButton, setBackButton] = useState(false);
 
   async function updatePosts() {
     try {
       setLoading(true);
       const response = await api.loadPostsByHashtag(hashtag, userData.token);
-      setPosts(response.data);
+      setTimeline(response.data);
     } catch (e) {
       if (e.response.status === 404) {
         alert("This topic does not exist");
@@ -50,7 +50,7 @@ export default function Topics() {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        <FeedPosts posts={posts} />
+        <FeedPosts posts={timeline} />
       )}
     </main>
   );

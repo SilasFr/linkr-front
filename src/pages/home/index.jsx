@@ -30,10 +30,10 @@ export default function Home({ target }) {
   const { reload, setReload } = useContext(TimelineContext);
   const [hashtagsArray, setHashtagsArray] = useState([]);
 
-  const [sessionUserId, setSessionUserId] = useState(null)
-  const [followState, setFollowState] = useState(null)
-  const [followButton, setFollowButton] = useState(null)
-  const [disabled, setDisabled] = useState(false)
+  const [sessionUserId, setSessionUserId] = useState(null);
+  const [followState, setFollowState] = useState(null);
+  const [followButton, setFollowButton] = useState(null);
+  const [disabled, setDisabled] = useState(false);
   const userId = useParams().id;
 
   // ALTERAR ASSIM QUE POSSIVEL
@@ -75,7 +75,6 @@ export default function Home({ target }) {
       updateHashtags();
       setFormData({});
     } catch (error) {
-      console.log(error);
       alert("Houve um erro ao publicar seu link");
       setLoading(false);
       setFormData({});
@@ -89,45 +88,42 @@ export default function Home({ target }) {
   useEffect(async () => {
     try {
       const response = await api.getUserId(userData.token);
-      setSessionUserId(response.userId)
-    } catch (error) {
-      console.log(error)
-    }
+      setSessionUserId(response.userId);
+    } catch (error) {}
   }, []);
 
   useEffect(async () => {
     try {
-      const verifyFollow = await api.verifyFollow(sessionUserId, userId)
-      if(verifyFollow.rows.length !== 0) {
-        setFollowState(true)
-        setFollowButton('unfollow')
+      const verifyFollow = await api.verifyFollow(sessionUserId, userId);
+      if (verifyFollow.rows.length !== 0) {
+        setFollowState(true);
+        setFollowButton("unfollow");
       } else {
-        setFollowState(false)
-        setFollowButton('follow')
+        setFollowState(false);
+        setFollowButton("follow");
       }
-    } catch (error){
-      alert('Somthing went wrong. Please try again later.')
+    } catch (error) {
+      alert("Somthing went wrong. Please try again later.");
     }
-  }, [sessionUserId, userId])
+  }, [sessionUserId, userId]);
 
   async function handleFollow(sessionUserId, userId) {
     try {
-      setDisabled(true)
-      if(followState === true) {
-        await api.unfollow(sessionUserId, userId)
-        setFollowState(false)
-        setFollowButton('follow')
+      setDisabled(true);
+      if (followState === true) {
+        await api.unfollow(sessionUserId, userId);
+        setFollowState(false);
+        setFollowButton("follow");
       }
 
-      if(followState === false) {
-        await api.follow(sessionUserId, userId)
-        setFollowState(true)
-        setFollowButton('unfollow')
+      if (followState === false) {
+        await api.follow(sessionUserId, userId);
+        setFollowState(true);
+        setFollowButton("unfollow");
       }
-      setDisabled(false)
+      setDisabled(false);
     } catch (error) {
-      console.log('erro no handleFollow')
-      alert('Somthing went wrong. Please try again later.')
+      alert("Somthing went wrong. Please try again later.");
     }
   }
 
@@ -182,16 +178,19 @@ export default function Home({ target }) {
             <UserPage userId={id} setUserName={setUserName} />
           )}
         </MainFeed>
-        {target === "user" && 
-          (
+        {target === "user" && (
           <Aside>
-            {parseInt(sessionUserId) !== parseInt(userId) ?
-              <FollowButton disabled={disabled} className={`${followButton}`} onClick={() => handleFollow(sessionUserId, userId)}>
+            {parseInt(sessionUserId) !== parseInt(userId) ? (
+              <FollowButton
+                disabled={disabled}
+                className={`${followButton}`}
+                onClick={() => handleFollow(sessionUserId, userId)}
+              >
                 {followState === false ? "Follow" : "Unfollow"}
               </FollowButton>
-              :
+            ) : (
               <></>
-            }
+            )}
             <HashtagBox>
               <h3>trending</h3>
               <HorizontalLine></HorizontalLine>
@@ -199,7 +198,7 @@ export default function Home({ target }) {
                 {typeof hashtagsArray === "string"
                   ? ""
                   : hashtagsArray.map((hashtag) => (
-                    <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
+                      <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
                         <li># {hashtag.topic}</li>
                       </Link>
                     ))}
@@ -207,21 +206,22 @@ export default function Home({ target }) {
             </HashtagBox>
           </Aside>
         )}
-        {target === "hashtag" || target === "timeline" && (
-          <HashtagBox>
-            <h3>trending</h3>
-            <HorizontalLine></HorizontalLine>
-            <ul>
-              {typeof hashtagsArray === "string"
-                ? ""
-                : hashtagsArray.map((hashtag) => (
-                  <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
-                      <li># {hashtag.topic}</li>
-                    </Link>
-                  ))}
-            </ul>
-          </HashtagBox>
-        )}
+        {target === "hashtag" ||
+          (target === "timeline" && (
+            <HashtagBox>
+              <h3>trending</h3>
+              <HorizontalLine></HorizontalLine>
+              <ul>
+                {typeof hashtagsArray === "string"
+                  ? ""
+                  : hashtagsArray.map((hashtag) => (
+                      <Link to={`/hashtag/${hashtag.topic}`} key={hashtag.id}>
+                        <li># {hashtag.topic}</li>
+                      </Link>
+                    ))}
+              </ul>
+            </HashtagBox>
+          ))}
       </ContentContainer>
     </MainContainer>
   );

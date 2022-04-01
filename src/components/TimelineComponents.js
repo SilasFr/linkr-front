@@ -87,7 +87,7 @@ const PostCard = styled.li`
     border-radius: 0;
     height: 232px;
   }
-`; /* height: 276px; */
+`;
 
 const PostContent = styled.div`
   display: flex;

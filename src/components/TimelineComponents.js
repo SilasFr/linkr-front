@@ -64,7 +64,7 @@ const Feed = styled.div`
 const PostsList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 611px;
   margin: 30px 0;
   @media (max-width: 450px) {
     width: 100vw;

@@ -50,7 +50,7 @@ export default function Topics() {
           <ClipLoader color="white" />
         </TimelineMessage>
       ) : (
-        <FeedPosts posts={timeline} />
+        <FeedPosts identifier={hashtag} type={"topic"} posts={timeline} />
       )}
     </main>
   );

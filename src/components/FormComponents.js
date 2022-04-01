@@ -42,6 +42,49 @@ const Container = styled.div`
 
     background-color: #333333;
   }
+  @media (max-width: 900px) {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    .right {
+      width: 65%;
+      display: flex;
+      justify-content: flex-end;
+
+      background-color: #151515;
+      color: #fff;
+      .banner {
+        width: 442px;
+
+        margin-top: 300px;
+        margin-left: 145px;
+
+        h1 {
+          font-family: "Passion One";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 106px;
+          line-height: 117px;
+          letter-spacing: 0.05em;
+        }
+        h2 {
+          font-family: "Oswald";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 43px;
+          line-height: 64px;
+        }
+      }
+    }
+
+    .left {
+      width: 35%;
+      display: flex;
+      justify-content: center;
+
+      background-color: #333333;
+    }
+  }
   @media (max-width: 420px) {
     width: 100%;
     flex-direction: column;

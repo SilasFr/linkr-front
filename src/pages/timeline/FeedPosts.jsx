@@ -5,16 +5,17 @@ import {
   TimelineMessage,
 } from "../../components/TimelineComponents";
 import UserContext from "../../contexts/userContext";
-import IndividualPost from "../../components/IndividualPost";
+import IndividualPost from "../../components/IndividualPost/index";
 import TimelineContext from "../../contexts/timelineContext";
 import LoadingComponent from "../../components/LoadingComponent";
 import { api } from "../../services/api";
 
-export default function FeedPosts({ dialog }) {
+export default function FeedPosts({ identifier, type, dialog }) {
   const { userData } = useContext(UserContext);
   const { timeline, setTimeline } = useContext(TimelineContext);
   const [hasMore, setHasMore] = useState(true);
   const [loadNumber, setLoadNumber] = useState(1);
+  console.log("tyupe: ", type);
   if (typeof timeline === "string") {
     return (
       <TimelineMessage>
@@ -24,7 +25,23 @@ export default function FeedPosts({ dialog }) {
   }
 
   async function loadMorePosts() {
-    const response = await api.loadPosts(userData.token, loadNumber);
+    let response;
+    switch (type) {
+      case "main":
+        response = await api.loadPosts(userData.token, loadNumber);
+      case "topic":
+        response = await api.loadPostsByHashtag(
+          userData.token,
+          identifier,
+          loadNumber
+        );
+      case "user":
+        response = await api.loadPostsByUserId(
+          userData.token,
+          identifier,
+          loadNumber
+        );
+    }
 
     if (typeof response.data === "string") {
       setHasMore(false);

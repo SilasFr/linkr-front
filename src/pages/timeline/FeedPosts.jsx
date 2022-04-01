@@ -15,7 +15,6 @@ export default function FeedPosts({ identifier, type, dialog }) {
   const { timeline, setTimeline } = useContext(TimelineContext);
   const [hasMore, setHasMore] = useState(true);
   const [loadNumber, setLoadNumber] = useState(1);
-  console.log("tyupe: ", type);
   if (typeof timeline === "string") {
     return (
       <TimelineMessage>
@@ -48,7 +47,7 @@ export default function FeedPosts({ identifier, type, dialog }) {
       return;
     }
     let aux = [...timeline];
-    response.data.map((elem) => {
+    response?.data.map((elem) => {
       aux.push(elem);
     });
     setTimeline(aux);
